@@ -7,7 +7,19 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        light: "#C0BCCA",
+        dark: "#0F0E11",
+
+        "gray-dark": "#273444",
+        "gray-light": "#d3dce6",
+      },
+      fontFamily: {
+        heebo: ["Heebo", "sans-serif"],
+        work: ["Work Sans", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 

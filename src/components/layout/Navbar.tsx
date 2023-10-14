@@ -6,6 +6,7 @@ import { MenuFoldOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
 import logoImage from "@/assets/logo.png";
+import SearchAntd from "./SearchAntd";
 
 const { Header } = Layout;
 
@@ -35,22 +36,24 @@ const Navbar: React.FC = () => {
 
   //   console.log(selectedKeys);
   return (
-    <div>
-      <Header className="flex items-center justify-between bg-[#FFFFFF] uppercase border-b border-b-slate-300/70 top-0 sticky z-40">
+    <>
+      <Header className="flex items-center justify-between bg-[#FFFFFF] uppercase border-b border-b-slate-300/70 sticky top-0  z-40">
         <div className="flex items-center justify-between lg:mr-2">
           <div>
-            <Link className="flex" href={"/"}>
+            <Link className="hidden md:hidden lg:flex" href={"/"}>
               <Image src={logoImage} width={32} height={32} alt="logo" />
             </Link>
           </div>
           <div>
-            <h2 className="text-3xl   ml-2">
+            <h2 className="text-2xl md:text-3xl lg:text-3xl   ml-2">
               <Link href={"/"} className="text-primary">
-                Next Medical Supplies
+                NB Surgical
               </Link>
             </h2>
           </div>
         </div>
+
+        <SearchAntd />
 
         <div className="flex items-center justify-start">
           <div className="hidden lg:block">
@@ -91,7 +94,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </Header>
-    </div>
+    </>
   );
 };
 

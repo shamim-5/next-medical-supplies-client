@@ -11,8 +11,14 @@ const config: Config = {
       colors: {
         light: "#C0BCCA",
         dark: "#0F0E11",
+
         primary: "#4D6066",
+        "primary-light": "#FFFFFF",
+        "primary-dark": "#242424",
         secondary: "#0F0E11",
+        cyan: "#19B3BD",
+        "cyan-light": "#B8EBEF",
+        warning: "#E72C59",
 
         "gray-dark": "#273444",
         "gray-light": "#d3dce6",

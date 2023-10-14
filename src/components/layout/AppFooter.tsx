@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import { Footer } from "antd/es/layout/layout";
 import Image from "next/image";
+import logoImage from "@/assets/logo.png";
 import { RiFacebookBoxLine, RiInstagramLine } from "react-icons/ri";
 
 const AppFooter = () => {
@@ -9,15 +10,11 @@ const AppFooter = () => {
 
   return (
     <>
-      <Footer style={{ textAlign: "center" }}>
-        <div className="bg-[#eee8e8] text-secondary p-20">
+      <Footer style={{ textAlign: "center" }} className="pt-0">
+        <div className="bg-[#e2eaec85] text-secondary px-20 pb-12 pt-4">
           <div className="flex justify-between">
             <div>
-              <Image
-                className="h-16"
-                src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/128/external-library-edutainment-flaticons-lineal-color-flat-icons.png"
-                alt="FooterLogo"
-              />
+              <Image src={logoImage} alt="FooterLogo" width={96} />
             </div>
             <div className="flex gap-20">
               <ul className="space-y-2">
@@ -42,7 +39,7 @@ const AppFooter = () => {
           <div className="flex w-full mt-20 gap-5">
             <p>Privacy Policy</p>
             <p>Terms & Condition</p>
-            <p className="ml-auto"> &#169; Book-catalog {year}</p>
+            <p className="ml-auto"> &#169; NB Surgical {year}</p>
           </div>
         </div>
       </Footer>

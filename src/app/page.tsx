@@ -1,11 +1,12 @@
-import Layout from "@/components/layout/Layout";
+import Subscribe from "@/components/others/Subscribe";
+import CarouselAntd from "@/components/ui/CarouselAntd";
 
-export default function HomePage({ children }: { children: React.ReactNode }) {
+export default function HomePage() {
   return (
     <div>
-      <Layout>
-        {children}
-      </Layout>
+      <CarouselAntd />
+      
+      <Subscribe />
     </div>
   );
 }

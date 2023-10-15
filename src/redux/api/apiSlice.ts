@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedOut } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.DATABASE_URL,
+  baseUrl: process.env.NEXT_PUBLIC_DATABASE_URL,
   prepareHeaders: async (headers, { getState }) => {
     const state = getState() as RootState;
     const token = state?.auth?.accessToken;

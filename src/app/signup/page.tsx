@@ -1,23 +1,52 @@
 "use client";
-import { Button, Col, Input, Row } from "antd";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button, Col, Row } from "antd";
 import loginImage from "../../assets/login.png";
 import Image from "next/image";
 import { SubmitHandler } from "react-hook-form";
 import Form from "@/components/forms/Form";
 import FormInput from "@/components/forms/FormInput";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
 
 type FormValues = {
-  id: string;
+  name: string;
+  email: string;
   password: string;
+  confirmPassword: string;
 };
 
 const LoginPage = () => {
+  const router = useRouter();
+  const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
+  const [passwordLength, setPasswordLength] = useState<string | undefined>(undefined);
+
+  const [register, { isLoading }] = useRegisterMutation();
+
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     try {
-      console.log(data);
+      if (data?.password !== data?.confirmPassword) {
+        setPasswordsMatch(false);
+        setPasswordLength(undefined);
+        return;
+      } else if (data?.password.length < 6) {
+        setPasswordsMatch(true);
+        setPasswordLength("Password too short! minimum length six");
+        return;
+      } else {
+        setPasswordsMatch(true);
+
+        const { email, password } = data;
+        register({ email, password });
+
+        toast.success("Signup success");
+        router.push("/login");
+      }
     } catch (err) {}
   };
+
   return (
     <Row
       justify="center"
@@ -55,8 +84,18 @@ const LoginPage = () => {
                 margin: "15px 0px",
               }}
             >
-              <FormInput name="confirm-password" type="password" size="large" label="Confirm Password" />
+              <FormInput name="confirmPassword" type="password" size="large" label="Confirm Password" />
             </div>
+            {!passwordsMatch && (
+              <div>
+                <span className="text-warning font-thin">Password must match!</span>
+              </div>
+            )}
+            {passwordLength && (
+              <div>
+                <span className="text-warning font-thin">{passwordLength}</span>
+              </div>
+            )}
             <div className="flex flex-row mt-0 mb-2">
               <p className="text-slate-500">Already have an account?</p>{" "}
               <Link href={`/login`} className="ml-2">
@@ -64,6 +103,7 @@ const LoginPage = () => {
               </Link>
             </div>
             <Button
+              disabled={isLoading}
               className="bg-gradient-to-l hover:bg-gradient-to-b from-primary/90 to-primary/70 hover:text-slate-900"
               type="primary"
               htmlType="submit"

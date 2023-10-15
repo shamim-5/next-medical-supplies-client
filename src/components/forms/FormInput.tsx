@@ -30,9 +30,17 @@ const FormInput = ({ name, type, size, value, id, placeholder, validation, label
               placeholder={placeholder}
               {...field}
               value={value ? value : field.value}
+              required
             />
           ) : (
-            <Input type={type} size={size} placeholder={placeholder} {...field} value={value ? value : field.value} />
+            <Input
+              type={type}
+              size={size}
+              placeholder={placeholder}
+              {...field}
+              value={value ? value : field.value}
+              required
+            />
           )
         }
       />

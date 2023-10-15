@@ -42,7 +42,7 @@ const LoginPage = () => {
         register({ email, password });
 
         toast.success("Signup success");
-        router.push("/login");
+        router.push("/");
       }
     } catch (err) {}
   };

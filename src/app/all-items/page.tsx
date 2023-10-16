@@ -2,9 +2,11 @@
 import ProductCard from "@/components/cards/ProductCard";
 import { useGetReagentsQuery } from "@/redux/features/reagents/reagentsApi";
 import { useGetProductsQuery } from "@/redux/features/products/productsApi";
+import { useAppSelector } from "@/redux/hooks/hook";
 
 const AllItemsPage = () => {
-  const { data: products, isLoading } = useGetProductsQuery({ undefined });
+  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+  const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm });
   const { data: reagents, isLoading: isReagentsLoading } = useGetReagentsQuery({ undefined });
 
   return (

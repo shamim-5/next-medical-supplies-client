@@ -7,17 +7,17 @@ import { useRouter } from "next/navigation";
 
 const { Meta } = Card;
 
-interface AllProductCardProps {
+interface ProductCardProps {
   product: ITopProduct;
 }
 
-const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const router = useRouter();
   const price = product?.price;
   const priceInt: number | undefined = Number(price);
 
   return (
-    <Card hoverable style={{ width: 240 }} cover={<img alt="example" src={product.imageURL} />}>
+    <Card hoverable style={{ width: 300 }} cover={<img alt="example" src={product.imageURL} />}>
       <Meta title={product.name} description={product?.description} className="h-24" />
       <p>{product.manufacturer}</p>
       <div className="flex flex-row items-center justify-betweeen">
@@ -45,4 +45,4 @@ const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
   );
 };
 
-export default AllProductCard;
+export default ProductCard;

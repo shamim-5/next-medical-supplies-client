@@ -1,21 +1,32 @@
 "use client";
-import { Button, Col, Input, Row } from "antd";
+import { useRouter } from "next/navigation";
+import { Button, Col, Row } from "antd";
 import loginImage from "../../assets/login.png";
 import Image from "next/image";
 import { SubmitHandler } from "react-hook-form";
 import Form from "@/components/forms/Form";
 import FormInput from "@/components/forms/FormInput";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { toast } from "react-toastify";
 import Link from "next/link";
 
 type FormValues = {
-  id: string;
+  email: string;
   password: string;
 };
 
 const LoginPage = () => {
+  const router = useRouter();
+
+  const [login, {isLoading}] = useLoginMutation();
+
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     try {
-      console.log(data);
+      const { email, password } = data;
+
+      login({ email, password });
+      router.push("/");
+      toast.success("Login success");
     } catch (err) {}
   };
   return (
@@ -50,6 +61,7 @@ const LoginPage = () => {
               </Link>
             </div>
             <Button
+              disabled={isLoading}
               className="bg-gradient-to-l hover:bg-gradient-to-b from-primary/90 to-primary/70 hover:text-slate-900"
               type="primary"
               htmlType="submit"

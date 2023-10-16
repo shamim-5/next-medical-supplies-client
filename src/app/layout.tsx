@@ -1,9 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Providers from "@/lib/Providers";
-
-const inter = Inter({ subsets: ["latin"] });
+import AppFooter from "@/components/layout/AppFooter";
+import Navbar from "@/components/layout/Navbar";
+import { Layout } from "antd";
+import { Content } from "antd/es/layout/layout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AuthCheck from "@/components/AuthCheck";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,10 +16,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Providers>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </Providers>
+    <html lang="en">
+      <body>
+        <Providers>
+          <Layout>
+            <Navbar />
+            <Content className="site-layout px-6 md:px-9 lg:px-12">
+              <div style={{ minHeight: "100vh" }} className="">
+                <AuthCheck>{children}</AuthCheck>
+              </div>
+            </Content>
+            <AppFooter />
+            <ToastContainer position="top-center" />
+          </Layout>
+        </Providers>
+      </body>
+    </html>
   );
 }

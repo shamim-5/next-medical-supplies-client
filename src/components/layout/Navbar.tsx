@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Layout, Menu, Space, Dropdown, Button } from "antd";
 import { MenuFoldOutlined } from "@ant-design/icons";
@@ -17,6 +17,7 @@ const { Header } = Layout;
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const isLoggedIn = useAuth();
 
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
@@ -29,7 +30,7 @@ const Navbar: React.FC = () => {
 
   const handleSignOut = () => {
     signOut(auth);
-
+    router.push("/login");
     try {
       localStorage.clear();
       dispatch(userLoggedOut());
@@ -60,7 +61,7 @@ const Navbar: React.FC = () => {
       ),
       name: isLoggedIn ? "Logout" : "Login",
       key: "2",
-      path: isLoggedIn ? "undefined" : `/login`,
+      path: isLoggedIn ? "" : `/login`,
     },
     {
       label: !isLoggedIn && <Link href="/signup">Signup</Link>,
@@ -106,10 +107,17 @@ const Navbar: React.FC = () => {
 
                 return {
                   key,
-                  label: (
-                    <Link className={`${selectedKeys[0] === m.path} && text-slate-900`} href={m.path}>
+                  label: m.path ? (
+                    <Link className={`${selectedKeys[0] === m.path} && text-[#253858]`} href={m.path}>
                       {m.name}
                     </Link>
+                  ) : (
+                    <Button
+                      onClick={() => handleSignOut()}
+                      className={`${selectedKeys[0] === m.path} && text-primary border-0 mx-0 px-0`}
+                    >
+                      {m.name}
+                    </Button>
                   ),
                 };
               })}

@@ -64,9 +64,9 @@ export const sidebarItems = (role: string) => {
     ...defaultSidebarItems,
     ...commonSidebarItems,
     {
-      label: <Link href={`/${role}/orders`}>Orders</Link>,
+      label: <Link href={`/${role}/cart-items`}>cart-items</Link>,
       icon: <ScheduleOutlined />,
-      key: `/${role}/orders`,
+      key: `/${role}/cart-items`,
     },
   ];
 

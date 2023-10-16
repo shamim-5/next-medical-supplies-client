@@ -23,8 +23,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleButtonClick = () => {
     dispatch(addToCart(product));
-    router.push("/users/cart-items");
-    toast.success("Add to cart success")
+    router.push("/user/cart-items");
+    toast.success("Add to cart success");
   };
 
   return (

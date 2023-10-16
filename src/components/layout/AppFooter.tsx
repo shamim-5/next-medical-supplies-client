@@ -10,7 +10,7 @@ const AppFooter = () => {
 
   return (
     <>
-      <Footer style={{ textAlign: "center" }} className="pt-0">
+      <Footer style={{ textAlign: "center" }} className="pt-0 relative bottom-0 left-0 w-full z-10">
         <div className="bg-[#e2eaec85] text-secondary px-20 pb-12 pt-4">
           <div className="flex justify-between">
             <div>

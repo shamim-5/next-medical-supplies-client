@@ -1,9 +1,13 @@
+"use client";
+
+import CartItemsTable from "@/components/table/CartItemsTable";
+
 const CartItemPage = () => {
-   return (
-      <div>
-         This is users CartItemPage
-      </div>
-   );
+  return (
+    <div>
+      <CartItemsTable />
+    </div>
+  );
 };
 
 export default CartItemPage;

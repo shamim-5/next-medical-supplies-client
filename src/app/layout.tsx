@@ -16,23 +16,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Providers>
-      <html lang="en">
-        <body>
+    <html lang="en">
+      <body>
+        <Providers>
           <Layout>
             <Navbar />
             <Content className="site-layout px-6 md:px-9 lg:px-12">
               <div style={{ minHeight: "100vh" }} className="">
-                <AuthCheck>
-                  {children}
-                </AuthCheck>
+                <AuthCheck>{children}</AuthCheck>
               </div>
             </Content>
             <AppFooter />
             <ToastContainer position="top-center" />
           </Layout>
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }

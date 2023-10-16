@@ -41,13 +41,14 @@ const Navbar: React.FC = () => {
   const items = [
     { label: <Link href="/">Home</Link>, name: "Home", key: "0", path: `/` },
     { label: <Link href="/all-items">All-Items</Link>, name: "All-Items", key: "4", path: `/all-items` },
-    { label: <Link href="/reagents">Reagents</Link>, name: "Reagents", key: "1", path: `/reagents` },
     {
       label: <Link href="/products">Products</Link>,
       name: "Products",
       key: "4",
       path: `/products`,
     },
+    { label: <Link href="/reagents">Reagents</Link>, name: "Reagents", key: "1", path: `/reagents` },
+
     { label: <Link href="/others">Others</Link>, name: "Others", key: "5", path: `/others` },
     {
       label: isLoggedIn ? (

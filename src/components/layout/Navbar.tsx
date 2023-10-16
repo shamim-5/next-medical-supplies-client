@@ -43,10 +43,10 @@ const Navbar: React.FC = () => {
     { label: <Link href="/all-items">All-Items</Link>, name: "All-Items", key: "4", path: `/all-items` },
     { label: <Link href="/reagents">Reagents</Link>, name: "Reagents", key: "1", path: `/reagents` },
     {
-      label: <Link href="/surgical-items">Surgical-Items</Link>,
-      name: "Surgical-Items",
+      label: <Link href="/products">Products</Link>,
+      name: "Products",
       key: "4",
-      path: `/surgical-items`,
+      path: `/products`,
     },
     { label: <Link href="/others">Others</Link>, name: "Others", key: "5", path: `/others` },
     {

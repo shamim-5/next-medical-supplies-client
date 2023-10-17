@@ -14,7 +14,7 @@ interface FeaturedCardProps {
 const FeaturedCard: React.FC<FeaturedCardProps> = ({ topProduct }) => {
   return (
     <Card
-      style={{ width: 280 }}
+      className="place-self-stretch"
       cover={
         <img
           alt="example"

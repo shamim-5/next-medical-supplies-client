@@ -77,14 +77,19 @@ const Navbar: React.FC = () => {
       <Header className="flex items-center justify-between bg-[#FFFFFF] uppercase border-b border-b-slate-300/70 sticky top-0  z-40">
         <div className="flex items-center justify-between lg:mr-2">
           <div>
-            <Link className="hidden md:hidden lg:flex" href={"/"}>
-              <Image src={logoImage} width={32} height={32} alt="logo" />
+            <Link href={"/"}>
+              <Image className="w-4 md:w-6" src={logoImage} width={32} height={32} alt="logo" />
             </Link>
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl lg:text-3xl   ml-2">
+            <h2 className="text-2xl md:text-3xl lg:text-3xl  hidden md:block  ml-2">
               <Link href={"/"} className="text-cyan">
                 NB Surgical
+              </Link>
+            </h2>
+            <h2 className="text-2xl md:text-3xl lg:text-3xl block md:hidden ml-2">
+              <Link href={"/"} className="text-cyan">
+                NBS
               </Link>
             </h2>
           </div>

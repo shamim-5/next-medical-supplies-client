@@ -28,10 +28,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <Card hoverable style={{ width: 300 }} cover={<img alt="example" src={product.imageURL} />}>
+    <Card hoverable className="place-self-stretch" cover={<img alt="example" src={product.imageURL} />}>
       <Meta title={product.name} description={product?.description} className="h-24" />
       <p>{product.manufacturer}</p>
-      <div className="flex flex-row items-center justify-betweeen">
+      <div className="flex flex-row items-center justify-between">
         <div>
           <Button
             onClick={handleButtonClick}
@@ -42,14 +42,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             Buy now
           </Button>
         </div>
-        <div className="flex items-center ml-4">
+        <div className="flex items-center justify-end ml-4">
           <img
             width="28"
             height="28"
             src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/external-taka-currency-vitaliy-gorbachev-flat-vitaly-gorbachev.png"
             alt="external-taka-currency-vitaliy-gorbachev-flat-vitaly-gorbachev"
           />
-          <p className="text-lg text-yellow-600/90">{priceInt}</p>
+          <p className="text-lg  text-yellow-600/90">{priceInt}</p>
         </div>
       </div>
     </Card>

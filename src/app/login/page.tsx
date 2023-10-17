@@ -18,7 +18,7 @@ type FormValues = {
 const LoginPage = () => {
   const router = useRouter();
 
-  const [login, {isLoading}] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     try {
@@ -26,7 +26,6 @@ const LoginPage = () => {
 
       login({ email, password });
       router.push("/");
-      toast.success("Login success");
     } catch (err) {}
   };
   return (

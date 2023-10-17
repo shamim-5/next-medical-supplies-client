@@ -29,9 +29,10 @@ const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const handleSignOut = () => {
-    signOut(auth);
-    router.push("/login");
     try {
+      signOut(auth);
+      router.push("/login");
+
       localStorage.clear();
       dispatch(userLoggedOut());
     } catch (err) {
@@ -45,15 +46,15 @@ const Navbar: React.FC = () => {
     {
       label: <Link href="/products">Products</Link>,
       name: "Products",
-      key: "4",
+      key: "5",
       path: `/products`,
     },
     { label: <Link href="/reagents">Reagents</Link>, name: "Reagents", key: "1", path: `/reagents` },
 
-    { label: <Link href="/others">Others</Link>, name: "Others", key: "5", path: `/others` },
+    { label: <Link href="/others">Others</Link>, name: "Others", key: "6", path: `/others` },
     {
       label: isLoggedIn ? (
-        <Button onClick={() => handleSignOut()} className="text-primary border-0 mx-0 px-0">
+        <Button onClick={() => handleSignOut()} className="border-0 mx-0 px-0">
           Logout
         </Button>
       ) : (
@@ -61,7 +62,7 @@ const Navbar: React.FC = () => {
       ),
       name: isLoggedIn ? "Logout" : "Login",
       key: "2",
-      path: isLoggedIn ? "" : `/login`,
+      path: `/logout`,
     },
     {
       label: !isLoggedIn && <Link href="/signup">Signup</Link>,
@@ -105,20 +106,22 @@ const Navbar: React.FC = () => {
                 }
                 const key = m.path.replace(/^.*[/]/, "");
 
+                // large screen onClick handle
                 return {
                   key,
-                  label: m.path ? (
-                    <Link className={`${selectedKeys[0] === m.path} && text-[#253858]`} href={m.path}>
-                      {m.name}
-                    </Link>
-                  ) : (
-                    <Button
-                      onClick={() => handleSignOut()}
-                      className={`${selectedKeys[0] === m.path} && text-primary border-0 mx-0 px-0`}
-                    >
-                      {m.name}
-                    </Button>
-                  ),
+                  label:
+                    m.path === "/logout" ? (
+                      <Button
+                        onClick={() => handleSignOut()}
+                        className={`${selectedKeys[0] === m.path} && text-[#253858] border-0 mx-0 px-0 uppercase`}
+                      >
+                        {m.name}
+                      </Button>
+                    ) : (
+                      <Link className={`${selectedKeys[0] === m.path} && text-[#253858]`} href={m.path}>
+                        {m.name}
+                      </Link>
+                    ),
                 };
               })}
             />

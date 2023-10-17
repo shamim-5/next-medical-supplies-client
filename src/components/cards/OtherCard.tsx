@@ -20,7 +20,7 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
   const price = consumable?.price;
   const priceInt: number | undefined = Number(price);
 
-  const priceME = consumable?.price;
+  const priceME = medicalEquipment?.price;
   const priceIntME: number | undefined = Number(priceME);
 
   const dispatch = useAppDispatch();
@@ -64,7 +64,7 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
                 src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/external-taka-currency-vitaliy-gorbachev-flat-vitaly-gorbachev.png"
                 alt="external-taka-currency-vitaliy-gorbachev-flat-vitaly-gorbachev"
               />
-              <p className="text-lg text-yellow-600/90">{priceInt}</p>
+              <p className="text-lg text-yellow-600/90">{!isNaN(priceInt) ? priceInt : ""}</p>
             </div>
           </div>
         </Card>
@@ -91,7 +91,7 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
                 src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/external-taka-currency-vitaliy-gorbachev-flat-vitaly-gorbachev.png"
                 alt="external-taka-currency-vitaliy-gorbachev-flat-vitaly-gorbachev"
               />
-              <p className="text-lg text-yellow-600/90">{priceIntME}</p>
+              <p className="text-lg text-yellow-600/90">{!isNaN(priceIntME) ? priceIntME : ""}</p>
             </div>
           </div>
         </Card>

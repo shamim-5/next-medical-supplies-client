@@ -7,6 +7,7 @@ import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export const metadata: Metadata = {
   title: "NB_Surgical - Home page",
@@ -27,6 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </Content>
             <AppFooter />
+
+            <ScrollToTopButton />
             <ToastContainer position="top-center" />
           </Layout>
         </Providers>

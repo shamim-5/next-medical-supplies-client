@@ -3,7 +3,8 @@ import { apiSlice } from "@/redux/api/apiSlice";
 export const medicalEquipmentsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMedicalEquipments: builder.query({
-      query: () => `/medical-equipments`,
+      query: ({ field, searchTerm }) =>
+        searchTerm && field ? `/medical-equipments?field=${field}&searchTerm=${searchTerm}` : `/medical-equipments`,
 
       providesTags: [""],
     }),

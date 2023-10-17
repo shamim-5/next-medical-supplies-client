@@ -1,9 +1,12 @@
 "use client";
 import ProductCard from "@/components/cards/ProductCard";
 import { useGetReagentsQuery } from "@/redux/features/reagents/reagentsApi";
+import { useAppSelector } from "@/redux/hooks/hook";
 
 const ReagentsPage = () => {
-  const { data: products, isLoading } = useGetReagentsQuery({ undefined });
+  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+
+  const { data: products, isLoading } = useGetReagentsQuery({ field, searchTerm }) || [];
 
   return (
     <div className="my-4 md:my-6 lg:my-9">

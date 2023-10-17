@@ -10,10 +10,11 @@ import { useGetMedicalEquipmentsQuery } from "@/redux/features/medicalEquipments
 const AllItemsPage = () => {
   const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
   const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm }) || [];
-  const { data: reagents, isLoading: isReagentsLoading } = useGetReagentsQuery({ undefined }) || [];
+  const { data: reagents, isLoading: isReagentsLoading } = useGetReagentsQuery({ field, searchTerm }) || [];
 
-  const { data: consumables, isLoading: isConsumableLoading } = useGetConsumablesQuery({ undefined }) || [];
-  const { data: medicalEquipments, isLoading: isMedicalEquipments } = useGetMedicalEquipmentsQuery({ undefined }) || [];
+  const { data: consumables, isLoading: isConsumableLoading } = useGetConsumablesQuery({ field, searchTerm }) || [];
+  const { data: medicalEquipments, isLoading: isMedicalEquipments } =
+    useGetMedicalEquipmentsQuery({ field, searchTerm }) || [];
 
   return (
     <div>

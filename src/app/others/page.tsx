@@ -4,7 +4,7 @@ import OtherCard from "@/components/cards/OtherCard";
 import { useGetConsumablesQuery } from "@/redux/features/consumables/consumablesApi";
 import { useGetMedicalEquipmentsQuery } from "@/redux/features/medicalEquipments/medicalEquipmentsApi";
 
-const AllItemsPage = () => {
+const OthersPage = () => {
   const { data: consumables, isLoading } = useGetConsumablesQuery({ undefined });
   const { data: medicalEquipments, isLoading: isMedicalEquipments } = useGetMedicalEquipmentsQuery({ undefined });
 
@@ -26,4 +26,4 @@ const AllItemsPage = () => {
   );
 };
 
-export default AllItemsPage;
+export default OthersPage;

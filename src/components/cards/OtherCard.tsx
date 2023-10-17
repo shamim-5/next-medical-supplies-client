@@ -43,10 +43,10 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
   return (
     <>
       {consumable && (
-        <Card hoverable style={{ width: 300 }} cover={<img alt="example" src={consumable.imageURL} />}>
+        <Card hoverable className="place-self-stretch" cover={<img alt="example" src={consumable.imageURL} />}>
           <Meta title={consumable.name} description={consumable?.description} className="h-24" />
           <p>{consumable.manufacturer}</p>
-          <div className="flex flex-row items-center justify-betweeen">
+          <div className="flex flex-row items-center justify-between">
             <div>
               <Button
                 onClick={handleButtonClick}
@@ -70,10 +70,10 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
         </Card>
       )}
       {medicalEquipment && (
-        <Card hoverable style={{ width: 300 }} cover={<img alt="example" src={medicalEquipment.imageURL} />}>
+        <Card hoverable className="place-self-stretch" cover={<img alt="example" src={medicalEquipment.imageURL} />}>
           <Meta title={medicalEquipment.name} description={consumable?.description} className="h-24" />
           <p>{medicalEquipment.manufacturer}</p>
-          <div className="flex flex-row items-center justify-betweeen">
+          <div className="flex flex-row items-center justify-between">
             <div>
               <Button
                 onClick={handleButtonMe}

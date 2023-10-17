@@ -11,7 +11,7 @@ import { addToCart } from "@/redux/features/cart-items/cartItemsSlice";
 const { Meta } = Card;
 
 interface AllProductCardProps {
-  product: ITopProduct;
+  product: IProduct;
 }
 
 const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
@@ -28,10 +28,14 @@ const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
   };
 
   return (
-    <Card hoverable style={{ width: 240 }} cover={<img alt="example" src={product.imageURL} />}>
+    <Card
+      hoverable
+      className="place-self-stretch"
+      cover={<img alt="example" src={product.imageURL} style={{ width: "100%" }} />}
+    >
       <Meta title={product.name} description={product?.description} className="h-24" />
       <p>{product.manufacturer}</p>
-      <div className="flex flex-row items-center justify-betweeen">
+      <div className="flex flex-row items-center justify-between">
         <div>
           <Button
             onClick={handleButtonClick}

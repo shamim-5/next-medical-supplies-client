@@ -5,7 +5,7 @@ import { useAppSelector } from "@/redux/hooks/hook";
 
 const ProductsPage = () => {
   const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
-  const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm });
+  const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm }) || [];
 
   return (
     <div className="my-4 md:my-6 lg:my-9">

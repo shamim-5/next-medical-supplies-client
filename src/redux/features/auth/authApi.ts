@@ -4,7 +4,7 @@ import { auth } from "@/lib/firebase";
 import { apiSlice } from "@/redux/api/apiSlice";
 
 interface IData {
-  displayName: string;
+  displayName?: string;
   email: string;
   password: string;
 }

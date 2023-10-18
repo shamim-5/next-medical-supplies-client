@@ -8,6 +8,7 @@ import type { ColumnsType } from "antd/es/table";
 import { addToCart, removeFromCart, removeQuantity } from "@/redux/features/cart-items/cartItemsSlice";
 import { toast } from "react-toastify";
 import EmptyData from "../shared/EmptyData";
+import ButtonShake from "../shared/ButtonShake";
 
 const CartItemsTable: React.FC = () => {
   const products = useAppSelector((state) => state?.cartItems) || [];
@@ -102,26 +103,36 @@ const CartItemsTable: React.FC = () => {
 
               const finalPrice = applyDiscount(totalPrice, discountPercentage);
 
+              const handleClick = () => {
+
+                
+                console.log("Button clicked!");
+                console.log(record);
+                // Add your custom logic here
+              };
               return (
                 <div>
                   <div className="flex justify-end">
-                    <h2 className="mr-12 text-slate-900/70">Total Price :</h2>
-                    <div className="mr-6 lg:mr-9">
+                    <h2 className="mr-9 w-[200px] text-end text-slate-900/70">Total Price :</h2>
+                    <div className="mr-4 lg:mr-6 w-[100px]">
                       <div className="">{totalPrice}.00 /=</div>
                     </div>
                   </div>
                   <div className="flex justify-end">
-                    <h2 className="mr-12 text-slate-900/70">10% Discount :</h2>
-                    <div className="mr-6 lg:mr-9">
+                    <h2 className="mr-9 w-[200px] text-end text-slate-900/70">10% Discount :</h2>
+                    <div className="mr-4 lg:mr-6 w-[100px]">
                       <div className=""> - {finalPrice?.discount} /=</div>
                       <Divider className="mt-2 mb-3" />
                     </div>
                   </div>
                   <div className="flex justify-end">
-                    <h2 className="mr-12">Payable Amount :</h2>
-                    <div className="mr-6 lg:mr-9">
+                    <h2 className="mr-9 w-[200px] text-end">Payable Amount :</h2>
+                    <div className="mr-4 lg:mr-6 w-[100px]">
                       <div className="">{finalPrice?.discountPrice}.00 /=</div>
                     </div>
+                  </div>
+                  <div className="flex justify-end mr-4 lg:mr-6">
+                    <ButtonShake onClick={handleClick}>Place an Order</ButtonShake>
                   </div>
                 </div>
               );

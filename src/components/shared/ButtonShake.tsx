@@ -44,21 +44,21 @@ const showShakeEffect: WaveConfig["showEffect"] = (node, { component }) => {
   loop();
 };
 
-// Component
-const Wrapper = ({ name, ...wave }: WaveConfig & { name: string }) => (
+const Wrapper = ({ name, customOnClick, ...wave }: WaveConfig & { name: string; customOnClick?: () => void }) => (
   <ConfigProvider wave={wave}>
     <Button
       type="primary"
       className="bg-gradient-to-l hover:bg-gradient-to-b uppercase from-primary/90 to-primary/70 hover:text-slate-900 "
+      onClick={customOnClick}
     >
       {name}
     </Button>
   </ConfigProvider>
 );
 
-const ButtonShake = ({ children }: { children: string }) => (
-  <Space  style={{ padding: 24 }} size="large">
-    <Wrapper name={children} showEffect={showShakeEffect} />
+const ButtonShake = ({ children, onClick }: { children: string; onClick?: () => void }) => (
+  <Space style={{ padding: 24 }} size="large">
+    <Wrapper name={children} showEffect={showShakeEffect} customOnClick={onClick} />
   </Space>
 );
 

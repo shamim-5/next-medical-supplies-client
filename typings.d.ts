@@ -32,3 +32,21 @@ interface IProduct {
 
   reviews: IReview[];
 }
+
+// total price
+interface IRecord {
+  _id?: string;
+  name?: string;
+  category?: string;
+  description?: string;
+  price?: number;
+  stock?: number;
+  manufacturer?: string;
+  imageURL?: string;
+  avatarUrl?: string;
+
+  quantity?: number;
+  priceTotal?: number;
+
+  reviews: IReview[];
+}

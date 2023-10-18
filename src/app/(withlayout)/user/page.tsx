@@ -1,9 +1,11 @@
-const UsersPage = () => {
+import EmptyData from "@/components/shared/EmptyData";
+
+const UserPage = () => {
    return (
       <div>
-         This is users UsersPage
+         <EmptyData />
       </div>
    );
 };
 
-export default UsersPage;
+export default UserPage;

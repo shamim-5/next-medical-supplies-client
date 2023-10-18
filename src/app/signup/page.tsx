@@ -38,8 +38,8 @@ const LoginPage = () => {
       } else {
         setPasswordsMatch(true);
 
-        const { email, password } = data;
-        register({ email, password });
+        const { email, password, name: displayName } = data;
+        register({ email, password, displayName });
 
         toast.success("Signup success");
         router.push("/");

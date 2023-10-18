@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 import CartItemsTable from "@/components/table/CartItemsTable";
 
-const CartItemPage = () => {
+const ManageOrdersPage = () => {
   return (
     <div>
       <CartItemsTable />
@@ -14,4 +14,4 @@ const CartItemPage = () => {
   );
 };
 
-export default CartItemPage;
+export default ManageOrdersPage;

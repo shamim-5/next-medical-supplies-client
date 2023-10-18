@@ -1,9 +1,10 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { userLoggedIn } from "./authSlice";
 import { auth } from "@/lib/firebase";
 import { apiSlice } from "@/redux/api/apiSlice";
 
 interface IData {
+  displayName: string;
   email: string;
   password: string;
 }
@@ -13,11 +14,12 @@ export const authApi = apiSlice.injectEndpoints({
     register: builder.mutation({
       query: () => ({}),
       async onQueryStarted(arg: IData, { dispatch }) {
-         const { email, password } = arg;
-         
+        const { email, password, displayName } = arg;
+
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
         const user = userCredential?.user;
+        await updateProfile(user, { displayName });
         const idToken = await user.getIdToken();
         try {
           localStorage.setItem(

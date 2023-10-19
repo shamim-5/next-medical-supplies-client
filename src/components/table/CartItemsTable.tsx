@@ -9,9 +9,11 @@ import { addToCart, removeFromCart, removeQuantity } from "@/redux/features/cart
 import { toast } from "react-toastify";
 import EmptyData from "../shared/EmptyData";
 import ButtonShake from "../shared/ButtonShake";
+import { useAddToDBMutation } from "@/redux/features/cart-items/cartItemsApi";
 
 const CartItemsTable: React.FC = () => {
   const products = useAppSelector((state) => state?.cartItems) || [];
+  const [addToDB] = useAddToDBMutation();
 
   const dispatch = useAppDispatch();
 
@@ -81,7 +83,9 @@ const CartItemsTable: React.FC = () => {
             columns={columns}
             dataSource={data}
             pagination={false}
-            title={() => <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2">Items that you want to buy</h2>}
+            title={() => (
+              <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2">Items that you want to buy</h2>
+            )}
             footer={(record) => {
               const calculateTotalPrice = (record: any[] | readonly IProduct[]) => {
                 if (!record || record.length === 0) {
@@ -104,10 +108,11 @@ const CartItemsTable: React.FC = () => {
               const finalPrice = applyDiscount(totalPrice, discountPercentage);
 
               const handleClick = () => {
-
                 
-                console.log("Button clicked!");
-                console.log(record);
+
+                addToDB(record);
+                console.log("Button clicked!", record);
+                toast.info("Order placed Success")
                 // Add your custom logic here
               };
               return (

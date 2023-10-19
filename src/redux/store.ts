@@ -3,11 +3,13 @@ import { apiSlice } from "./api/apiSlice";
 import authReducer from "./features/auth/authSlice";
 import cartItemsReducer from "./features/cart-items/cartItemsSlice";
 import helperSliceReducer from "./helper/helperSlice";
+import pathSliceReducer from "./features/path/pathSlice";
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authReducer,
+    path: pathSliceReducer,
     cartItems: cartItemsReducer,
     helper: helperSliceReducer,
   },

@@ -7,8 +7,10 @@ import { SubmitHandler } from "react-hook-form";
 import Form from "@/components/forms/Form";
 import FormInput from "@/components/forms/FormInput";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
-import { toast } from "react-toastify";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hook";
+import useAuth from "@/redux/hooks/useAuth";
+import { cleanPath } from "@/redux/features/path/pathSlice";
 
 type FormValues = {
   email: string;
@@ -17,17 +19,23 @@ type FormValues = {
 
 const LoginPage = () => {
   const router = useRouter();
-
+  const isLoggedin = useAuth();
+  const path = useAppSelector((state) => state.path.path);
   const [login, { isLoading }] = useLoginMutation();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       const { email, password } = data;
 
-      login({ email, password });
-      router.push("/");
-    } catch (err) {}
+      await login({ email, password });
+    } catch (err) {
+      // do nothing
+    }
   };
+
+  if (isLoggedin) {
+    router.push(path);
+  }
   return (
     <div className="mb-9 lg:mb-0">
       <Row

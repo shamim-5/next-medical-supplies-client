@@ -1,3 +1,4 @@
+import PrivateRoute from "@/components/PrivateRoute";
 import Contents from "@/components/ui/Contents";
 import SideBar from "@/components/ui/Sidebar";
 import { Layout } from "antd";
@@ -5,8 +6,10 @@ import { Layout } from "antd";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Layout hasSider>
-      <SideBar />
-      <Contents>{children}</Contents>
+      <PrivateRoute>
+        <SideBar />
+        <Contents>{children}</Contents>
+      </PrivateRoute>
     </Layout>
   );
 };

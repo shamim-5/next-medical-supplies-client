@@ -8,17 +8,9 @@ export const cartItemsApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      async onQueryStarted(_arg, { queryFulfilled }) {
-        try {
-          const result = await queryFulfilled;
-
-          console.log(result);
-        } catch (err) {
-          // do nothing
-        }
-      },
+     
     }),
   }),
 });
 
-export const {} = cartItemsApi;
+export const {useAddToDBMutation} = cartItemsApi;

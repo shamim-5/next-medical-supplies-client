@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hook";
 import { Divider, Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
@@ -10,10 +10,24 @@ import { toast } from "react-toastify";
 import EmptyData from "../shared/EmptyData";
 import ButtonShake from "../shared/ButtonShake";
 import { useAddToDBMutation } from "@/redux/features/cart-items/cartItemsApi";
+import { User, onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 const CartItemsTable: React.FC = () => {
   const products = useAppSelector((state) => state?.cartItems) || [];
+  const [userInfo, setUserInfo] = useState<User | null>(null);
+  const { uid, displayName, email } = userInfo || {};
   const [addToDB] = useAddToDBMutation();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      // 'user' will be null if the user is not authenticated
+      setUserInfo(user);
+    });
+
+    // Cleanup function to unsubscribe when the component unmounts
+    return () => unsubscribe();
+  }, []);
 
   const dispatch = useAppDispatch();
 
@@ -87,6 +101,7 @@ const CartItemsTable: React.FC = () => {
               <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2">Items that you want to buy</h2>
             )}
             footer={(record) => {
+              // console.log(uid, displayName, email);
               const calculateTotalPrice = (record: any[] | readonly IProduct[]) => {
                 if (!record || record.length === 0) {
                   return 0;
@@ -107,14 +122,20 @@ const CartItemsTable: React.FC = () => {
 
               const finalPrice = applyDiscount(totalPrice, discountPercentage);
 
-              const handleClick = () => {
-                
+              const handleClick = async () => {
+                const items = {
+                  userId: uid?.toString(),
+                  userName: displayName,
+                  email: email,
+                  status: true,
+                  timestamp: Date.now().toString(),
+                  order: [...record],
+                };
 
-                addToDB(record);
-                console.log("Button clicked!", record);
-                toast.info("Order placed Success")
-                // Add your custom logic here
+                await addToDB(items);
+                toast.success("Thanks for your order. You will receive confirmation message soon.");
               };
+
               return (
                 <div>
                   <div className="flex justify-end">

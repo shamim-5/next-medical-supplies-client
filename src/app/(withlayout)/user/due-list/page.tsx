@@ -1,6 +1,6 @@
 import EmptyData from "@/components/shared/EmptyData";
 
-const UserProfilePage = () => {
+const DueListPage = () => {
   return (
     <div>
       <div></div>
@@ -11,4 +11,4 @@ const UserProfilePage = () => {
   );
 };
 
-export default UserProfilePage;
+export default DueListPage;

@@ -12,6 +12,7 @@ import SearchAntd from "./SearchAntd";
 import { useAppDispatch } from "@/redux/hooks/hook";
 import { signOut } from "firebase/auth";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
+import { cleanPath } from "@/redux/features/path/pathSlice";
 
 const { Header } = Layout;
 
@@ -35,6 +36,7 @@ const Navbar: React.FC = () => {
 
       localStorage.clear();
       dispatch(userLoggedOut());
+      dispatch(cleanPath());
     } catch (err) {
       // do nothing
     }

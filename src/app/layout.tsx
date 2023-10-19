@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Layout>
             <Navbar />
             <Content className="site-layout px-6 md:px-9 lg:px-12">
-              <div style={{ minHeight: "100vh" }} className="">
+              <div style={{ minHeight: "100vh" }}>
                 <AuthCheck>{children}</AuthCheck>
               </div>
             </Content>

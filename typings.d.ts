@@ -35,7 +35,7 @@ interface IProduct {
 
 // total price
 interface IRecord {
-  _id?: string;
+  _id: string;
   name?: string;
   category?: string;
   description?: string;
@@ -49,4 +49,24 @@ interface IRecord {
   priceTotal?: number;
 
   reviews: IReview[];
+}
+
+interface ICartItems {
+  _id?: string;
+  userId?: string;
+  userName?: string;
+  email?: string;
+  status?: boolean;
+  active?: boolean;
+  paid?: boolean;
+  timestamp?: string;
+  order?: IRecord[];
+}
+
+interface IManageItems extends IRecord {
+  status?: boolean;
+  active?: boolean;
+  paid?: boolean;
+  timestamp?: string;
+  order?: IRecord[];
 }

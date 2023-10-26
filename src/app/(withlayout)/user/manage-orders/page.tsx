@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: "NB_Surgical - Cart Items page",
   description: "Surgical equipments shop app",
 };
-import CartItemsTable from "@/components/table/CartItemsTable";
+import ManageOrdersTable from "@/components/table/ManageOrdersTable";
 
 const ManageOrdersPage = () => {
   return (
     <div>
-      <CartItemsTable />
+      <ManageOrdersTable />
     </div>
   );
 };

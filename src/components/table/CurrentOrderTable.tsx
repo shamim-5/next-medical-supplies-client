@@ -4,14 +4,16 @@ import React from "react";
 import { useAppDispatch } from "@/redux/hooks/hook";
 import { Divider, Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { addToCart, removeFromCart, removeQuantity } from "@/redux/features/cart-items/cartItemsSlice";
-import { toast } from "react-toastify";
+import { modifyCartItems } from "@/redux/features/cart-items/cartItemsSlice";
+import { useRouter } from "next/navigation";
+import { cartItemsApi } from "@/redux/features/cart-items/cartItemsApi";
 
 interface ICurrentOrderTableProps {
   order: ICartItems;
 }
 
 const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
+  const router = useRouter();
   const dataSource = order?.order;
 
   const dispatch = useAppDispatch();
@@ -49,33 +51,6 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
       dataIndex: "priceTotal",
       key: "priceTotal",
     },
-
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => {
-        const handleDelete = () => {
-          dispatch(removeFromCart(record._id));
-          toast.warning("Delete from cart success");
-        };
-        const handleAddQuantity = () => {
-          dispatch(addToCart(record));
-          toast.success("Quantity and Price Updated");
-        };
-        const handleRemoveQuantity = () => {
-          dispatch(removeQuantity(record));
-          toast.warning("Quantity and Price Updated");
-        };
-
-        return (
-          <Space size="middle" className="w-full">
-            <a onClick={handleAddQuantity}>(+)</a>
-            <a onClick={handleRemoveQuantity}>(-)</a>
-            <a onClick={handleDelete}>Delete</a>
-          </Space>
-        );
-      },
-    },
   ];
   const data: IRecord[] = dataSource ? [...dataSource] : [];
 
@@ -98,11 +73,36 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
           columns={currentColumns}
           dataSource={data}
           pagination={false}
-          title={() => (
-            <h2 className="text-lg font-mono py-2">
-              Order Id: <span className="text-slate-900/70">{order._id}</span>
-            </h2>
-          )}
+          title={(record) => {
+            const records: any[] = [...record];
+
+            // modify current order
+            const modifyCurrentOrder = async (r: IRecord[]) => {
+              try {
+                dispatch(modifyCartItems(r));
+                await dispatch(cartItemsApi.endpoints.deleteOrderById.initiate(order._id));
+
+                router.push("/user/cart-items");
+              } catch (error) {
+                // do nothing
+              }
+            };
+
+            return (
+              <div className="flex justify-between">
+                <div>
+                  <h2 className="text-lg font-mono pt-2">
+                    Order Id: <span className="text-slate-900/70">{order._id}</span>
+                  </h2>
+                </div>
+                <div>
+                  <Space size="middle" className="w-full">
+                    <a onClick={() => modifyCurrentOrder(records)}>Modify</a>
+                  </Space>
+                </div>
+              </div>
+            );
+          }}
           footer={(record) => {
             const calculateTotalPrice = (record: any[] | readonly IProduct[]) => {
               if (!record || record.length === 0) {

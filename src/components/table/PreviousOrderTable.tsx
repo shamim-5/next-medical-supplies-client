@@ -72,7 +72,7 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
           dataSource={data}
           pagination={false}
           title={() => (
-            <h2 className="text-lg font-mono py-2">
+            <h2 className="text-lg font-mono pt-2">
               Order Id: <span className="text-slate-900/70">{order._id}</span>
             </h2>
           )}

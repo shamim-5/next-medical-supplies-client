@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import EmptyData from "../shared/EmptyData";
 import ButtonShake from "../shared/ButtonShake";
 import { useAddToDBMutation } from "@/redux/features/cart-items/cartItemsApi";
+import { useRouter } from "next/navigation";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 
@@ -18,6 +19,8 @@ const CartItemsTable: React.FC = () => {
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const { uid, displayName, email } = userInfo || {};
   const [addToDB] = useAddToDBMutation();
+
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -134,8 +137,13 @@ const CartItemsTable: React.FC = () => {
                   order: [...record],
                 };
 
-                await addToDB(items);
-                toast.success("Thanks for your order. You will receive confirmation message soon.");
+                try {
+                  await addToDB(items);
+                  router.push("/user/manage-orders");
+                  toast.success("Thanks for your order. You will receive confirmation message soon.");
+                } catch (error) {
+                  // do nothing
+                }
               };
 
               return (

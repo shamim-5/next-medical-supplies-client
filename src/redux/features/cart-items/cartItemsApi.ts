@@ -35,7 +35,17 @@ export const cartItemsApi = apiSlice.injectEndpoints({
         }
       },
     }),
+
+    deleteOrderById: builder.mutation({
+      query: (orderId) => ({
+        url: `/cart-items/${orderId}`,
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["cart-items"],
+    }),
   }),
 });
 
-export const { useAddToDBMutation, useGetDataFromDBQuery, useGetDataFromDBbyEmailQuery } = cartItemsApi;
+export const { useAddToDBMutation, useGetDataFromDBQuery, useGetDataFromDBbyEmailQuery, useDeleteOrderByIdMutation } =
+  cartItemsApi;

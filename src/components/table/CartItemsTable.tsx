@@ -128,6 +128,8 @@ const CartItemsTable: React.FC = () => {
                   userName: displayName,
                   email: email,
                   status: true,
+                  active: true,
+                  paid: true,
                   timestamp: Date.now().toString(),
                   order: [...record],
                 };

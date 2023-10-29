@@ -5,8 +5,6 @@ export const reagentsApi = apiSlice.injectEndpoints({
     getReagents: builder.query({
       query: ({ field, searchTerm }) =>
         searchTerm && field ? `/reagents?field=${field}&searchTerm=${searchTerm}` : `/reagents`,
-
-      providesTags: [""],
     }),
   }),
 });

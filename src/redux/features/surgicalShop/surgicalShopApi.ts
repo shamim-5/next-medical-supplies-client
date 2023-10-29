@@ -4,8 +4,6 @@ export const surgicalShopApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getSurgicalShop: builder.query({
       query: () => `/shop-details`,
-
-      providesTags: [""],
     }),
   }),
 });

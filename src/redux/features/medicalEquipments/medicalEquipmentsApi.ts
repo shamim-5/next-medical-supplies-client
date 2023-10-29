@@ -5,8 +5,6 @@ export const medicalEquipmentsApi = apiSlice.injectEndpoints({
     getMedicalEquipments: builder.query({
       query: ({ field, searchTerm }) =>
         searchTerm && field ? `/medical-equipments?field=${field}&searchTerm=${searchTerm}` : `/medical-equipments`,
-
-      providesTags: [""],
     }),
   }),
 });

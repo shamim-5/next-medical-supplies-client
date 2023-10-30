@@ -1,7 +1,7 @@
 "use client";
 import { Footer } from "antd/es/layout/layout";
 import Image from "next/image";
-import logoImage from "@/assets/logo.png";
+import logoImage from "@/assets/logo-footer.svg";
 import { RiFacebookBoxLine, RiInstagramLine } from "react-icons/ri";
 import { usePathname } from "next/navigation";
 
@@ -17,12 +17,12 @@ const AppFooter = () => {
   } else {
     // do nothing
   }
-  // console.log(path);
+
   return (
     <>
       {path !== "user" ? (
         <Footer style={{ textAlign: "center" }} className="px-6 md:px-9 lg:px-12 py-0">
-          <div className="">
+          <div>
             <div className=" bg-[#e2eaec85] text-secondary px-2 lg:px-12 py-3 lg:py-9">
               <div className="flex justify-between items-center w-full">
                 <div>

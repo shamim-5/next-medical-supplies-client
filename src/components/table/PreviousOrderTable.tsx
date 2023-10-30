@@ -1,11 +1,8 @@
 "use client";
 
 import React from "react";
-import { useAppDispatch } from "@/redux/hooks/hook";
 import { Divider, Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { addToCart, removeFromCart, removeQuantity } from "@/redux/features/cart-items/cartItemsSlice";
-import { toast } from "react-toastify";
 
 interface IPreviousOrderTableProps {
   order: ICartItems;
@@ -13,8 +10,6 @@ interface IPreviousOrderTableProps {
 
 const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
   const dataSource = order?.order;
-
-  const dispatch = useAppDispatch();
 
   const currentColumns: ColumnsType<IRecord> = [
     {
@@ -53,7 +48,6 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
   const data: IRecord[] = dataSource ? [...dataSource] : [];
 
   const date = order?.timestamp && new Date(parseInt(order?.timestamp));
-  // console.log(date.toLocaleString());
 
   const year = date && date.getFullYear();
   const month = date && date.getMonth() + 1;

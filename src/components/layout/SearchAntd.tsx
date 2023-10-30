@@ -14,10 +14,8 @@ const SearchAntd: React.FC = () => {
   const onSearch = async (e: { target: { value: string | undefined } }) => {
     const currentSearchTerm = e.target.value;
 
-    await dispatch(setSearchTerm({ field: "name", searchTerm: currentSearchTerm }));
+    dispatch(setSearchTerm({ field: "name", searchTerm: currentSearchTerm }));
     dispatch(productsApi.endpoints.getProducts.initiate({ field, searchTerm }));
-
-    // console.log(currentSearchTerm);
   };
 
   return (

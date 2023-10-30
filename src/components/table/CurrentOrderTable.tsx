@@ -55,7 +55,6 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
   const data: IRecord[] = dataSource ? [...dataSource] : [];
 
   const date = order?.timestamp && new Date(parseInt(order?.timestamp));
-  // console.log(date.toLocaleString());
 
   const year = date && date.getFullYear();
   const month = date && date.getMonth() + 1;

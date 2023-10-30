@@ -5,7 +5,7 @@ import { Layout, Menu, Space, Dropdown, Button } from "antd";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
-import logoImage from "@/assets/logo.png";
+import logoImage from "@/assets/logo-navbar.svg";
 import { auth } from "@/lib/firebase";
 import useAuth from "@/redux/hooks/useAuth";
 import SearchAntd from "./SearchAntd";
@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <Header className="flex items-center justify-between bg-[#FFFFFF] uppercase border-b border-b-slate-300/70 sticky top-0  z-40">
+      <Header className="flex items-center justify-between bg-[#FFFFFF] border-b border-b-slate-300/70 sticky top-0  z-40">
         <div className="flex items-center justify-between lg:mr-2">
           <div>
             <Link href={"/"}>
@@ -84,14 +84,14 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl lg:text-3xl  hidden md:block  ml-2">
-              <Link href={"/"} className="text-cyan">
-                NB Surgical
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold  hidden md:block  ml-2">
+              <Link href={"/"} className="text-primary">
+                NB <span className="text-cyan">Surgical</span>
               </Link>
             </h2>
-            <h2 className="text-2xl md:text-3xl lg:text-3xl block md:hidden ml-2">
-              <Link href={"/"} className="text-cyan">
-                NBS
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold block md:hidden ml-2">
+              <Link href={"/"} className="text-primary">
+                NB<span className="text-cyan">S</span>
               </Link>
             </h2>
           </div>
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
                         {m.name}
                       </Button>
                     ) : (
-                      <Link className={`${selectedKeys[0] === m.path} && text-[#253858]`} href={m.path}>
+                      <Link className={`${selectedKeys[0] === m.path} && text-[#253858] uppercase`} href={m.path}>
                         {m.name}
                       </Link>
                     ),

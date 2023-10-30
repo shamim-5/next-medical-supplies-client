@@ -104,7 +104,6 @@ const CartItemsTable: React.FC = () => {
               <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2">Items that you want to buy</h2>
             )}
             footer={(record) => {
-              // console.log(uid, displayName, email);
               const calculateTotalPrice = (record: any[] | readonly IProduct[]) => {
                 if (!record || record.length === 0) {
                   return 0;

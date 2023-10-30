@@ -12,8 +12,6 @@ const OthersPage = () => {
   const { data: medicalEquipments, isLoading: isMedicalEquipments } =
     useGetMedicalEquipmentsQuery({ field, searchTerm }) || [];
 
-  // console.log(medicalEquipments, isMedicalEquipments);
-  // console.log(consumables, isLoading);
   return (
     <div className="my-4 md:my-6 lg:my-9">
       <h2 className="text-primary-dark text-3xl lg:text-4xl uppercase font-semibold mb-4">

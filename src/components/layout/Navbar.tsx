@@ -14,6 +14,7 @@ import { signOut } from "firebase/auth";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { cleanPath } from "@/redux/features/path/pathSlice";
 import { USER_ROLE } from "@/constants/role";
+import ExtraNavbar from "./ExtraNavbar";
 
 const { Header } = Layout;
 
@@ -84,19 +85,19 @@ const Navbar: React.FC = () => {
           role && "hidden"
         }`}
       >
-        <div className="flex items-center justify-between lg:mr-2">
+        <div className="flex items-center justify-between lg:mr-2 mb-2">
           <div>
             <Link href={"/"}>
-              <Image className="w-4 md:w-6" src={logoImage} width={32} height={32} alt="logo" />
+              <Image className="w-6 md:w-9" src={logoImage} width={32} height={32} alt="logo" />
             </Link>
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold  hidden md:block  ml-2">
+            <h2 className="text-4xl font-semibold  hidden md:block  ml-2">
               <Link href={"/"} className="text-primary">
                 NB <span className="text-cyan">Surgical</span>
               </Link>
             </h2>
-            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold block md:hidden ml-2">
+            <h2 className="text-4xl font-semibold block md:hidden ml-2">
               <Link href={"/"} className="text-primary">
                 NB<span className="text-cyan">S</span>
               </Link>
@@ -104,7 +105,9 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <SearchAntd />
+        <div className="mt-6">
+          <SearchAntd />
+        </div>
 
         <div className="flex items-center justify-start">
           <div className="hidden lg:block">
@@ -157,6 +160,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </Header>
+      <ExtraNavbar role={role} />
     </>
   );
 };

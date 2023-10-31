@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hook";
 import { Divider, Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
@@ -11,26 +10,13 @@ import EmptyData from "../shared/EmptyData";
 import ButtonShake from "../shared/ButtonShake";
 import { useAddToDBMutation } from "@/redux/features/cart-items/cartItemsApi";
 import { useRouter } from "next/navigation";
-import { User, onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import useUserInfo from "@/hooks/useUserInfo";
 
 const CartItemsTable: React.FC = () => {
   const products = useAppSelector((state) => state?.cartItems) || [];
-  const [userInfo, setUserInfo] = useState<User | null>(null);
-  const { uid, displayName, email } = userInfo || {};
+  const { uid, displayName, email } = useUserInfo() || {};
   const [addToDB] = useAddToDBMutation();
-
   const router = useRouter();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      // 'user' will be null if the user is not authenticated
-      setUserInfo(user);
-    });
-
-    // Cleanup function to unsubscribe when the component unmounts
-    return () => unsubscribe();
-  }, []);
 
   const dispatch = useAppDispatch();
 

@@ -21,7 +21,7 @@ const AppFooter = () => {
   return (
     <>
       {path !== "user" ? (
-        <Footer style={{ textAlign: "center" }} className="px-9 md:px-12 lg:px-16 2xl:px-20 py-0">
+        <Footer style={{ textAlign: "center" }} className="px-6 md:px-11 lg:px-16 2xl:px-20 py-0">
           <div>
             <div className=" bg-[#e2eaec85] text-secondary px-2 lg:px-12 py-3 lg:py-9">
               <div className="flex justify-between items-center w-full">

@@ -23,7 +23,7 @@ const SideBar = () => {
       width={280}
       className="bg-secondary overflow-auto h-screen sticky left-0 top-0 bottom-0"
     >
-      <div className="flexCB space-x-2 cursor-pointer">
+      <div className="flex items-center justify-center space-x-2 cursor-pointer">
         <div>
           <Link href={"/"}>
             <Image

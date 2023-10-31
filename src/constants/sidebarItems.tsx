@@ -11,11 +11,19 @@ export const sidebarItems = (role: string) => {
       icon: <ProfileOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/profile`}>Account Profile</Link>,
+          label: (
+            <Link className="text-primary-light" href={`/${role}/profile`}>
+              Account Profile
+            </Link>
+          ),
           key: `/${role}/profile`,
         },
         {
-          label: <Link href={`/${role}/due-list`}>Due List</Link>,
+          label: (
+            <Link className="text-primary-light" href={`/${role}/due-list`}>
+              Due List
+            </Link>
+          ),
           key: `/${role}/due-list`,
         },
       ],
@@ -24,7 +32,11 @@ export const sidebarItems = (role: string) => {
 
   const commonSidebarItems: MenuProps["items"] = [
     {
-      label: <Link href={`/${role}/manage-orders`}>Manage Orders</Link>,
+      label: (
+        <Link className="text-primary-light" href={`/${role}/manage-orders`}>
+          Manage Orders
+        </Link>
+      ),
       icon: <TableOutlined />,
       key: `/${role}/manage-orders`,
     },
@@ -37,11 +49,19 @@ export const sidebarItems = (role: string) => {
       icon: <ProfileOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/customer-list`}>Customers List</Link>,
+          label: (
+            <Link className="text-primary-light" href={`/${role}/customer-list`}>
+              Customers List
+            </Link>
+          ),
           key: `/${role}/customer-list`,
         },
         {
-          label: <Link href={`/${role}/due-list`}>Due List</Link>,
+          label: (
+            <Link className="text-primary-light" href={`/${role}/due-list`}>
+              Due List
+            </Link>
+          ),
           key: `/${role}/due-list`,
         },
       ],
@@ -49,12 +69,20 @@ export const sidebarItems = (role: string) => {
     ...commonSidebarItems,
 
     {
-      label: <Link href={`/${role}/pending-orders`}>Pending Orders</Link>,
+      label: (
+        <Link className="text-primary-light" href={`/${role}/pending-orders`}>
+          Pending Orders
+        </Link>
+      ),
       icon: <ScheduleOutlined />,
       key: `/${role}/pending-orders`,
     },
     {
-      label: <Link href={`/${role}/completed-orders`}>Completed Orders</Link>,
+      label: (
+        <Link className="text-primary-light" href={`/${role}/completed-orders`}>
+          Completed Orders
+        </Link>
+      ),
       icon: <ScheduleOutlined />,
       key: `/${role}/completed-orders`,
     },
@@ -64,7 +92,11 @@ export const sidebarItems = (role: string) => {
     ...defaultSidebarItems,
     ...commonSidebarItems,
     {
-      label: <Link href={`/${role}/cart-items`}>cart-items</Link>,
+      label: (
+        <Link className="text-primary-light" href={`/${role}/cart-items`}>
+          cart-items
+        </Link>
+      ),
       icon: <ScheduleOutlined />,
       key: `/${role}/cart-items`,
     },

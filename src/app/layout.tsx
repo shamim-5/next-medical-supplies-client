@@ -4,11 +4,11 @@ import Providers from "@/lib/Providers";
 import AppFooter from "@/components/layout/AppFooter";
 import Navbar from "@/components/layout/Navbar";
 import { Layout } from "antd";
-import { Content } from "antd/es/layout/layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import AuthCheck from "@/components/AuthCheck";
+import Contents from "@/components/layout/Contents";
 
 export const metadata: Metadata = {
   title: "NB_Surgical - Home page",
@@ -22,11 +22,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Layout>
             <Navbar />
-            <Content className="site-layout px-6 md:px-9 lg:px-12">
-              <div style={{ minHeight: "100vh" }}>
-                <AuthCheck>{children}</AuthCheck>
-              </div>
-            </Content>
+            <Contents>
+              <AuthCheck>{children}</AuthCheck>
+            </Contents>
             <AppFooter />
 
             <ScrollToTopButton />

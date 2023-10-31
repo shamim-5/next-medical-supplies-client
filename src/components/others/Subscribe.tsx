@@ -12,7 +12,7 @@ const Subscribe: React.FC = () => {
   };
 
   return (
-    <div className="pt-12 text-primary-light ">
+    <div className="pt-12 text-primary-light">
       <div className="bg-cyan w-full h-auto lg:h-[250px] grid grid-cols-1 lg:grid-cols-3 px-4  ">
         <div className="mx-auto my-auto">
           <h3 className="uppercase text-2xl md:text-3xl lg:text-4xl my-4">Join our mailing list</h3>

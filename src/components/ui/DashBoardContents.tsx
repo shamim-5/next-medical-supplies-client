@@ -5,19 +5,12 @@ import { usePathname } from "next/navigation";
 
 const { Content } = Layout;
 
-const Contents = ({ children }: { children: React.ReactNode }) => {
+const DashBoardContents = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const base = pathname.replace(/^.*[/]/, "");
 
   return (
-    <Content
-      style={{
-        minHeight: "100vh",
-        color: "black",
-        marginTop: "10px",
-        marginLeft: "10px",
-      }}
-    >
+    <Content className="min-h-screen mt-4 mx-6">
       <BreadCrumbAntd
         items={[
           {
@@ -31,4 +24,4 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Contents;
+export default DashBoardContents;

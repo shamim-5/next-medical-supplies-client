@@ -13,6 +13,7 @@ import { useAppDispatch } from "@/redux/hooks/hook";
 import { signOut } from "firebase/auth";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { cleanPath } from "@/redux/features/path/pathSlice";
+import { USER_ROLE } from "@/constants/role";
 
 const { Header } = Layout;
 
@@ -74,9 +75,15 @@ const Navbar: React.FC = () => {
     },
   ];
 
+  const role = USER_ROLE.USER === pathname.split("/")[1] || USER_ROLE.ADMIN === pathname.split("/")[1];
+
   return (
     <>
-      <Header className="flex items-center justify-between bg-[#FFFFFF] border-b border-b-slate-300/70 sticky top-0  z-40">
+      <Header
+        className={`flex items-center justify-between bg-[#FFFFFF] border-b border-b-slate-300/70 px-9 md:px-12 lg:px-16 2xl:px-20 sticky top-0  z-40 ${
+          role && "hidden"
+        }`}
+      >
         <div className="flex items-center justify-between lg:mr-2">
           <div>
             <Link href={"/"}>

@@ -6,7 +6,7 @@ import AllProductCard from "../cards/AllProductCard";
 import { useAppSelector } from "@/redux/hooks/hook";
 
 const AllProducts = () => {
-  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+  const { field, searchTerm } = useAppSelector((state) => state.search) || {};
   const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm });
 
   return (

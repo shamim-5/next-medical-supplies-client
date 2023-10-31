@@ -5,8 +5,6 @@ export const consumablesApi = apiSlice.injectEndpoints({
     getConsumables: builder.query({
       query: ({ field, searchTerm }) =>
         searchTerm && field ? `/consumables?field=${field}&searchTerm=${searchTerm}` : `/consumables`,
-
-      providesTags: [""],
     }),
   }),
 });

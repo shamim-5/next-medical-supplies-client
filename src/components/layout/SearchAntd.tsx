@@ -1,13 +1,13 @@
 "use client";
 
 import { productsApi } from "@/redux/features/products/productsApi";
-import { setSearchTerm } from "@/redux/helper/helperSlice";
+import { setSearchTerm } from "@/redux/features/helper/searchSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hook";
 import { Space } from "antd";
 import Search from "antd/es/input/Search";
 
 const SearchAntd: React.FC = () => {
-  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+  const { field, searchTerm } = useAppSelector((state) => state.search) || {};
 
   const dispatch = useAppDispatch();
 
@@ -28,6 +28,3 @@ const SearchAntd: React.FC = () => {
 };
 
 export default SearchAntd;
-function dispatch(arg0: { payload: any; type: "helper/setSearchTerm" }) {
-  throw new Error("Function not implemented.");
-}

@@ -10,8 +10,8 @@ const initialState: IInitialState = {
   searchTerm: "",
 };
 
-const helperSlice = createSlice({
-  name: "helper",
+const searchSlice = createSlice({
+  name: "search",
   initialState,
   reducers: {
     setSearchTerm: (state, action) => {
@@ -21,5 +21,5 @@ const helperSlice = createSlice({
   },
 });
 
-export const { setSearchTerm } = helperSlice.actions;
-export default helperSlice.reducer;
+export const { setSearchTerm } = searchSlice.actions;
+export default searchSlice.reducer;

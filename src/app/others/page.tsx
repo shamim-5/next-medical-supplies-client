@@ -6,7 +6,7 @@ import { useGetMedicalEquipmentsQuery } from "@/redux/features/medicalEquipments
 import { useAppSelector } from "@/redux/hooks/hook";
 
 const OthersPage = () => {
-  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+  const { field, searchTerm } = useAppSelector((state) => state.search) || {};
 
   const { data: consumables, isLoading } = useGetConsumablesQuery({ field, searchTerm }) || [];
   const { data: medicalEquipments, isLoading: isMedicalEquipments } =

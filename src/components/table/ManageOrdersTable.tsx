@@ -18,14 +18,14 @@ const ManageOrdersTable: React.FC = () => {
     <div>
       {!isLoading && orders ? (
         <div>
-          <div>
+          <div className="mb-4 lg:mb-9">
             <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2 mt-4">Current Orders</h2>
             {orders.map((order: any) => (
               <CurrentOrderTable key={order._id} order={order} />
             ))}
           </div>
 
-          <div>
+          <div className="mb-4 lg:mb-12">
             <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2 mt-4">Previous Orders</h2>
             {orders.map((order: any) => (
               <PreviousOrderTable key={order._id} order={order} />

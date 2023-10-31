@@ -7,6 +7,7 @@ import type { ColumnsType } from "antd/es/table";
 import { modifyCartItems } from "@/redux/features/cart-items/cartItemsSlice";
 import { useRouter } from "next/navigation";
 import { cartItemsApi } from "@/redux/features/cart-items/cartItemsApi";
+import { setStatus } from "@/redux/features/helper/statusSlice";
 
 interface ICurrentOrderTableProps {
   order: ICartItems;

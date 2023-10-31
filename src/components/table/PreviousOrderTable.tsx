@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Divider, Space, Table, Tag } from "antd";
+import { Divider, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 
 interface IPreviousOrderTableProps {

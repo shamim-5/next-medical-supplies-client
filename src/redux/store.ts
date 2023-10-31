@@ -2,7 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./api/apiSlice";
 import authReducer from "./features/auth/authSlice";
 import cartItemsReducer from "./features/cart-items/cartItemsSlice";
-import helperSliceReducer from "./helper/helperSlice";
+import searchSliceReducer from "./features/helper/searchSlice";
+import statusSliceReducer from "./features/helper/statusSlice";
 import pathSliceReducer from "./features/path/pathSlice";
 
 export const store = configureStore({
@@ -11,7 +12,8 @@ export const store = configureStore({
     auth: authReducer,
     path: pathSliceReducer,
     cartItems: cartItemsReducer,
-    helper: helperSliceReducer,
+    search: searchSliceReducer,
+    status: statusSliceReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),

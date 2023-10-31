@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AppFooter />
 
             <ScrollToTopButton />
-            <ToastContainer position="top-center" />
+            <ToastContainer position="top-left" />
           </Layout>
         </Providers>
       </body>

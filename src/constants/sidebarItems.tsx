@@ -83,7 +83,7 @@ export const sidebarItems = (role: string) => {
           Completed Orders
         </Link>
       ),
-      icon: <ScheduleOutlined />,
+      icon: <ScheduleOutlined />, 
       key: `/${role}/completed-orders`,
     },
   ];

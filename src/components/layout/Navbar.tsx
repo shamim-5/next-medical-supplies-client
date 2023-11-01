@@ -2,7 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Layout, Menu, Space, Dropdown, Button } from "antd";
-import { MenuFoldOutlined } from "@ant-design/icons";
+import { LogoutOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
 import logoImage from "@/assets/logo-navbar.svg";
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
       ),
       name: isLoggedIn ? "Logout" : "Login",
       key: "2",
-      path: `/logout`,
+      path: isLoggedIn ? `/logout` : `login`,
     },
     {
       label: !isLoggedIn && <Link href="/signup">Signup</Link>,
@@ -130,8 +130,9 @@ const Navbar: React.FC = () => {
                     m.path === "/logout" ? (
                       <Button
                         onClick={() => handleSignOut()}
-                        className={`${selectedKeys[0] === m.path} && text-[#253858] border-0 mx-0 px-0 uppercase`}
+                        className={`${selectedKeys[0] === m.path} && text-[#253858] border-0 mx-0 px-0 uppercase w-32`}
                       >
+                        <LogoutOutlined className="text-cyan font-semibold  text-3xl" />
                         {m.name}
                       </Button>
                     ) : (

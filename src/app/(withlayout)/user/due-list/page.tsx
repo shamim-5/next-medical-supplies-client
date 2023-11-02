@@ -1,11 +1,17 @@
-import EmptyData from "@/components/shared/EmptyData";
+import Blank from "@/components/shared/Blank";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NB_Surgical - Due List page",
+  description: "Surgical equipments shop app",
+};
 
 const DueListPage = () => {
   return (
     <div>
       <div></div>
       <div>
-        <EmptyData />
+        <Blank />
       </div>
     </div>
   );

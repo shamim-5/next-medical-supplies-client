@@ -7,15 +7,19 @@ import { sidebarItems } from "@/constants/sidebarItems";
 import { USER_ROLE } from "@/constants/role";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks/hook";
+import useUserInfo from "@/hooks/useUserInfo";
 
 const { Sider } = Layout;
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const pathname = usePathname();
+  const { accessToken: firebaseAccessToken } = useUserInfo();
+  const { user, accessToken } = useAppSelector((state) => state?.auth);
 
-  const role = pathname.split("/")[1] || USER_ROLE.USER;
+  const admin = accessToken === firebaseAccessToken && user === process.env.NEXT_PUBLIC_ADMIN ? true : false;
+
+  const role = (admin && USER_ROLE.ADMIN) || USER_ROLE.USER;
 
   return (
     <Sider

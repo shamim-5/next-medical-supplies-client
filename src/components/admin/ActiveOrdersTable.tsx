@@ -119,7 +119,7 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
               <div>
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   <div>
-                    <h3>Order Status : {!order.status && order.active && !order.paid && "On the way to delivery !"}</h3>
+                    <h3>Order Status : {!order.status && order.active && "On the way to delivery !"}</h3>
                     <h3>{`Order Date and Time : ${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${amOrPm}`}</h3>
                     <Divider className="mt-2 mb-3" />
                     <h3 className="text-slate-600">Note : Order will delivery up to two business days.</h3>

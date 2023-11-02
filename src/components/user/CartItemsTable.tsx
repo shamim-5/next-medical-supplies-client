@@ -11,6 +11,7 @@ import ButtonShake from "../shared/ButtonShake";
 import { useAddToDBMutation } from "@/redux/features/cart-items/cartItemsApi";
 import { useRouter } from "next/navigation";
 import useUserInfo from "@/hooks/useUserInfo";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 const CartItemsTable: React.FC = () => {
   const products = useAppSelector((state) => state?.cartItems) || [];
@@ -87,7 +88,18 @@ const CartItemsTable: React.FC = () => {
             dataSource={data}
             pagination={false}
             title={() => (
-              <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2">Items that you want to buy</h2>
+              <div className="flex justify-between">
+                <div>
+                  <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2">Items that you want to buy</h2>
+                </div>
+                <div>
+                  <Space size="middle" className="w-full cursor-pointer">
+                    <a onClick={() => router.push("/all-items")}>
+                      Add More <PlusCircleOutlined className="text-blue-500/90 text-xl text-center" />
+                    </a>
+                  </Space>
+                </div>
+              </div>
             )}
             footer={(record) => {
               const calculateTotalPrice = (record: any[] | readonly IProduct[]) => {
@@ -115,9 +127,9 @@ const CartItemsTable: React.FC = () => {
                   userId: uid?.toString(),
                   userName: displayName,
                   email: email,
-                  status: true,
-                  active: true,
-                  paid: true,
+                  status: false,
+                  active: false,
+                  paid: false,
                   timestamp: Date.now().toString(),
                   order: [...record],
                 };

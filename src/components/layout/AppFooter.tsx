@@ -4,23 +4,18 @@ import Image from "next/image";
 import logoImage from "@/assets/logo-footer.svg";
 import { RiFacebookBoxLine, RiInstagramLine } from "react-icons/ri";
 import { usePathname } from "next/navigation";
+import { USER_ROLE } from "@/constants/role";
 
 const AppFooter = () => {
   const pathname = usePathname();
   const date = new Date();
   const year = date.getFullYear();
 
-  const firstPath = pathname.match(/^\/([^/]+)/);
-  let path;
-  if (firstPath) {
-    path = firstPath[1];
-  } else {
-    // do nothing
-  }
+  const role = USER_ROLE.USER === pathname.split("/")[1] || USER_ROLE.ADMIN === pathname.split("/")[1];
 
   return (
     <>
-      {path !== "user" ? (
+      {!role ? (
         <Footer style={{ textAlign: "center" }} className="px-6 md:px-11 lg:px-16 2xl:px-20 py-0">
           <div>
             <div className=" bg-[#e2eaec85] text-secondary px-2 lg:px-12 py-3 lg:py-9">

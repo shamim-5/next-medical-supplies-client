@@ -7,13 +7,15 @@ import { sidebarItems } from "@/constants/sidebarItems";
 import { USER_ROLE } from "@/constants/role";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const { Sider } = Layout;
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const pathname = usePathname();
 
-  const role = USER_ROLE.USER;
+  const role = pathname.split("/")[1] || USER_ROLE.USER;
 
   return (
     <Sider

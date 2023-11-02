@@ -4,17 +4,13 @@ import React from "react";
 import { useAppDispatch } from "@/redux/hooks/hook";
 import { Divider, Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { modifyCartItems } from "@/redux/features/cart-items/cartItemsSlice";
-import { useRouter } from "next/navigation";
-import { cartItemsApi } from "@/redux/features/cart-items/cartItemsApi";
-import { setStatus } from "@/redux/features/helper/statusSlice";
+import { ordersApi } from "@/redux/features/admin/orders/ordersApi";
 
-interface ICurrentOrderTableProps {
+interface ICompletedOrdersTableProps {
   order: ICartItems;
 }
 
-const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
-  const router = useRouter();
+const CompletedOrdersTable: React.FC<ICompletedOrdersTableProps> = ({ order }) => {
   const dataSource = order?.order;
 
   const dispatch = useAppDispatch();
@@ -67,39 +63,18 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
 
   return (
     <>
-      {order.status && (
+      {order.status && !order.active && (
         <Table
           key={order._id}
           columns={currentColumns}
           dataSource={data}
           pagination={false}
-          title={(record) => {
-            const records: any[] = [...record];
-
-            // modify current order
-            const modifyCurrentOrder = async (r: IRecord[]) => {
-              try {
-                dispatch(modifyCartItems(r));
-                await dispatch(cartItemsApi.endpoints.deleteOrderById.initiate(order._id));
-
-                router.push("/user/cart-items");
-              } catch (error) {
-                // do nothing
-              }
-            };
-
+          title={() => {
             return (
-              <div className="flex justify-between">
-                <div>
-                  <h2 className="text-lg font-mono pt-2">
-                    Order Id: <span className="text-slate-900/70">{order._id}</span>
-                  </h2>
-                </div>
-                <div>
-                  <Space size="middle" className="w-full">
-                    <a onClick={() => modifyCurrentOrder(records)}>Modify</a>
-                  </Space>
-                </div>
+              <div>
+                <h2 className="text-lg font-mono pt-2">
+                  Order Id: <span className="text-slate-900/70">{order._id}</span>
+                </h2>
               </div>
             );
           }}
@@ -124,10 +99,10 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
               <div>
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   <div>
-                    <h3>Status : {order.status ? "Processing" : "Completed"}</h3>
+                    <h3>Order Status : {order.status && !order.active && "Completed"}</h3>
                     <h3>{`Order Date and Time : ${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${amOrPm}`}</h3>
                     <Divider className="mt-2 mb-3" />
-                    <h3 className="text-slate-600">Note : Order will delivery up to two business days.</h3>
+                    <h3 className="text-slate-600">Note : Order successfully delivered.</h3>
                   </div>
                   <div>
                     <div className="flex justify-end">
@@ -162,4 +137,4 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
   );
 };
 
-export default CurrentOrderTable;
+export default CompletedOrdersTable;

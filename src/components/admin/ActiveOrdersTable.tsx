@@ -1,15 +1,19 @@
 "use client";
 
 import React from "react";
-import { Divider, Space, Table } from "antd";
+import { useAppDispatch } from "@/redux/hooks/hook";
+import { Divider, Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import { ordersApi } from "@/redux/features/admin/orders/ordersApi";
 
-interface IPreviousOrderTableProps {
+interface IActiveOrdersTableProps {
   order: ICartItems;
 }
 
-const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
+const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
   const dataSource = order?.order;
+
+  const dispatch = useAppDispatch();
 
   const currentColumns: ColumnsType<IRecord> = [
     {
@@ -59,17 +63,41 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
 
   return (
     <>
-      {!order.status && (
+      {!order.status && order.active && (
         <Table
           key={order._id}
           columns={currentColumns}
           dataSource={data}
           pagination={false}
-          title={() => (
-            <h2 className="text-lg font-mono pt-2">
-              Order Id: <span className="text-slate-900/70">{order._id}</span>
-            </h2>
-          )}
+          title={() => {
+            const completeOrder = async () => {
+              try {
+                await dispatch(
+                  ordersApi.endpoints.updateStatusById.initiate({
+                    data: { ...order, status: true, active: false },
+                    id: order._id,
+                  })
+                );
+              } catch (error) {
+                // do nothing
+              }
+            };
+
+            return (
+              <div className="flex justify-between">
+                <div>
+                  <h2 className="text-lg font-mono pt-2">
+                    Order Id: <span className="text-slate-900/70">{order._id}</span>
+                  </h2>
+                </div>
+                <div>
+                  <Space size="middle" className="w-full">
+                    <a onClick={() => completeOrder()}>Complete</a>
+                  </Space>
+                </div>
+              </div>
+            );
+          }}
           footer={(record) => {
             const calculateTotalPrice = (record: any[] | readonly IProduct[]) => {
               if (!record || record.length === 0) {
@@ -91,10 +119,10 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
               <div>
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   <div>
-                    <h3>Status : {order.status ? "Processing" : "Completed"}</h3>
+                    <h3>Order Status : {!order.status && order.active && !order.paid && "On the way to delivery !"}</h3>
                     <h3>{`Order Date and Time : ${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${amOrPm}`}</h3>
                     <Divider className="mt-2 mb-3" />
-                    <h3 className="text-slate-600">Note : Please pay your previous bill if any due have.</h3>
+                    <h3 className="text-slate-600">Note : Order will delivery up to two business days.</h3>
                   </div>
                   <div>
                     <div className="flex justify-end">
@@ -129,4 +157,4 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
   );
 };
 
-export default PreviousOrderTable;
+export default ActiveOrdersTable;

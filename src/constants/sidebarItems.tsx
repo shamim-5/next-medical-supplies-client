@@ -1,5 +1,5 @@
 import type { MenuProps } from "antd";
-import { ProfileOutlined, TableOutlined, ScheduleOutlined } from "@ant-design/icons";
+import { ProfileOutlined, TableOutlined, ScheduleOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 
@@ -43,29 +43,7 @@ export const sidebarItems = (role: string) => {
   ];
 
   const adminSidebarItems: MenuProps["items"] = [
-    {
-      label: "Customers",
-      key: "customers",
-      icon: <ProfileOutlined />,
-      children: [
-        {
-          label: (
-            <Link className="text-primary-light" href={`/${role}/customer-list`}>
-              Customers List
-            </Link>
-          ),
-          key: `/${role}/customer-list`,
-        },
-        {
-          label: (
-            <Link className="text-primary-light" href={`/${role}/due-list`}>
-              Due List
-            </Link>
-          ),
-          key: `/${role}/due-list`,
-        },
-      ],
-    },
+    ...defaultSidebarItems,
     ...commonSidebarItems,
 
     {
@@ -79,12 +57,30 @@ export const sidebarItems = (role: string) => {
     },
     {
       label: (
+        <Link className="text-primary-light" href={`/${role}/active-orders`}>
+          Active Orders
+        </Link>
+      ),
+      icon: <ScheduleOutlined />,
+      key: `/${role}/confirm-orders`,
+    },
+    {
+      label: (
         <Link className="text-primary-light" href={`/${role}/completed-orders`}>
           Completed Orders
         </Link>
       ),
-      icon: <ScheduleOutlined />, 
+      icon: <ScheduleOutlined />,
       key: `/${role}/completed-orders`,
+    },
+    {
+      label: (
+        <Link className="text-primary-light" href={`/${role}/customers`}>
+          Customers
+        </Link>
+      ),
+      icon: <UnorderedListOutlined />,
+      key: `/${role}/customers`,
     },
   ];
 

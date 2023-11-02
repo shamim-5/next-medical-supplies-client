@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import ManageOrdersTable from "@/components/user/ManageOrdersTable";
 
 export const metadata: Metadata = {
   title: "NB_Surgical - Cart Items page",
   description: "Surgical equipments shop app",
 };
-import ManageOrdersTable from "@/components/table/ManageOrdersTable";
 
 const ManageOrdersPage = () => {
   return (

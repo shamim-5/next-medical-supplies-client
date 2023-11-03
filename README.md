@@ -1,38 +1,87 @@
-# next-medical-supplies
+# Next Medical Supplies Client
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Welcome to Next Medical Supplies project build with [Next.js](https://nextjs.org/).This project based on surgical shop management where have tow different interface **user** and **admin**.
 
-## Getting Started
+### Project Overview :
 
-First, run the development server:
+User can place order, modify current order, see current order status and previous order status. Admin can approve pending orders, after successful delivery make order status completed and the completed order shows user and admin side. Admin check every user due list and make it's status paid. User can see ther previous dues. More functionality will be implemented soon...
+
+## Getting Started :
+
+**Live Link:** [Next Medical Supplies Live Website](https://next-medical-supplies-client.vercel.app/)
+
+Admin access:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+email: admin@example.com
+password: Admin123
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### **Note**: Please wait some time if no content is available in **live link**. Have some deployment issue cause of deploy server side **onrender**. Try reload browser tab for visualize updated content.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Github Code Link :
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Client Side Code:** [next-medical-supplies-client](https://github.com/shamim-5/next-medical-supplies-client)
+- **Server Side Code:** [next-medical-supplies-server](https://github.com/shamim-5/next-medical-supplies-server)
 
-## Learn More
+## Features :
 
-To learn more about Next.js, take a look at the following resources:
+- User can search product, add product into cart, place order and update order
+- Implemented Firebase authentication and use MongoDB for database
+- User and Admin dashboard implemented with various functionality
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Client Side Implementation :
 
-## Deploy on Vercel
+- [Next.js](https://nextjs.org/): A React framework for building server-rendered React applications.
+- [TypeScript](https://www.typescriptlang.org/): A statically-typed superset of JavaScript.
+- [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for quickly building custom designs.
+- [Ant Design](https://ant.design/): A design system and UI library for React applications.
+- [React Hook Form](https://react-hook-form.com/): A library for managing form state and validation in React applications.
+- [Redux](https://redux.js.org/): A state management library for managing the application's state.
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview): A toolset for simplifying API data fetching and state management.
+- [Firebase](https://firebase.google.com/): A mobile and web application development platform by Google.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Server Side Implementation :
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [MongoDB](https://www.mongodb.com/): A NoSQL database for storing and retrieving data.
+- [Node.js](https://nodejs.org/): A JavaScript runtime environment for server-side development.
+- [Express.js](https://expressjs.com/): A fast and minimalist web application framework for Node.js.
+
+## Functional Requirements :
+
+### User :
+
+- User can login and log out.
+- User can manage and update their profile.
+- User can place order, modify current order.
+- User see current order status and previous order status.
+  \_ User can see ther previous dues.
+
+### Admin :
+
+- Admin can log in and log out.
+- Admin can manage and update their profile.
+- Admin check every user due list and make it's status paid.
+- Admin can approve pending orders, after successful delivery make order status completed.
+
+## API Endpoints :
+
+### User :
+
+- `GET /cart-items`
+- `GET /cart-items/${email}`
+- `POST /cart-items`
+- `DELETE /cart-items/:orderId`
+
+### User :
+
+- `GET /orders`
+- `GET /orders/${email}`
+- `POST /orders`
+- `PATCH /orders/${id}`
+
+## ER Diagram :
+
+- [Next Medical Supplies: ER Diagram]()

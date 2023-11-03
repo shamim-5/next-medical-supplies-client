@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "NB_Surgical - Cart Items page",
   description: "Surgical equipments shop app",
 };
-import CartItemsTable from "@/components/table/CartItemsTable";
+import CartItemsTable from "@/components/user/CartItemsTable";
 
 const CartItemPage = () => {
   return (

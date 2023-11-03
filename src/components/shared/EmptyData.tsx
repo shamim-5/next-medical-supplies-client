@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Button, Empty } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 
 const EmptyData: React.FC = () => (
   <div>
@@ -14,8 +15,10 @@ const EmptyData: React.FC = () => (
         </span>
       }
     >
-      <Button type="primary">
-        <a href="/all-items">Buy Now</a>
+      <Button type="primary" className="uppercase">
+        <a href="/">
+          <HomeOutlined /> Back To Home
+        </a>
       </Button>
     </Empty>
   </div>

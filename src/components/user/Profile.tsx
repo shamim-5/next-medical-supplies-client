@@ -4,7 +4,7 @@ import { Divider, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
 import { User, onAuthStateChanged } from "firebase/auth";
-import { Avatar, Space } from "antd";
+import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 interface ProfileProps {
@@ -25,7 +25,6 @@ const Profile: React.FC<ProfileProps> = ({ title }) => {
     return () => unsubscribe();
   }, []);
 
-  //   console.log(uid, displayName, email);
   return (
     <div>
       <Divider className="text-3xl lg:text-4xl">{title}</Divider>

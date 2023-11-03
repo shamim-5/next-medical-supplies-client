@@ -4,7 +4,7 @@ import { useGetReagentsQuery } from "@/redux/features/reagents/reagentsApi";
 import { useAppSelector } from "@/redux/hooks/hook";
 
 const ReagentsPage = () => {
-  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+  const { field, searchTerm } = useAppSelector((state) => state.search) || {};
 
   const { data: products, isLoading } = useGetReagentsQuery({ field, searchTerm }) || [];
 

@@ -6,14 +6,12 @@ import { useGetMedicalEquipmentsQuery } from "@/redux/features/medicalEquipments
 import { useAppSelector } from "@/redux/hooks/hook";
 
 const OthersPage = () => {
-  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+  const { field, searchTerm } = useAppSelector((state) => state.search) || {};
 
   const { data: consumables, isLoading } = useGetConsumablesQuery({ field, searchTerm }) || [];
   const { data: medicalEquipments, isLoading: isMedicalEquipments } =
     useGetMedicalEquipmentsQuery({ field, searchTerm }) || [];
 
-  // console.log(medicalEquipments, isMedicalEquipments);
-  // console.log(consumables, isLoading);
   return (
     <div className="my-4 md:my-6 lg:my-9">
       <h2 className="text-primary-dark text-3xl lg:text-4xl uppercase font-semibold mb-4">

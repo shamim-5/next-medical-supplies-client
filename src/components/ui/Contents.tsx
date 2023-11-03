@@ -32,3 +32,4 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default Contents;
+

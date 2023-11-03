@@ -4,7 +4,7 @@ import { useGetProductsQuery } from "@/redux/features/products/productsApi";
 import { useAppSelector } from "@/redux/hooks/hook";
 
 const ProductsPage = () => {
-  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+  const { field, searchTerm } = useAppSelector((state) => state.search) || {};
   const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm }) || [];
 
   return (

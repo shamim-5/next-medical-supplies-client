@@ -8,7 +8,7 @@ import { useGetConsumablesQuery } from "@/redux/features/consumables/consumables
 import { useGetMedicalEquipmentsQuery } from "@/redux/features/medicalEquipments/medicalEquipmentsApi";
 
 const AllItemsPage = () => {
-  const { field, searchTerm } = useAppSelector((state) => state.helper) || {};
+  const { field, searchTerm } = useAppSelector((state) => state.search) || {};
   const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm }) || [];
   const { data: reagents, isLoading: isReagentsLoading } = useGetReagentsQuery({ field, searchTerm }) || [];
 

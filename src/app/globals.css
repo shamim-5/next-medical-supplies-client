@@ -12,8 +12,31 @@
 }
 
 /* globals css */
+@layer components {
+  .infoText {
+    @apply p-4 bg-gray-700/50 rounded-lg max-w-[300px];
+  }
+
+  .flexCB {
+    @apply flex items-center justify-between;
+  }
+
+  .box-shadow-custom {
+    @apply shadow-custom;
+  }
+}
+
+.shadow-custom {
+  box-shadow: 0 0 2px #919eab4d, 0 12px 24px -4px #919eab05 !important;
+}
 
 /* antd default style customization */
+
+.ant-menu-dark .ant-menu-item-selected {
+  @apply bg-secondary shadow-custom rounded text-white !important;
+}
+
 .ant-layout-sider-trigger {
-  background-color: #212c40 !important;
+  @apply bg-secondary border border-primary-light/10 font-bold !important;
+  box-shadow: #919eab4d 0 0 2px, #919eab05 0 12px 24px -4px !important;
 }

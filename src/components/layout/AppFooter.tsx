@@ -1,28 +1,23 @@
 "use client";
 import { Footer } from "antd/es/layout/layout";
 import Image from "next/image";
-import logoImage from "@/assets/logo.png";
+import logoImage from "@/assets/logo-footer.svg";
 import { RiFacebookBoxLine, RiInstagramLine } from "react-icons/ri";
 import { usePathname } from "next/navigation";
+import { USER_ROLE } from "@/constants/role";
 
 const AppFooter = () => {
   const pathname = usePathname();
   const date = new Date();
   const year = date.getFullYear();
 
-  const firstPath = pathname.match(/^\/([^/]+)/);
-  let path;
-  if (firstPath) {
-    path = firstPath[1];
-  } else {
-    // do nothing
-  }
-  // console.log(path);
+  const role = USER_ROLE.USER === pathname.split("/")[1] || USER_ROLE.ADMIN === pathname.split("/")[1];
+
   return (
     <>
-      {path !== "user" ? (
-        <Footer style={{ textAlign: "center" }} className="px-6 md:px-9 lg:px-12 py-0">
-          <div className="">
+      {!role ? (
+        <Footer style={{ textAlign: "center" }} className="px-6 md:px-11 lg:px-16 2xl:px-20 py-0">
+          <div>
             <div className=" bg-[#e2eaec85] text-secondary px-2 lg:px-12 py-3 lg:py-9">
               <div className="flex justify-between items-center w-full">
                 <div>

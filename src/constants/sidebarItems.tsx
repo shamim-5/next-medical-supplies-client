@@ -1,5 +1,5 @@
 import type { MenuProps } from "antd";
-import { ProfileOutlined, TableOutlined, ScheduleOutlined } from "@ant-design/icons";
+import { ProfileOutlined, TableOutlined, ScheduleOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 
@@ -11,11 +11,19 @@ export const sidebarItems = (role: string) => {
       icon: <ProfileOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/profile`}>Account Profile</Link>,
+          label: (
+            <Link className="text-primary-light" href={`/${role}/profile`}>
+              Account Profile
+            </Link>
+          ),
           key: `/${role}/profile`,
         },
         {
-          label: <Link href={`/${role}/due-list`}>Due List</Link>,
+          label: (
+            <Link className="text-primary-light" href={`/${role}/due-list`}>
+              Due List
+            </Link>
+          ),
           key: `/${role}/due-list`,
         },
       ],
@@ -24,39 +32,55 @@ export const sidebarItems = (role: string) => {
 
   const commonSidebarItems: MenuProps["items"] = [
     {
-      label: <Link href={`/${role}/manage-orders`}>Manage Orders</Link>,
+      label: (
+        <Link className="text-primary-light" href={`/${role}/manage-orders`}>
+          Manage Orders
+        </Link>
+      ),
       icon: <TableOutlined />,
       key: `/${role}/manage-orders`,
     },
   ];
 
   const adminSidebarItems: MenuProps["items"] = [
-    {
-      label: "Customers",
-      key: "customers",
-      icon: <ProfileOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/customer-list`}>Customers List</Link>,
-          key: `/${role}/customer-list`,
-        },
-        {
-          label: <Link href={`/${role}/due-list`}>Due List</Link>,
-          key: `/${role}/due-list`,
-        },
-      ],
-    },
+    ...defaultSidebarItems,
     ...commonSidebarItems,
 
     {
-      label: <Link href={`/${role}/pending-orders`}>Pending Orders</Link>,
+      label: (
+        <Link className="text-primary-light" href={`/${role}/pending-orders`}>
+          Pending Orders
+        </Link>
+      ),
       icon: <ScheduleOutlined />,
       key: `/${role}/pending-orders`,
     },
     {
-      label: <Link href={`/${role}/completed-orders`}>Completed Orders</Link>,
+      label: (
+        <Link className="text-primary-light" href={`/${role}/active-orders`}>
+          Active Orders
+        </Link>
+      ),
+      icon: <ScheduleOutlined />,
+      key: `/${role}/confirm-orders`,
+    },
+    {
+      label: (
+        <Link className="text-primary-light" href={`/${role}/completed-orders`}>
+          Completed Orders
+        </Link>
+      ),
       icon: <ScheduleOutlined />,
       key: `/${role}/completed-orders`,
+    },
+    {
+      label: (
+        <Link className="text-primary-light" href={`/${role}/customers`}>
+          Customers
+        </Link>
+      ),
+      icon: <UnorderedListOutlined />,
+      key: `/${role}/customers`,
     },
   ];
 
@@ -64,7 +88,11 @@ export const sidebarItems = (role: string) => {
     ...defaultSidebarItems,
     ...commonSidebarItems,
     {
-      label: <Link href={`/${role}/cart-items`}>cart-items</Link>,
+      label: (
+        <Link className="text-primary-light" href={`/${role}/cart-items`}>
+          cart-items
+        </Link>
+      ),
       icon: <ScheduleOutlined />,
       key: `/${role}/cart-items`,
     },

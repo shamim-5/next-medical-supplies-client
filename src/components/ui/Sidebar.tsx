@@ -12,7 +12,7 @@ import useUserInfo from "@/hooks/useUserInfo";
 
 const { Sider } = Layout;
 
-const SideBar = () => {
+const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { accessToken: firebaseAccessToken } = useUserInfo();
   const { user, accessToken } = useAppSelector((state) => state?.auth);
@@ -60,4 +60,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default Sidebar;

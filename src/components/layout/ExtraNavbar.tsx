@@ -9,7 +9,7 @@ const ExtraNavbar = ({ role }: { role: boolean }) => {
   const { displayName } = useUserInfo() || {};
   const { data, isLoading } = useGetShopDetailsQuery(undefined) || {};
 
-  const { location, contact } = (!isLoading && data[0]) || {};
+  const { location, contact } = (!isLoading && data && data[0]) || {};
 
   return (
     <div

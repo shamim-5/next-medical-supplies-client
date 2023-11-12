@@ -1,13 +1,13 @@
 import PrivateRoute from "@/components/PrivateRoute";
 import Contents from "@/components/ui/DashBoardContents";
-import SideBar from "@/components/ui/SideBar";
+import Sidebar from "@/components/ui/Sidebar";
 import { Layout } from "antd";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Layout hasSider>
       <PrivateRoute>
-        <SideBar />
+        <Sidebar />
         <Contents>{children}</Contents>
       </PrivateRoute>
     </Layout>
@@ -15,3 +15,4 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default DashboardLayout;
+ 

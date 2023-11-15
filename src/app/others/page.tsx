@@ -8,8 +8,8 @@ import { useAppSelector } from "@/redux/hooks/hook";
 const OthersPage = () => {
   const { field, searchTerm } = useAppSelector((state) => state.search) || {};
 
-  const { data: consumables, isLoading } = useGetConsumablesQuery({ field, searchTerm }) || [];
-  const { data: medicalEquipments, isLoading: isMedicalEquipments } =
+  const { data: { data: consumables } = [], isLoading } = useGetConsumablesQuery({ field, searchTerm }) || [];
+  const { data: { data: medicalEquipments } = [], isLoading: isMedicalEquipments } =
     useGetMedicalEquipmentsQuery({ field, searchTerm }) || [];
 
   return (
@@ -19,11 +19,11 @@ const OthersPage = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-content-between gap-4 lg:gap-x-12 lg:gap-y-6">
         {!isLoading &&
-          consumables.map((consumable: IProduct) => <OtherCard key={consumable._id} consumable={consumable} />)}
+          consumables.map((consumable: IProduct) => <OtherCard key={consumable.id} consumable={consumable} />)}
 
         {!isMedicalEquipments &&
           medicalEquipments.map((medicalEquipment: IProduct) => (
-            <OtherCard key={medicalEquipment._id} medicalEquipment={medicalEquipment} />
+            <OtherCard key={medicalEquipment.id} medicalEquipment={medicalEquipment} />
           ))}
       </div>
     </div>

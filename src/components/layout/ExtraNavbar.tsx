@@ -7,9 +7,9 @@ import useUserInfo from "@/hooks/useUserInfo";
 
 const ExtraNavbar = ({ role }: { role: boolean }) => {
   const { displayName } = useUserInfo() || {};
-  const { data, isLoading } = useGetShopDetailsQuery(undefined) || {};
+  const { data: { data: shopDetails } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
 
-  const { location, contact } = (!isLoading && data && data[0]) || {};
+  const { location, contact } = (!isLoading && shopDetails && shopDetails[0]) || {};
 
   return (
     <div

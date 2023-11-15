@@ -5,7 +5,7 @@ import FeaturedCard from "../cards/FeaturedCard";
 import { useGetTopProductsQuery } from "@/redux/features/topProducts/topProductsApi";
 
 const FeaturedServices = () => {
-  const { data: topProducts, isLoading } = useGetTopProductsQuery({ undefined }) || [];
+  const { data: { data: topProducts } = [], isLoading } = useGetTopProductsQuery({ undefined }) || [];
 
   return (
     <div className="my-6 md:my-9 lg:my-12">
@@ -15,7 +15,7 @@ const FeaturedServices = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-content-between gap-4 lg:gap-x-12 lg:gap-y-6">
         {!isLoading &&
           topProducts &&
-          topProducts.map((topProduct: ITopProduct) => <FeaturedCard key={topProduct._id} topProduct={topProduct} />)}
+          topProducts.map((topProduct: ITopProduct) => <FeaturedCard key={topProduct.id} topProduct={topProduct} />)}
       </div>
     </div>
   );

@@ -2,9 +2,8 @@
 
 import React from "react";
 import { useAppDispatch } from "@/redux/hooks/hook";
-import { Divider, Space, Table, Tag } from "antd";
+import { Divider, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { ordersApi } from "@/redux/features/admin/orders/ordersApi";
 
 interface ICompletedOrdersTableProps {
   order: ICartItems;
@@ -13,12 +12,10 @@ interface ICompletedOrdersTableProps {
 const CompletedOrdersTable: React.FC<ICompletedOrdersTableProps> = ({ order }) => {
   const dataSource = order?.order;
 
-  const dispatch = useAppDispatch();
-
   const currentColumns: ColumnsType<IRecord> = [
     {
       title: "S/N",
-      key: "_id",
+      key: "id",
       rowScope: "row",
       render: (_, _record, index) => <Space>{index + 1}</Space>,
     },
@@ -65,7 +62,7 @@ const CompletedOrdersTable: React.FC<ICompletedOrdersTableProps> = ({ order }) =
     <>
       {order.status && !order.active && (
         <Table
-          key={order._id}
+          key={order.id}
           columns={currentColumns}
           dataSource={data}
           pagination={false}
@@ -73,7 +70,7 @@ const CompletedOrdersTable: React.FC<ICompletedOrdersTableProps> = ({ order }) =
             return (
               <div>
                 <h2 className="text-lg font-mono pt-2">
-                  Order Id: <span className="text-slate-900/70">{order._id}</span>
+                  Order Id: <span className="text-slate-900/70">{order.id}</span>
                 </h2>
               </div>
             );
@@ -130,7 +127,7 @@ const CompletedOrdersTable: React.FC<ICompletedOrdersTableProps> = ({ order }) =
               </div>
             );
           }}
-          rowKey="_id"
+          rowKey="id"
         />
       )}
     </>

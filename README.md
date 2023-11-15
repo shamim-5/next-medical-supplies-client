@@ -57,7 +57,7 @@ password: Admin123
 - User can manage and update their profile.
 - User can place order, modify current order.
 - User see current order status and previous order status.
-  \_ User can see ther previous dues.
+_ User can see ther previous dues.
 
 ### Admin :
 

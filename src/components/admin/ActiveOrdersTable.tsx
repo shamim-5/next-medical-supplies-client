@@ -5,6 +5,7 @@ import { useAppDispatch } from "@/redux/hooks/hook";
 import { Divider, Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { ordersApi } from "@/redux/features/admin/orders/ordersApi";
+import { toast } from "react-toastify";
 
 interface IActiveOrdersTableProps {
   order: ICartItems;
@@ -18,7 +19,7 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
   const currentColumns: ColumnsType<IRecord> = [
     {
       title: "S/N",
-      key: "_id",
+      key: "id",
       rowScope: "row",
       render: (_, _record, index) => <Space>{index + 1}</Space>,
     },
@@ -65,19 +66,23 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
     <>
       {!order.status && order.active && (
         <Table
-          key={order._id}
+          key={order.id}
           columns={currentColumns}
           dataSource={data}
           pagination={false}
           title={() => {
             const completeOrder = async () => {
+              let { id, ...restData } = order;
+
               try {
                 await dispatch(
                   ordersApi.endpoints.updateStatusById.initiate({
-                    data: { ...order, status: true, active: false },
-                    id: order._id,
+                    data: { ...restData, status: true, active: false },
+                    id: id,
                   })
                 );
+
+                toast.success("Order updated successfully");
               } catch (error) {
                 // do nothing
               }
@@ -87,7 +92,7 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
               <div className="flex justify-between">
                 <div>
                   <h2 className="text-lg font-mono pt-2">
-                    Order Id: <span className="text-slate-900/70">{order._id}</span>
+                    Order Id: <span className="text-slate-900/70">{order.id}</span>
                   </h2>
                 </div>
                 <div>
@@ -150,7 +155,7 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
               </div>
             );
           }}
-          rowKey="_id"
+          rowKey="id"
         />
       )}
     </>

@@ -1,72 +1,72 @@
 interface IReview {
   rating: string;
-  userName?: string;
+  userName: string;
   email: string;
-  comment?: string;
+  comment: string;
 }
 
 interface ITopProduct {
-  _id: string;
-  name?: string;
-  category?: string;
-  description?: string;
-  price?: number;
-  stock?: number;
-  manufacturer?: string;
-  imageURL?: string;
-  avatarUrl?: string;
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  stock: number;
+  manufacturer: string;
+  imageURL: string;
+  avatarUrl: string;
 
-  reviews: IReview[];
+  reviews?: IReview[];
 }
 
 interface IProduct {
-  _id: string;
-  name?: string;
-  category?: string;
-  description?: string;
-  price?: number;
-  stock?: number;
-  manufacturer?: string;
-  imageURL?: string;
-  avatarUrl?: string;
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  stock: number;
+  manufacturer: string;
+  imageURL: string;
+  avatarUrl: string;
 
-  reviews: IReview[];
+  reviews?: IReview[];
 }
 
 // total price
 interface IRecord {
-  _id: string;
-  name?: string;
-  category?: string;
-  description?: string;
-  price?: number;
-  stock?: number;
-  manufacturer?: string;
-  imageURL?: string;
-  avatarUrl?: string;
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  stock: number;
+  manufacturer: string;
+  imageURL: string;
+  avatarUrl: string;
 
-  quantity?: number;
-  priceTotal?: number;
+  quantity: number;
+  priceTotal: number;
 
-  reviews: IReview[];
+  reviews?: IReview[];
 }
 
 interface ICartItems {
-  _id?: string;
-  userId?: string;
-  userName?: string;
-  email?: string;
-  status?: boolean;
-  active?: boolean;
-  paid?: boolean;
-  timestamp?: string;
+  id: string;
+  userId: string;
+  userName: string;
+  email: string;
+  status: boolean;
+  active: boolean;
+  paid: boolean;
+  timestamp: string;
   order?: IRecord[];
 }
 
 interface IManageItems extends IRecord {
-  status?: boolean;
-  active?: boolean;
-  paid?: boolean;
-  timestamp?: string;
+  status: boolean;
+  active: boolean;
+  paid: boolean;
+  timestamp: string;
   order?: IRecord[];
 }

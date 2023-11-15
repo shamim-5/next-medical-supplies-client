@@ -1,19 +1,19 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface ICartItems {
-  _id: string;
-  name?: string;
-  category?: string;
-  description?: string;
-  price?: number;
-  stock?: number;
-  manufacturer?: string;
-  imageURL?: string;
-  avatarUrl?: string;
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  stock: number;
+  manufacturer: string;
+  imageURL: string;
+  avatarUrl: string;
   quantity?: number;
   priceTotal?: number;
 
-  reviews: IReview[];
+  reviews?: IReview[];
 }
 
 const initialState: ICartItems[] = [];
@@ -23,7 +23,7 @@ const cartItemsSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<ICartItems>) => {
-      const existingItem = state.find((item) => item._id === action.payload._id);
+      const existingItem = state.find((item: { id: string }) => item.id === action.payload.id);
       if (existingItem) {
         existingItem.quantity = existingItem.quantity ? existingItem.quantity + 1 : 1;
         existingItem.priceTotal = existingItem.price
@@ -40,7 +40,7 @@ const cartItemsSlice = createSlice({
     },
 
     removeQuantity: (state, action: PayloadAction<ICartItems>) => {
-      const existingItem = state.find((item) => item._id === action.payload._id);
+      const existingItem = state.find((item: { id: string }) => item.id === action.payload.id);
       if (existingItem && existingItem.quantity !== 0) {
         existingItem.quantity = existingItem.quantity ? existingItem.quantity - 1 : 1;
         existingItem.priceTotal = existingItem.price
@@ -50,8 +50,8 @@ const cartItemsSlice = createSlice({
     },
 
     removeFromCart: (state, action: PayloadAction<string>) => {
-      // Remove item from the cart based on the _id
-      return state.filter((item) => item._id !== action.payload);
+      // Remove item from the cart based on the id
+      return state.filter((item: { id: string }) => item.id !== action.payload);
     },
 
     // clear existing cart-items state replace with empty array

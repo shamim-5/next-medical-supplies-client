@@ -9,11 +9,13 @@ import { useGetMedicalEquipmentsQuery } from "@/redux/features/medicalEquipments
 
 const AllItemsPage = () => {
   const { field, searchTerm } = useAppSelector((state) => state.search) || {};
-  const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm }) || [];
-  const { data: reagents, isLoading: isReagentsLoading } = useGetReagentsQuery({ field, searchTerm }) || [];
+  const { data: { data: products } = [], isLoading } = useGetProductsQuery({ field, searchTerm }) || [];
+  const { data: { data: reagents } = [], isLoading: isReagentsLoading } =
+    useGetReagentsQuery({ field, searchTerm }) || [];
 
-  const { data: consumables, isLoading: isConsumableLoading } = useGetConsumablesQuery({ field, searchTerm }) || [];
-  const { data: medicalEquipments, isLoading: isMedicalEquipments } =
+  const { data: { data: consumables } = [], isLoading: isConsumableLoading } =
+    useGetConsumablesQuery({ field, searchTerm }) || [];
+  const { data: { data: medicalEquipments } = [], isLoading: isMedicalEquipments } =
     useGetMedicalEquipmentsQuery({ field, searchTerm }) || [];
 
   return (
@@ -26,10 +28,10 @@ const AllItemsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-content-between gap-4 lg:gap-x-12 lg:gap-y-6">
           {!isLoading &&
             products &&
-            products.map((product: IProduct) => <ProductCard key={product._id} product={product} />)}
+            products.map((product: IProduct) => <ProductCard key={product.id} product={product} />)}
           {!isReagentsLoading &&
             reagents &&
-            reagents.map((product: IProduct) => <ProductCard key={product._id} product={product} />)}
+            reagents.map((product: IProduct) => <ProductCard key={product.id} product={product} />)}
         </div>
       </div>
       <div className="my-4 md:my-6 lg:my-9">
@@ -39,12 +41,12 @@ const AllItemsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-content-between gap-4 lg:gap-x-12 lg:gap-y-6">
           {!isConsumableLoading &&
             consumables &&
-            consumables.map((consumable: IProduct) => <OtherCard key={consumable._id} consumable={consumable} />)}
+            consumables.map((consumable: IProduct) => <OtherCard key={consumable.id} consumable={consumable} />)}
 
           {!isMedicalEquipments &&
             medicalEquipments &&
             medicalEquipments.map((medicalEquipment: IProduct) => (
-              <OtherCard key={medicalEquipment._id} medicalEquipment={medicalEquipment} />
+              <OtherCard key={medicalEquipment.id} medicalEquipment={medicalEquipment} />
             ))}
         </div>
       </div>

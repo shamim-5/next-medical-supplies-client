@@ -14,7 +14,7 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
   const currentColumns: ColumnsType<IRecord> = [
     {
       title: "S/N",
-      key: "_id",
+      key: "id",
       rowScope: "row",
       render: (_, _record, index) => <Space>{index + 1}</Space>,
     },
@@ -61,13 +61,13 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
     <>
       {order.status && !order.active && (
         <Table
-          key={order._id}
+          key={order.id}
           columns={currentColumns}
           dataSource={data}
           pagination={false}
           title={() => (
             <h2 className="text-lg font-mono pt-2">
-              Order Id: <span className="text-slate-900/70">{order._id}</span>
+              Order Id: <span className="text-slate-900/70">{order.id}</span>
             </h2>
           )}
           footer={(record) => {
@@ -122,7 +122,7 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
               </div>
             );
           }}
-          rowKey="_id"
+          rowKey="id"
         />
       )}
     </>

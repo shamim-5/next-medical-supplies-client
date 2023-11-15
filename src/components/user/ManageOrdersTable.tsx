@@ -13,8 +13,9 @@ const ManageOrdersTable: React.FC = () => {
   const { user: email } = useAppSelector((state) => state.auth);
 
   const userEmail = email?.toString();
-  const { data: orders, isLoading } = useGetDataFromDBbyEmailQuery(userEmail) || [];
-  const { data: confirmOrder, isLoading: isConfirmOrderLoading } = useGetOrdersFromDBbyEmailQuery(userEmail) || [];
+  const { data: { data: orders } = [], isLoading } = useGetDataFromDBbyEmailQuery(userEmail) || [];
+  const { data: { data: confirmOrder } = [], isLoading: isConfirmOrderLoading } =
+    useGetOrdersFromDBbyEmailQuery(userEmail) || [];
 
   return (
     <div>
@@ -22,13 +23,15 @@ const ManageOrdersTable: React.FC = () => {
         <div>
           <div className="mb-4 lg:mb-9">
             <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2 mt-4">Current Orders</h2>
-            {orders && orders.map((order: any) => <CurrentOrderTable key={order._id} order={order} />)}
-            {confirmOrder && confirmOrder.map((order: any) => <CurrentOrderTable key={order._id} order={order} />)}
+            {orders && orders.map((order: ICartItems) => <CurrentOrderTable key={order.id} order={order} />)}
+            {confirmOrder &&
+              confirmOrder.map((order: ICartItems) => <CurrentOrderTable key={order.id} order={order} />)}
           </div>
 
           <div className="mb-4 lg:mb-12">
             <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2 mt-4">Previous Orders</h2>
-            {confirmOrder && confirmOrder.map((order: any) => <PreviousOrderTable key={order._id} order={order} />)}
+            {confirmOrder &&
+              confirmOrder.map((order: ICartItems) => <PreviousOrderTable key={order.id} order={order} />)}
           </div>
         </div>
       ) : (

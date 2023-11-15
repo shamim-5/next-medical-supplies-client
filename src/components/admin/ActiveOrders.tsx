@@ -6,12 +6,12 @@ import ActiveOrdersTable from "./ActiveOrdersTable";
 import { useGetOrdersFromDBQuery } from "@/redux/features/admin/orders/ordersApi";
 
 const ActiveOrders: React.FC = () => {
-  const { data: orders, isLoading } = useGetOrdersFromDBQuery(undefined) || [];
+  const { data: { data: orders } = [], isLoading } = useGetOrdersFromDBQuery(undefined) || [];
 
   return (
     <div>
       {!isLoading && orders ? (
-        orders.map((order: ICartItems) => <ActiveOrdersTable key={order._id} order={order} />)
+        orders.map((order: ICartItems) => <ActiveOrdersTable key={order.id} order={order} />)
       ) : (
         <EmptyData />
       )}

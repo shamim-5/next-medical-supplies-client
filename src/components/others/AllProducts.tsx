@@ -7,7 +7,7 @@ import { useAppSelector } from "@/redux/hooks/hook";
 
 const AllProducts = () => {
   const { field, searchTerm } = useAppSelector((state) => state.search) || {};
-  const { data: products, isLoading } = useGetProductsQuery({ field, searchTerm });
+  const { data: { data: products } = [], isLoading } = useGetProductsQuery({ field, searchTerm });
 
   return (
     <div className="my-6 md:my-9 lg:my-12">
@@ -15,7 +15,7 @@ const AllProducts = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 place-content-between  gap-4 lg:gap-x-9 lg:gap-y-6">
         {!isLoading &&
           products &&
-          products.map((product: IProduct) => <AllProductCard key={product._id} product={product} />)}
+          products.map((product: IProduct) => <AllProductCard key={product.id} product={product} />)}
       </div>
     </div>
   );

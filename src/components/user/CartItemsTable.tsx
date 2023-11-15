@@ -54,7 +54,7 @@ const CartItemsTable: React.FC = () => {
       key: "action",
       render: (_, record) => {
         const handleDelete = () => {
-          dispatch(removeFromCart(record._id));
+          dispatch(removeFromCart(record.id));
           toast.warning("Delete from cart success");
         };
         const handleAddQuantity = () => {
@@ -170,7 +170,7 @@ const CartItemsTable: React.FC = () => {
                 </div>
               );
             }}
-            rowKey="_id"
+            rowKey="id"
           />
         </div>
       ) : (

@@ -7,7 +7,7 @@ import NestedCarousel from "./NestedCarousel";
 import { useGetShopDetailsQuery } from "@/redux/features/surgicalShop/surgicalShopApi";
 
 const CarouselAntd: React.FC = () => {
-  const { data, isLoading } = useGetShopDetailsQuery(undefined) || {};
+  const { data: { data } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
 
   const { sliderImage } = (!isLoading && data[0]) || {};
 

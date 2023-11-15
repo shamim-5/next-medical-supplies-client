@@ -21,7 +21,7 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
   const currentColumns: ColumnsType<IRecord> = [
     {
       title: "S/N",
-      key: "_id",
+      key: "id",
       rowScope: "row",
       render: (_, _record, index) => <Space>{index + 1}</Space>,
     },
@@ -68,7 +68,7 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
     <>
       {!order.status && (
         <Table
-          key={order._id}
+          key={order.id}
           columns={currentColumns}
           dataSource={data}
           pagination={false}
@@ -79,7 +79,7 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
             const modifyCurrentOrder = async (r: IRecord[]) => {
               try {
                 dispatch(modifyCartItems(r));
-                await dispatch(cartItemsApi.endpoints.deleteOrderById.initiate(order._id));
+                await dispatch(cartItemsApi.endpoints.deleteOrderById.initiate(order.id));
 
                 router.push("/user/cart-items");
               } catch (error) {
@@ -91,7 +91,7 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
               <div className="flex justify-between">
                 <div>
                   <h2 className="text-lg font-mono pt-2">
-                    Order Id: <span className="text-slate-900/70">{order._id}</span>
+                    Order Id: <span className="text-slate-900/70">{order.id}</span>
                   </h2>
                 </div>
                 <div>
@@ -162,7 +162,7 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
               </div>
             );
           }}
-          rowKey="_id"
+          rowKey="id"
         />
       )}
     </>

@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { Button, Card } from "antd";
+import { Button, Card, Image } from "antd";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks/hook";
 import { addToCart } from "@/redux/features/cart-items/cartItemsSlice";
@@ -43,7 +43,7 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
   return (
     <>
       {consumable && (
-        <Card hoverable className="place-self-stretch" cover={<img alt="example" src={consumable.imageURL} />}>
+        <Card hoverable className="place-self-stretch" cover={<Image alt="example" src={consumable.imageURL} />}>
           <Meta title={consumable.name} description={consumable?.description} className="h-24" />
           <p>{consumable.manufacturer}</p>
           <div className="flex flex-row items-center justify-between">
@@ -70,7 +70,7 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
         </Card>
       )}
       {medicalEquipment && (
-        <Card hoverable className="place-self-stretch" cover={<img alt="example" src={medicalEquipment.imageURL} />}>
+        <Card hoverable className="place-self-stretch" cover={<Image alt="example" src={medicalEquipment.imageURL} />}>
           <Meta title={medicalEquipment.name} description={consumable?.description} className="h-24" />
           <p>{medicalEquipment.manufacturer}</p>
           <div className="flex flex-row items-center justify-between">

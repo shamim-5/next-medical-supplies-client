@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { Button, Card } from "antd";
+import { Button, Card, Image } from "antd";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks/hook";
 import { addToCart } from "@/redux/features/cart-items/cartItemsSlice";
@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <Card hoverable className="place-self-stretch" cover={<img alt="example" src={product.imageURL} />}>
+    <Card hoverable className="place-self-stretch" cover={<Image src={product.imageURL} alt={product.name} />}>
       <Meta title={product.name} description={product?.description} className="h-24" />
       <p>{product.manufacturer}</p>
       <div className="flex flex-row items-center justify-between">
@@ -44,8 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
         <div className="flex items-center justify-end ml-4">
           <img
-            width="28"
-            height="28"
+            width={28}
             src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/external-taka-currency-vitaliy-gorbachev-flat-vitaly-gorbachev.png"
             alt="external-taka-currency-vitaliy-gorbachev-flat-vitaly-gorbachev"
           />

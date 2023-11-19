@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { Button, Card } from "antd";
+import { Button, Card, Image } from "antd";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks/hook";
 import { toast } from "react-toastify";
@@ -31,7 +31,7 @@ const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
     <Card
       hoverable
       className="place-self-stretch"
-      cover={<img alt="example" src={product.imageURL} style={{ width: "100%" }} />}
+      cover={<Image alt="example" src={product.imageURL} style={{ width: "100%" }} />}
     >
       <Meta title={product.name} description={product?.description} className="h-24" />
       <p>{product.manufacturer}</p>

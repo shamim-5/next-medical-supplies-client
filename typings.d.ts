@@ -1,8 +1,14 @@
 interface IReview {
-  rating: string;
-  userName: string;
+  rating: number;
+  userName?: string;
   email: string;
   comment: string;
+
+  productId?: string | null;
+  reagentId?: string | null;
+  deviceId?: string | null;
+  consumableId?: string | null;
+  equipmentId?: string | null;
 }
 
 interface ITopProduct {
@@ -20,6 +26,7 @@ interface ITopProduct {
 }
 
 interface IProduct {
+  [x: string]: ReactNode;
   id: string;
   name: string;
   category: string;

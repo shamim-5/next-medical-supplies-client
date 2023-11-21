@@ -27,10 +27,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     toast.success("Add to cart success");
   };
 
+  const handleDetailsButton = () => {
+    router.push(`/${product.id}`);
+  };
+
   return (
     <Card hoverable className="place-self-stretch" cover={<Image src={product.imageURL} alt={product.name} />}>
       <Meta title={product.name} description={product?.description} className="h-24" />
-      <p>{product.manufacturer}</p>
+      <div className="flex items-center justify-between">
+        <p>{product.manufacturer}</p>
+        <Button
+          onClick={handleDetailsButton}
+          className="text-cyan hover:font-bold m-0 p-0 font-thin font-mono text-xs "
+          type="link"
+        >
+          Details
+        </Button>
+      </div>
       <div className="flex flex-row items-center justify-between">
         <div>
           <Button

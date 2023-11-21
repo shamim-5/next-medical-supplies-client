@@ -40,12 +40,28 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
     }
   };
 
+  const handleDetailsButton = () => {
+    router.push(`/${consumable?.id}`);
+  };
+  const handleDetailsButtonForME = () => {
+    router.push(`/${medicalEquipment?.id}`);
+  };
+
   return (
     <>
       {consumable && (
         <Card hoverable className="place-self-stretch" cover={<Image alt="example" src={consumable.imageURL} />}>
           <Meta title={consumable.name} description={consumable?.description} className="h-24" />
-          <p>{consumable.manufacturer}</p>
+          <div className="flex items-center justify-between">
+            <p>{consumable.manufacturer}</p>
+            <Button
+              onClick={handleDetailsButton}
+              className="text-cyan hover:font-bold m-0 p-0 font-thin font-mono text-xs "
+              type="link"
+            >
+              Details
+            </Button>
+          </div>
           <div className="flex flex-row items-center justify-between">
             <div>
               <Button
@@ -71,8 +87,17 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
       )}
       {medicalEquipment && (
         <Card hoverable className="place-self-stretch" cover={<Image alt="example" src={medicalEquipment.imageURL} />}>
-          <Meta title={medicalEquipment.name} description={consumable?.description} className="h-24" />
-          <p>{medicalEquipment.manufacturer}</p>
+          <Meta title={medicalEquipment.name} description={medicalEquipment?.description} className="h-24" />
+          <div className="flex items-center justify-between">
+            <p>{medicalEquipment.manufacturer}</p>
+            <Button
+              onClick={handleDetailsButtonForME}
+              className="text-cyan hover:font-bold m-0 p-0 font-thin font-mono text-xs "
+              type="link"
+            >
+              Details
+            </Button>
+          </div>
           <div className="flex flex-row items-center justify-between">
             <div>
               <Button

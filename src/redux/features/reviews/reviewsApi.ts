@@ -1,30 +1,39 @@
 import { apiSlice } from "@/redux/api/apiSlice";
 
-export const topProductsApi = apiSlice.injectEndpoints({
+export const reviewsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getTopProducts: builder.query({
-      query: () => `/top-products`,
+    getReviews: builder.query({
+      query: () => `/reviews`,
+
+      providesTags: ["reviews"],
+    }),
+    getAllReviewsById: builder.query({
+      query: (id: string) => `/reviews/filter/${id}`,
+
+      providesTags: ["reviews"],
     }),
     getDataById: builder.query({
-      query: (id: string) => `top-products/${id}`,
+      query: (id: string) => `reviews/${id}`,
     }),
     insertIntoDB: builder.mutation({
       query: (data: any) => ({
-        url: "top-products",
+        url: "/reviews",
         method: "POST",
         body: data,
       }),
+
+      invalidatesTags: ["reviews"],
     }),
     updateOneInDB: builder.mutation({
       query: ({ id, data }) => ({
-        url: `top-products/${id}`,
+        url: `/reviews/${id}`,
         method: "PATCH",
         body: data,
       }),
     }),
     deleteByIdFromDB: builder.mutation({
       query: (id: string) => ({
-        url: `top-products/${id}`,
+        url: `/reviews/${id}`,
         method: "DELETE",
       }),
     }),
@@ -32,9 +41,10 @@ export const topProductsApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetTopProductsQuery,
+  useGetReviewsQuery,
+  useGetAllReviewsByIdQuery,
   useGetDataByIdQuery,
   useInsertIntoDBMutation,
   useUpdateOneInDBMutation,
   useDeleteByIdFromDBMutation,
-} = topProductsApi;
+} = reviewsApi;

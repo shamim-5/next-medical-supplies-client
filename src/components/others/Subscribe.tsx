@@ -4,11 +4,21 @@ import React, { useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Space } from "antd";
 import { RiFacebookBoxFill, RiGoogleFill } from "react-icons/ri";
+import { useInsertSubscriptionsIntoDBMutation } from "@/redux/features/subscriptions/subscriptionsApi";
+
+interface IEmailData {
+  email: string;
+}
 
 const Subscribe: React.FC = () => {
+  const [insertSubscriptionsIntoDB] = useInsertSubscriptionsIntoDBMutation();
+
   const handleSubmit = (values: any) => {
-    //FIXME: SUBSCRIBE EMAIL LATER
-    console.log("Submitted email:", values.email);
+    const emailData: IEmailData = {
+      email: values.email,
+    };
+    insertSubscriptionsIntoDB(emailData);
+    console.log(emailData);
   };
 
   return (

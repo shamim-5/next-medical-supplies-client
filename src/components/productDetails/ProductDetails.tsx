@@ -171,7 +171,7 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
       };
 
       insertIntoDB(newReview);
-      toast("Thanks fro your feedback");
+      toast("Thanks for your feedback");
     };
 
     content = (
@@ -190,14 +190,16 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
                   <IconText
                     icon={StarOutlined}
                     text={
-                      (item?.reviews as unknown as { averageRating: number; numberOfReviews: number })?.averageRating || "0"
+                      (item?.reviews as unknown as { averageRating: number; numberOfReviews: number })?.averageRating ||
+                      "0"
                     }
                     key="list-vertical-star-o"
                   />,
                   <IconText
                     icon={MessageOutlined}
                     text={
-                      (item?.reviews as unknown as { averageRating: number; numberOfReviews: number })?.numberOfReviews || "0"
+                      (item?.reviews as unknown as { averageRating: number; numberOfReviews: number })
+                        ?.numberOfReviews || "0"
                     }
                     key="list-vertical-message"
                   />,
@@ -278,9 +280,9 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
 
   return (
     <div>
-      <h2 className="text-primary-dark text-3xl lg:text-4xl uppercase font-semibold mb-4">Product Details</h2>
+      <h2 className="text-primary-dark text-2xl md:text-3xl lg:text-4xl uppercase font-semibold mb-4">Product Details</h2>
 
-      <div className="my-6">{content}</div>
+      <div className="my-2">{content}</div>
     </div>
   );
 };

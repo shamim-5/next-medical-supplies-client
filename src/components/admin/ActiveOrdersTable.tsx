@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
 import { useAppDispatch } from "@/redux/hooks/hook";
 import { Divider, Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { ordersApi } from "@/redux/features/admin/orders/ordersApi";
 import { toast } from "react-toastify";
+import CalculatePrice from "@/utils/calculatePrice";
+import { setPrice } from "@/redux/features/helper/priceSlice";
 
 interface IActiveOrdersTableProps {
   order: ICartItems;
@@ -70,7 +71,9 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
           columns={currentColumns}
           dataSource={data}
           pagination={false}
-          title={() => {
+          title={(record) => {
+            const { totalPrice, finalPrice } = CalculatePrice(record) || {};
+
             const completeOrder = async () => {
               let { id, ...restData } = order;
 
@@ -79,6 +82,11 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
                   ordersApi.endpoints.updateStatusById.initiate({
                     data: { ...restData, status: true, active: false },
                     id: id,
+                    rest: {
+                      totalPrice: totalPrice,
+                      discount: finalPrice.discount,
+                      discountPrice: finalPrice.discountPrice,
+                    },
                   })
                 );
 
@@ -104,21 +112,7 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
             );
           }}
           footer={(record) => {
-            const calculateTotalPrice = (record: any[] | readonly IProduct[]) => {
-              if (!record || record.length === 0) {
-                return 0;
-              }
-              const totalPriceFloat = record.reduce((sum: number, obj: IRecord) => sum + (obj.priceTotal || 0), 0);
-              return Math.floor(totalPriceFloat);
-            };
-            const applyDiscount = (totalPrice: number, discountPercentage: number) => {
-              const discount = (totalPrice * discountPercentage) / 100;
-              const discountPrice = totalPrice - discount;
-              return { discountPrice: Math.floor(discountPrice), discount: discount };
-            };
-            const totalPrice: number = calculateTotalPrice(record);
-            const discountPercentage: number = 10;
-            const finalPrice = applyDiscount(totalPrice, discountPercentage);
+            const { totalPrice, finalPrice } = CalculatePrice(record) || {};
 
             return (
               <div>

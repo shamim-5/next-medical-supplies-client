@@ -5,6 +5,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Space } from "antd";
 import { RiFacebookBoxFill, RiGoogleFill } from "react-icons/ri";
 import { useInsertSubscriptionsIntoDBMutation } from "@/redux/features/subscriptions/subscriptionsApi";
+import { toast } from "react-toastify";
 
 interface IEmailData {
   email: string;
@@ -18,7 +19,7 @@ const Subscribe: React.FC = () => {
       email: values.email,
     };
     insertSubscriptionsIntoDB(emailData);
-    console.log(emailData);
+    toast("Thank for subscribe");
   };
 
   return (

@@ -11,7 +11,10 @@ import AuthCheck from "@/components/AuthCheck";
 import Contents from "@/components/layout/Contents";
 
 export const metadata: Metadata = {
-  title: "NB_Surgical - Home page",
+  title: {
+    default: "NB_Surgical",
+    template: "%s",
+  },
   description: "Surgical equipments shop app",
 };
 

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function useUserInfo() {
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const { uid, displayName, email } = userInfo || {};
+  const { uid, displayName, email, photoURL } = userInfo || {};
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -27,5 +27,5 @@ export default function useUserInfo() {
     return () => unsubscribe();
   }, []);
 
-  return { uid, displayName, email, accessToken };
+  return { uid, displayName, email, accessToken, photoURL };
 }

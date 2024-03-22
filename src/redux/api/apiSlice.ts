@@ -26,6 +26,7 @@ export const apiSlice = createApi({
 
     return result;
   },
-  tagTypes: ["cart-items", "orders", "due-list", "reviews"],
+
+  tagTypes: ["cart-items", "orders", "due-list", "reviews", "user-details", "file-uploads"],
   endpoints: () => ({}),
 });

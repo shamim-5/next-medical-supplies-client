@@ -13,6 +13,7 @@
     "@ant-design/icons": "^5.2.6",
     "@reduxjs/toolkit": "^1.9.7",
     "antd": "^5.10.0",
+    "antd-img-crop": "^4.18.0",
     "firebase": "^10.5.0",
     "next": "13.5.4",
     "react": "^18",

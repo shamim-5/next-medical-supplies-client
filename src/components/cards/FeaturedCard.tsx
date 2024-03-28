@@ -2,8 +2,7 @@
 "use client";
 
 import React from "react";
-import { EditOutlined, EllipsisOutlined, StarOutlined } from "@ant-design/icons";
-import { Avatar, Card } from "antd";
+import { Avatar, Card, Image } from "antd";
 
 const { Meta } = Card;
 
@@ -16,12 +15,11 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({ topProduct }) => {
     <Card
       className="place-self-stretch"
       cover={
-        <img
+        <Image
           alt="example"
           src={topProduct.imageURL || "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"}
         />
       }
-      actions={[<StarOutlined key="setting" />, <EditOutlined key="edit" />, <EllipsisOutlined key="ellipsis" />]}
     >
       <Meta
         avatar={<Avatar src={topProduct.avatarUrl || "https://xsgames.co/randomusers/avatar.php?g=pixel"} />}

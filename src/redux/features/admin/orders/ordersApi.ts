@@ -1,4 +1,5 @@
 import { apiSlice } from "@/redux/api/apiSlice";
+import { dueListApi } from "../dueList/dueListApi";
 
 export const ordersApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -30,6 +31,29 @@ export const ordersApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        const result = await queryFulfilled;
+
+        // silent entry to due-list collection
+        if (result?.data?.data && arg.rest) {
+          const orderData = result?.data?.data;
+          const restData = arg.rest;
+
+          dispatch(
+            dueListApi.endpoints.addToDueListDB.initiate({
+              userName: orderData.userName,
+              email: orderData.email,
+              paid: orderData.paid,
+              timestamp: orderData.timestamp,
+              totalPrice: restData.totalPrice,
+              discount: restData.discount,
+              discountPrice: restData.discountPrice,
+              orderId: orderData.id,
+            })
+          );
+        }
+      },
 
       invalidatesTags: ["orders"],
     }),

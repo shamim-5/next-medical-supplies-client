@@ -16,11 +16,11 @@ import {
 } from "@/redux/features/user-details/userDetailsApi";
 import { useAppDispatch } from "@/redux/hooks/hook";
 import { fileUploadsApi } from "@/redux/features/file-uploads/fileUploadsApi";
+import FormInput from "../forms/FormInput";
 
 type FormValues = {
   email: string;
   name: string;
-  photoURL: string;
   file: string;
   phoneNumber: string;
   address: string;
@@ -47,7 +47,8 @@ const ModalUpdateProfile: React.FC = () => {
     isLoading: isUserDetailsLoading,
   } = useGetUserDetailsByEmailQuery(email as string) || [];
 
-  const { id, photoURL: dbPhotoURL, phoneNumber, address } = userData || {};
+  const { id, fileUploads, phoneNumber, address } = userData || {};
+  const [{ photoURL: dbPhotoURL }] = (fileUploads && fileUploads.length && fileUploads.slice(-1)) || [{}];
 
   const dispatch = useAppDispatch();
 
@@ -66,8 +67,6 @@ const ModalUpdateProfile: React.FC = () => {
   };
 
   const handleOk = () => {
-    console.log("Clicked Ok button");
-
     setConfirmLoading(true);
     setTimeout(() => {
       setOpen(false);
@@ -94,7 +93,7 @@ const ModalUpdateProfile: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      const { email, name, photoURL, phoneNumber, address } = data;
+      const { email, name, phoneNumber, address } = data;
 
       const userDetails = {
         name: name,
@@ -114,12 +113,12 @@ const ModalUpdateProfile: React.FC = () => {
       file && formData.append("file", file);
       formData.append("data", JSON.stringify(userDetailId));
 
-      formData && (await dispatch(fileUploadsApi.endpoints.insertFileUploadsIntoDB.initiate(formData)));
+      file && id && formData && (await dispatch(fileUploadsApi.endpoints.insertFileUploadsIntoDB.initiate(formData)));
 
       // update firebase authenticated current user and also db
       await updateProfile(auth.currentUser as User, {
         displayName: name,
-        photoURL: "https://res.cloudinary.com/dsp6g0ykp/image/upload/v1705481608/lyzwy4sajihesxzcsnjv.png",
+        photoURL: dbPhotoURL,
       })
         .then(() => {
           // add or update details into database
@@ -159,7 +158,7 @@ const ModalUpdateProfile: React.FC = () => {
               margin: "15px 0px",
             }}
           >
-            <InputField name="phoneNumber" type="number" size="large" label="User Phone Number" />
+            <FormInput name="phoneNumber" type="number" size="large" label="User Phone Number" />
           </div>
           <div
             style={{

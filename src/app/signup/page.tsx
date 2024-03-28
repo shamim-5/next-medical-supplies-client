@@ -10,6 +10,7 @@ import FormInput from "@/components/forms/FormInput";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import { useInsertUserDetailsIntoDBMutation } from "@/redux/features/user-details/userDetailsApi";
 
 type FormValues = {
   name: string;
@@ -22,6 +23,8 @@ const LoginPage = () => {
   const router = useRouter();
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
   const [passwordLength, setPasswordLength] = useState<string | undefined>(undefined);
+
+  const [insertUserDetailsIntoDB, { isLoading: isUserDetailsLoading }] = useInsertUserDetailsIntoDBMutation(undefined);
 
   const [register, { isLoading }] = useRegisterMutation();
 
@@ -40,6 +43,13 @@ const LoginPage = () => {
 
         const { email, password, name: displayName } = data;
         register({ email, password, displayName });
+
+        // insert userDetails into db
+        const userDetails = {
+          name: displayName,
+          email: email,
+        };
+        insertUserDetailsIntoDB(userDetails);
 
         toast.success("Signup success");
         router.push("/");

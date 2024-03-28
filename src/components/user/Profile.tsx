@@ -13,7 +13,6 @@ interface ProfileProps {
 
 const Profile: React.FC<ProfileProps> = ({ title }) => {
   const { displayName, email, photoURL } = useUserInfo();
-
   const {
     data: { data: [userData] } = { data: [] },
     isError,
@@ -22,8 +21,7 @@ const Profile: React.FC<ProfileProps> = ({ title }) => {
 
   const { name, phoneNumber, address, fileUploads } = userData || {};
 
-  const [{ photoURL: dbPhotoURL }] = (fileUploads && fileUploads.slice(-1)) || [{}];
-  // console.log("🚀 ~ fileUploads :", dbPhotoURL);
+  const [{ photoURL: dbPhotoURL }] = (fileUploads && fileUploads.length && fileUploads.slice(-1)) || [{}];
 
   return (
     <div>
@@ -31,7 +29,7 @@ const Profile: React.FC<ProfileProps> = ({ title }) => {
       <div className="flex justify-center uppercase">
         <div>
           <div className="text-center">
-            {photoURL ? (
+            {photoURL || dbPhotoURL ? (
               <Avatar size={64} icon={<Image src={`${dbPhotoURL || photoURL}`} alt="Profile picture" />} />
             ) : (
               <Avatar size={64} icon={<UserOutlined />} />
@@ -48,7 +46,7 @@ const Profile: React.FC<ProfileProps> = ({ title }) => {
           <Divider />
           <div className="text-lg text-slate-900 flex mt-2">
             <span className="w-28">Phone :</span>
-            <p className="ml-4 text-slate-900/75">{phoneNumber || "Phone number not found"}</p>
+            <p className="ml-4 text-slate-900/75">{phoneNumber ? "0" + phoneNumber : "Phone number not found"}</p>
           </div>
           <div className="text-lg text-slate-900 flex mt-2">
             <span className="w-28">Address :</span>

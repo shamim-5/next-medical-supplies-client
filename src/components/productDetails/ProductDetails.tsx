@@ -2,6 +2,7 @@
 
 import { MessageOutlined, StarOutlined } from "@ant-design/icons";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Avatar, Button, Form, Image, InputNumber, List, Space } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { toast } from "react-toastify";
@@ -22,6 +23,7 @@ interface IProductDetailsProps {
 const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
   const { displayName, email } = useUserInfo();
   const [insertIntoDB] = useInsertIntoDBMutation();
+  const router = useRouter();
 
   let products: any[] = [];
   let productId = undefined;
@@ -61,14 +63,19 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
 
   if (reagentData) {
     products.push(reagentData);
+    sessionStorage.setItem("routes", "reagents");
   } else if (deviceData) {
     products.push(deviceData);
+    sessionStorage.setItem("routes", "devices");
   } else if (consumableData) {
     products.push(consumableData);
+    sessionStorage.setItem("routes", "consumables");
   } else if (medicalEquipmentData) {
     products.push(medicalEquipmentData);
+    sessionStorage.setItem("routes", "medicalEquipments");
   } else if (productData) {
     products.push(productData);
+    sessionStorage.setItem("routes", "products");
   }
 
   // set array field name as  productId dinamically
@@ -278,9 +285,18 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
     );
   }
 
+  const handleDetailsButton = () => {
+    router.push(`/admin/store/${id}`);
+  };
+
   return (
     <div>
-      <h2 className="text-primary-dark text-2xl md:text-3xl lg:text-4xl uppercase font-semibold mb-4">Product Details</h2>
+      <h2 className="text-primary-dark text-2xl md:text-3xl lg:text-4xl uppercase font-semibold mb-4">
+        Product Details{" "}
+        <Button onClick={handleDetailsButton} type="primary" size="small" danger ghost>
+          Edit
+        </Button>
+      </h2>
 
       <div className="my-2">{content}</div>
     </div>

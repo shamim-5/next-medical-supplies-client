@@ -29,6 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleDetailsButton = () => {
     router.push(`/${product.id}`);
+    sessionStorage.setItem("routes", "products");
   };
 
   return (

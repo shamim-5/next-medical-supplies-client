@@ -17,6 +17,15 @@ export const fileUploadsApi = apiSlice.injectEndpoints({
       invalidatesTags: ["file-uploads", "user-details"],
     }),
 
+    insertSecureUrlIntoDB: builder.mutation({
+      query: (formData) => ({
+        url: "/secure-url",
+        method: "POST",
+        body: formData,
+        contentType: "multipart/form-data",
+      }),
+    }),
+
     updateFileUploadsInDB: builder.mutation({
       query: ({ id, data }) => ({
         url: `/file-uploads/${id}`,
@@ -41,6 +50,7 @@ export const fileUploadsApi = apiSlice.injectEndpoints({
 export const {
   useGetFileUploadsQuery,
   useInsertFileUploadsIntoDBMutation,
+  useInsertSecureUrlIntoDBMutation,
   useUpdateFileUploadsInDBMutation,
   useDeleteFileUploadsFromDBMutation,
 } = fileUploadsApi;

@@ -7,25 +7,25 @@ export const reagentsApi = apiSlice.injectEndpoints({
         searchTerm && field ? `/reagents?field=${field}&searchTerm=${searchTerm}` : `/reagents`,
     }),
     getReagentDataById: builder.query({
-      query: (id: string) => `reagents/${id}`,
+      query: (id: string) => `/reagents/${id}`,
     }),
     insertReagentIntoDB: builder.mutation({
       query: (data: any) => ({
-        url: "reagents",
+        url: "/reagents",
         method: "POST",
         body: data,
       }),
     }),
     updateOneReagentInDB: builder.mutation({
       query: ({ id, data }) => ({
-        url: `reagents/${id}`,
+        url: `/reagents/${id}`,
         method: "PATCH",
         body: data,
       }),
     }),
     deleteReagentByIdFromDB: builder.mutation({
       query: (id: string) => ({
-        url: `reagents/${id}`,
+        url: `/reagents/${id}`,
         method: "DELETE",
       }),
     }),

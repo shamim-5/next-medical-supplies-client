@@ -5,9 +5,13 @@ export const productsApi = apiSlice.injectEndpoints({
     getProducts: builder.query({
       query: ({ field, searchTerm }) =>
         searchTerm && field ? `/products?field=${field}&searchTerm=${searchTerm}` : `/products`,
+
+      providesTags: ["products"],
     }),
     getProductsDataById: builder.query({
       query: (id: string) => `products/${id}`,
+
+      providesTags: ["products"],
     }),
     insertProductsIntoDB: builder.mutation({
       query: (data: any) => ({

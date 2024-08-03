@@ -4,6 +4,8 @@ export const dynamicApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getDataByIdDynamically: builder.query({
       query: ({ url, id }) => `/${url}/${id}`,
+
+      providesTags: ["dynamic"],
     }),
     insertIntoDBDynamically: builder.mutation({
       query: ({ url, data }) => ({
@@ -11,6 +13,8 @@ export const dynamicApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+
+      invalidatesTags: ["dynamic", "products", "medical-equipments", "consumables", "devices", "top-products", "reagents"],
     }),
     updateOneInDBDynamically: builder.mutation({
       query: ({ url, id, data }) => ({
@@ -18,12 +22,16 @@ export const dynamicApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+
+      invalidatesTags: ["dynamic", "products", "medical-equipments", "consumables", "devices", "top-products", "reagents"],
     }),
     deleteByIdFromDBDynamically: builder.mutation({
       query: ({ url, id }) => ({
         url: `/${url}/${id}`,
         method: "DELETE",
       }),
+
+      invalidatesTags: ["dynamic", "products", "medical-equipments", "consumables", "devices", "top-products", "reagents"],
     }),
   }),
 });

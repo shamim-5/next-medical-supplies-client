@@ -111,7 +111,7 @@ const FormAntd: React.FC = () => {
             <Select.Option value="medicalEquipments">medicalEquipments</Select.Option>
             <Select.Option value="consumables">consumables</Select.Option>
             <Select.Option value="products">products</Select.Option>
-            <Select.Option value="topProducts">topProducts</Select.Option>
+            <Select.Option value="top-products">top-products</Select.Option>
           </Select>
         </Form.Item>
 

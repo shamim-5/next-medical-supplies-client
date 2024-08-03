@@ -28,8 +28,15 @@ const UploadAntd = ({ setFile, placeholder }: ImageUploadProps) => {
   };
 
   return (
-    <ImgCrop rotationSlider>
-      <Upload action="" listType="picture" fileList={fileList} customRequest={customRequest} onChange={onChange}>
+    <ImgCrop rotationSlider aspect={16 / 10}>
+      <Upload
+        action=""
+        listType="picture"
+        fileList={fileList}
+        customRequest={customRequest}
+        onChange={onChange}
+        style={{ maxWidth: "300px" }}
+      >
         {fileList.length < 1 && <Button icon={<UploadOutlined />}>{placeholder}</Button>}
       </Upload>
     </ImgCrop>

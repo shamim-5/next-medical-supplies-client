@@ -5,9 +5,13 @@ export const consumablesApi = apiSlice.injectEndpoints({
     getConsumables: builder.query({
       query: ({ field, searchTerm }) =>
         searchTerm && field ? `/consumables?field=${field}&searchTerm=${searchTerm}` : `/consumables`,
+
+      providesTags: ["consumables"],
     }),
     getConsumablesDataById: builder.query({
       query: (id: string) => `consumables/${id}`,
+
+      providesTags: ["consumables"],
     }),
     insertConsumablesIntoDB: builder.mutation({
       query: (data: any) => ({
@@ -37,5 +41,5 @@ export const {
   useGetConsumablesDataByIdQuery,
   useInsertConsumablesIntoDBMutation,
   useUpdateOneConsumablesInDBMutation,
-  useDeleteConsumablesByIdFromDBMutation
+  useDeleteConsumablesByIdFromDBMutation,
 } = consumablesApi;

@@ -9,6 +9,7 @@ import { fileUploadsApi } from "@/redux/features/file-uploads/fileUploadsApi";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { dynamicApi, useGetDataByIdDynamicallyQuery } from "@/redux/features/dynamic/dynamicApi";
+import { useRouter } from "next/navigation";
 
 type ApiResponse = {
   data?: any;
@@ -26,9 +27,12 @@ const FormAntdPatch: React.FC<IFormAntdPatchProps> = ({ id, routes }) => {
   const [form] = Form.useForm();
   const [file, setFile] = useState<(string | Blob) | null>(null);
   const [avatar, setAvatar] = useState<(string | Blob) | null>(null);
+  const router = useRouter();
 
   const { data: { data: getData } = { data: {} }, isLoading } =
     useGetDataByIdDynamicallyQuery({ url: routes, id: id }) || {};
+
+  const { stock: stockN, price: priceN } = (getData && getData) || {};
 
   const { TextArea } = Input;
   const normFile = (e: any) => {
@@ -90,6 +94,7 @@ const FormAntdPatch: React.FC<IFormAntdPatchProps> = ({ id, routes }) => {
           dynamicApi.endpoints.updateOneInDBDynamically.initiate({ url: routes, id, data: productDetails })
         ).then((res: ApiResponse) => {
           res?.data?.success === true ? toast.success(`${res?.data?.message}`) : toast.error(`${res?.data?.message}`);
+          routes === "top-products" ? router.push("/") : router.push(`/${routes}`);
         }));
     } catch (err) {
       // do nothing
@@ -120,7 +125,7 @@ const FormAntdPatch: React.FC<IFormAntdPatchProps> = ({ id, routes }) => {
               <Select.Option value="medicalEquipments">medicalEquipments</Select.Option>
               <Select.Option value="consumables">consumables</Select.Option>
               <Select.Option value="products">products</Select.Option>
-              <Select.Option value="topProducts">topProducts</Select.Option>
+              <Select.Option value="top-products">top-products</Select.Option>
             </Select>
           </Form.Item>
 
@@ -152,7 +157,7 @@ const FormAntdPatch: React.FC<IFormAntdPatchProps> = ({ id, routes }) => {
             <TextArea rows={2} />
           </Form.Item>
           <Form.Item
-            initialValue={`${parseFloat(getData.price)}`}
+            initialValue={priceN ? priceN : `${parseFloat(getData.price)}`}
             name="price"
             label="Price"
             rules={[{ required: true, type: "number", min: 1 }]}
@@ -160,7 +165,7 @@ const FormAntdPatch: React.FC<IFormAntdPatchProps> = ({ id, routes }) => {
             <InputNumber />
           </Form.Item>
           <Form.Item
-            initialValue={`${parseFloat(getData.stock)}`}
+            initialValue={stockN ? stockN : `${parseFloat(getData.stock)}`}
             name="stock"
             label="Stock"
             rules={[{ required: true, type: "number", min: 0 }]}

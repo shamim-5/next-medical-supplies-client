@@ -15,11 +15,12 @@ import { useGetDevicesDataByIdQuery } from "@/redux/features/devices/devicesApi"
 import { useGetProductsDataByIdQuery } from "@/redux/features/products/productsApi";
 import { useGetMedicalEquipmentsDataByIdQuery } from "@/redux/features/medicalEquipments/medicalEquipmentsApi";
 import { useGetConsumablesDataByIdQuery } from "@/redux/features/consumables/consumablesApi";
-import { useAppDispatch } from "@/redux/hooks/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hook";
 import { dynamicApi } from "@/redux/features/dynamic/dynamicApi";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { useGetDataByIdTopProductsQuery } from "@/redux/features/topProducts/topProductsApi";
+import { addToCart } from "@/redux/features/cart-items/cartItemsSlice";
 
 interface IProductDetailsProps {
   id: string | undefined;
@@ -37,6 +38,11 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
   const [insertIntoDB] = useInsertIntoDBReviewsMutation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+
+  const { accessToken: firebaseAccessToken } = useUserInfo();
+  const { user, accessToken } = useAppSelector((state) => state?.auth);
+
+  const admin = accessToken === firebaseAccessToken && user === process.env.NEXT_PUBLIC_ADMIN ? true : false;
 
   let products: any[] = [];
   let productId = undefined;
@@ -327,16 +333,30 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
     }
   };
 
+  const handleButtonClick = () => {
+    dispatch(addToCart(products[0]));
+    router.push("/user/cart-items");
+    toast.success("Add to cart success");
+  };
+
   return (
     <div>
       <h2 className="text-primary-dark text-2xl md:text-3xl lg:text-4xl uppercase font-semibold mb-4">
         Product Details{" "}
-        <Button onClick={handleDetailsButton} type="primary" size="small" ghost>
-          Edit
-        </Button>
-        <Button onClick={handleDeleteProduct} type="primary" size="small" danger ghost className="ml-2">
-          Delete
-        </Button>
+        {admin ? (
+          <>
+            <Button onClick={handleDetailsButton} type="primary" size="small" ghost>
+              Edit
+            </Button>
+            <Button onClick={handleDeleteProduct} type="primary" size="small" danger ghost className="ml-2">
+              Delete
+            </Button>
+          </>
+        ) : (
+          <Button onClick={handleButtonClick} type="primary" size="small" ghost htmlType="submit">
+            Add to cart
+          </Button>
+        )}
       </h2>
 
       <div className="my-2">{content}</div>

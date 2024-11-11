@@ -3,6 +3,7 @@
 import React from "react";
 import { Divider, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import { useGetUserDetailsByEmailQuery } from "@/redux/features/user-details/userDetailsApi";
 
 interface IPreviousOrderTableProps {
   order: ICartItems;
@@ -10,6 +11,9 @@ interface IPreviousOrderTableProps {
 
 const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
   const dataSource = order?.order;
+
+  const { data: { data: [userData] } = { data: [] } } = useGetUserDetailsByEmailQuery(order?.email as string) || [];
+  const { phoneNumber, address } = userData || {};
 
   const currentColumns: ColumnsType<IRecord> = [
     {
@@ -66,9 +70,28 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
           dataSource={data}
           pagination={false}
           title={() => (
-            <h2 className="text-lg font-mono pt-2">
-              Order Id: <span className="text-slate-900/70">{order.id}</span>
-            </h2>
+            <div>
+              <h2 className="text-lg font-mono">
+                <p className="w-24 inline-block">Order Id</p>
+                <span className="text-slate-900/70">: {order.id}</span>
+              </h2>
+              <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                <p className="w-24 inline-block">User Name</p>
+                <span className="text-slate-900/70">: {order.userName}</span>
+              </h2>
+              <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                <p className="w-24 inline-block">Address</p>
+                <span className="text-slate-900/70">
+                  : {address?.addressLineOne || "Address not found. Please update your profile."}
+                </span>
+              </h2>
+              <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                <p className="w-24 inline-block">Phone</p>
+                <span className="text-slate-900/70">
+                  : {phoneNumber ? `0${phoneNumber} ` : "Phone Number not found. Please update your profile."}
+                </span>
+              </h2>
+            </div>
           )}
           footer={(record) => {
             const calculateTotalPrice = (record: any[] | readonly IProduct[]) => {

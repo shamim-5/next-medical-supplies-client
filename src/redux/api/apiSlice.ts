@@ -27,6 +27,20 @@ export const apiSlice = createApi({
     return result;
   },
 
-  tagTypes: ["cart-items", "orders", "due-list", "reviews", "user-details", "file-uploads"],
+  tagTypes: [
+    "cart-items",
+    "orders",
+    "due-list",
+    "reviews",
+    "user-details",
+    "file-uploads",
+    "dynamic",
+    "products",
+    "medical-equipments",
+    "consumables",
+    "devices",
+    "reagents",
+    "top-products",
+  ],
   endpoints: () => ({}),
 });

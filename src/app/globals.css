@@ -40,3 +40,12 @@
   @apply bg-secondary border border-primary-light/10 font-bold !important;
   box-shadow: #919eab4d 0 0 2px, #919eab05 0 12px 24px -4px !important;
 }
+
+.ant-menu-horizontal  {
+  @apply flex justify-end !important;
+}
+
+.ant-menu-item .ant-menu-submenu  {
+  @apply px-1 !important;
+}
+

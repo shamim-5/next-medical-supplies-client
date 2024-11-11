@@ -7,6 +7,7 @@ import type { ColumnsType } from "antd/es/table";
 import { modifyCartItems } from "@/redux/features/cart-items/cartItemsSlice";
 import { useRouter } from "next/navigation";
 import { cartItemsApi } from "@/redux/features/cart-items/cartItemsApi";
+import { useGetUserDetailsByEmailQuery } from "@/redux/features/user-details/userDetailsApi";
 
 interface ICurrentOrderTableProps {
   order: ICartItems;
@@ -15,6 +16,13 @@ interface ICurrentOrderTableProps {
 const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
   const router = useRouter();
   const dataSource = order?.order;
+
+  const {
+    data: { data: [userData] } = { data: [] },
+    isError,
+    isLoading,
+  } = useGetUserDetailsByEmailQuery(order?.email as string) || [];
+  const { phoneNumber, address } = userData || {};
 
   const dispatch = useAppDispatch();
 
@@ -90,10 +98,28 @@ const CurrentOrderTable: React.FC<ICurrentOrderTableProps> = ({ order }) => {
             return (
               <div className="flex justify-between">
                 <div>
-                  <h2 className="text-lg font-mono pt-2">
-                    Order Id: <span className="text-slate-900/70">{order.id}</span>
+                  <h2 className="text-lg font-mono">
+                    <p className="w-24 inline-block">Order Id</p>
+                    <span className="text-slate-900/70">: {order.id}</span>
+                  </h2>
+                  <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                    <p className="w-24 inline-block">User Name</p>
+                    <span className="text-slate-900/70">: {order.userName}</span>
+                  </h2>
+                  <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                    <p className="w-24 inline-block">Address</p>
+                    <span className="text-slate-900/70">
+                      : {address?.addressLineOne || "Address not found. Please update your profile."}
+                    </span>
+                  </h2>
+                  <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                    <p className="w-24 inline-block">Phone</p>
+                    <span className="text-slate-900/70">
+                      : {phoneNumber ? `0${phoneNumber} ` : "Phone Number not found. Please update your profile."}
+                    </span>
                   </h2>
                 </div>
+
                 <div>
                   <Space size="middle" className={`w-full ${order?.active && "hidden"}`}>
                     <a onClick={() => modifyCurrentOrder(records)}>Modify</a>

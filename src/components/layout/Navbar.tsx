@@ -57,6 +57,12 @@ const Navbar: React.FC = () => {
     },
     { label: <Link href="/others">Others</Link>, name: "Others", key: "6", path: `/others` },
     {
+      label: isLoggedIn && <Link href="/user/manage-orders">Dashboard</Link>,
+      name: isLoggedIn && "Dashboard",
+      key: "123",
+      path: isLoggedIn && `/user/manage-orders`,
+    },
+    {
       label: isLoggedIn ? (
         <Button onClick={() => handleSignOut()} className="border-0 mx-0 px-0">
           Logout
@@ -68,6 +74,7 @@ const Navbar: React.FC = () => {
       key: "2",
       path: isLoggedIn ? `/logout` : `login`,
     },
+
     {
       label: !isLoggedIn && <Link href="/signup">Signup</Link>,
       name: !isLoggedIn && "Signup",
@@ -85,7 +92,7 @@ const Navbar: React.FC = () => {
           role && "hidden"
         }`}
       >
-        <div className="flex items-center justify-between lg:mr-2 mb-2">
+        <div className="flex-none flex items-center justify-between lg:mr-2 mb-2">
           <div>
             <Link href={"/"}>
               <Image className="w-6 md:w-9" src={logoImage} width={32} height={32} alt="logo" />
@@ -105,11 +112,11 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 flex-none">
           <SearchAntd />
         </div>
 
-        <div className="flex items-center justify-start">
+        <div className="shrink flex items-center justify-start">
           <div className="hidden lg:block">
             <Menu
               style={{ whiteSpace: "nowrap", minWidth: "650px" }}

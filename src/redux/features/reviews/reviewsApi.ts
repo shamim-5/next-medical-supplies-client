@@ -12,10 +12,10 @@ export const reviewsApi = apiSlice.injectEndpoints({
 
       providesTags: ["reviews"],
     }),
-    getDataById: builder.query({
+    getDataByIdReviews: builder.query({
       query: (id: string) => `reviews/${id}`,
     }),
-    insertIntoDB: builder.mutation({
+    insertIntoDBReviews: builder.mutation({
       query: (data: any) => ({
         url: "/reviews",
         method: "POST",
@@ -24,14 +24,14 @@ export const reviewsApi = apiSlice.injectEndpoints({
 
       invalidatesTags: ["reviews"],
     }),
-    updateOneInDB: builder.mutation({
+    updateOneInDBReviews: builder.mutation({
       query: ({ id, data }) => ({
         url: `/reviews/${id}`,
         method: "PATCH",
         body: data,
       }),
     }),
-    deleteByIdFromDB: builder.mutation({
+    deleteByIdFromDBReviews: builder.mutation({
       query: (id: string) => ({
         url: `/reviews/${id}`,
         method: "DELETE",
@@ -43,8 +43,8 @@ export const reviewsApi = apiSlice.injectEndpoints({
 export const {
   useGetReviewsQuery,
   useGetAllReviewsByIdQuery,
-  useGetDataByIdQuery,
-  useInsertIntoDBMutation,
-  useUpdateOneInDBMutation,
-  useDeleteByIdFromDBMutation,
+  useGetDataByIdReviewsQuery,
+  useInsertIntoDBReviewsMutation,
+  useUpdateOneInDBReviewsMutation,
+  useDeleteByIdFromDBReviewsMutation,
 } = reviewsApi;

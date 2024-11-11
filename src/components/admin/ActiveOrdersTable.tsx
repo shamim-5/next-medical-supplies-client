@@ -6,6 +6,7 @@ import type { ColumnsType } from "antd/es/table";
 import { ordersApi } from "@/redux/features/admin/orders/ordersApi";
 import { toast } from "react-toastify";
 import CalculatePrice from "@/utils/calculatePrice";
+import { useGetUserDetailsByEmailQuery } from "@/redux/features/user-details/userDetailsApi";
 import { setPrice } from "@/redux/features/helper/priceSlice";
 
 interface IActiveOrdersTableProps {
@@ -14,6 +15,9 @@ interface IActiveOrdersTableProps {
 
 const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
   const dataSource = order?.order;
+
+  const { data: { data: [userData] } = { data: [] } } = useGetUserDetailsByEmailQuery(order?.email as string) || [];
+  const { phoneNumber, address } = userData || {};
 
   const dispatch = useAppDispatch();
 
@@ -99,8 +103,25 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
             return (
               <div className="flex justify-between">
                 <div>
-                  <h2 className="text-lg font-mono pt-2">
-                    Order Id: <span className="text-slate-900/70">{order.id}</span>
+                  <h2 className="text-lg font-mono">
+                    <p className="w-24 inline-block">Order Id</p>
+                    <span className="text-slate-900/70">: {order.id}</span>
+                  </h2>
+                  <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                    <p className="w-24 inline-block">User Name</p>
+                    <span className="text-slate-900/70">: {order.userName}</span>
+                  </h2>
+                  <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                    <p className="w-24 inline-block">Address</p>
+                    <span className="text-slate-900/70">
+                      : {address?.addressLineOne || "Address not found. Please update your profile."}
+                    </span>
+                  </h2>
+                  <h2 className="text-sm font-mono overflow-hidden whitespace-nowrap text-ellipsis max-w-md ">
+                    <p className="w-24 inline-block">Phone</p>
+                    <span className="text-slate-900/70">
+                      : {phoneNumber ? `0${phoneNumber} ` : "Phone Number not found. Please update your profile."}
+                    </span>
                   </h2>
                 </div>
                 <div>

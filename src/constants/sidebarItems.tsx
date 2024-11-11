@@ -1,5 +1,11 @@
 import type { MenuProps } from "antd";
-import { ProfileOutlined, TableOutlined, ScheduleOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import {
+  ProfileOutlined,
+  TableOutlined,
+  ScheduleOutlined,
+  UnorderedListOutlined,
+  AppstoreAddOutlined,
+} from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 
@@ -81,6 +87,15 @@ export const sidebarItems = (role: string) => {
       ),
       icon: <UnorderedListOutlined />,
       key: `/${role}/customers`,
+    },
+    {
+      label: (
+        <Link className="text-primary-light" href={`/${role}/store`}>
+          Store
+        </Link>
+      ),
+      icon: <AppstoreAddOutlined />,
+      key: `/${role}/store`,
     },
   ];
 

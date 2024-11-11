@@ -5,9 +5,13 @@ export const devicesApi = apiSlice.injectEndpoints({
     getDevices: builder.query({
       query: ({ field, searchTerm }) =>
         searchTerm && field ? `/devices?field=${field}&searchTerm=${searchTerm}` : `/devices`,
+
+      providesTags: ["devices"],
     }),
     getDevicesDataById: builder.query({
       query: (id: string) => `/devices/${id}`,
+
+      providesTags: ["devices"],
     }),
     insertDevicesIntoDB: builder.mutation({
       query: (data: any) => ({

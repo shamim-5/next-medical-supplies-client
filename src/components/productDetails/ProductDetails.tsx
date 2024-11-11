@@ -2,30 +2,57 @@
 
 import { MessageOutlined, StarOutlined } from "@ant-design/icons";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Avatar, Button, Form, Image, InputNumber, List, Space } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { toast } from "react-toastify";
 import Error from "../shared/Error";
 import useUserInfo from "@/hooks/useUserInfo";
 import Comments from "./Comments";
-import { useGetAllReviewsByIdQuery, useInsertIntoDBMutation } from "@/redux/features/reviews/reviewsApi";
+import { useGetAllReviewsByIdQuery, useInsertIntoDBReviewsMutation } from "@/redux/features/reviews/reviewsApi";
 import { useGetReagentDataByIdQuery } from "@/redux/features/reagents/reagentsApi";
 import { useGetDevicesDataByIdQuery } from "@/redux/features/devices/devicesApi";
 import { useGetProductsDataByIdQuery } from "@/redux/features/products/productsApi";
 import { useGetMedicalEquipmentsDataByIdQuery } from "@/redux/features/medicalEquipments/medicalEquipmentsApi";
 import { useGetConsumablesDataByIdQuery } from "@/redux/features/consumables/consumablesApi";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hook";
+import { dynamicApi } from "@/redux/features/dynamic/dynamicApi";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
+import { useGetDataByIdTopProductsQuery } from "@/redux/features/topProducts/topProductsApi";
+import { addToCart } from "@/redux/features/cart-items/cartItemsSlice";
 
 interface IProductDetailsProps {
   id: string | undefined;
 }
 
+type ApiResponse = {
+  data?: any;
+  success?: boolean;
+  message?: string;
+  error?: FetchBaseQueryError | SerializedError;
+};
+
 const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
   const { displayName, email } = useUserInfo();
-  const [insertIntoDB] = useInsertIntoDBMutation();
+  const [insertIntoDB] = useInsertIntoDBReviewsMutation();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const { accessToken: firebaseAccessToken } = useUserInfo();
+  const { user, accessToken } = useAppSelector((state) => state?.auth);
+
+  const admin = accessToken === firebaseAccessToken && user === process.env.NEXT_PUBLIC_ADMIN ? true : false;
 
   let products: any[] = [];
   let productId = undefined;
 
+  const {
+    data: { data: topProductData } = { data: {} },
+    isLoading: istTopProductLoading,
+    isError: isTopProductError,
+    error: topProductError,
+  } = useGetDataByIdTopProductsQuery(id as string) || {};
   const {
     data: { data: reagentData } = { data: {} },
     isLoading: isReagentLoading,
@@ -61,14 +88,22 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
 
   if (reagentData) {
     products.push(reagentData);
+    sessionStorage.setItem("routes", "reagents");
+  } else if (topProductData) {
+    products.push(topProductData);
+    sessionStorage.setItem("routes", "top-products");
   } else if (deviceData) {
     products.push(deviceData);
+    sessionStorage.setItem("routes", "devices");
   } else if (consumableData) {
     products.push(consumableData);
+    sessionStorage.setItem("routes", "consumables");
   } else if (medicalEquipmentData) {
     products.push(medicalEquipmentData);
+    sessionStorage.setItem("routes", "medical-equipments");
   } else if (productData) {
     products.push(productData);
+    sessionStorage.setItem("routes", "products");
   }
 
   // set array field name as  productId dinamically
@@ -278,9 +313,51 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
     );
   }
 
+  const handleDetailsButton = () => {
+    router.push(`/admin/store/${id}`);
+  };
+
+  const handleDeleteProduct = async () => {
+    const path = sessionStorage.getItem("routes");
+    try {
+      id &&
+        path &&
+        (await dispatch(dynamicApi.endpoints.deleteByIdFromDBDynamically.initiate({ url: path, id })).then(
+          (res: ApiResponse) => {
+            res?.data?.success === true ? toast.success(`${res?.data?.message}`) : toast.error(`${res?.data?.message}`);
+            router.push(`/${path}`);
+          }
+        ));
+    } catch (err) {
+      // do nothing
+    }
+  };
+
+  const handleButtonClick = () => {
+    dispatch(addToCart(products[0]));
+    router.push("/user/cart-items");
+    toast.success("Add to cart success");
+  };
+
   return (
     <div>
-      <h2 className="text-primary-dark text-2xl md:text-3xl lg:text-4xl uppercase font-semibold mb-4">Product Details</h2>
+      <h2 className="text-primary-dark text-2xl md:text-3xl lg:text-4xl uppercase font-semibold mb-4">
+        Product Details{" "}
+        {admin ? (
+          <>
+            <Button onClick={handleDetailsButton} type="primary" size="small" ghost>
+              Edit
+            </Button>
+            <Button onClick={handleDeleteProduct} type="primary" size="small" danger ghost className="ml-2">
+              Delete
+            </Button>
+          </>
+        ) : (
+          <Button onClick={handleButtonClick} type="primary" size="small" ghost htmlType="submit">
+            Add to cart
+          </Button>
+        )}
+      </h2>
 
       <div className="my-2">{content}</div>
     </div>

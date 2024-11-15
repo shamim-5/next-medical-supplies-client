@@ -5,11 +5,16 @@ import logoImage from "@/assets/logo-footer.svg";
 import { RiFacebookBoxLine, RiInstagramLine } from "react-icons/ri";
 import { usePathname } from "next/navigation";
 import { USER_ROLE } from "@/constants/role";
+import Link from "next/link";
+import { useGetShopDetailsQuery } from "@/redux/features/surgicalShop/surgicalShopApi";
 
 const AppFooter = () => {
   const pathname = usePathname();
   const date = new Date();
   const year = date.getFullYear();
+
+    const { data: { data: shopDetails } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
+    const { name } = (!isLoading && shopDetails && shopDetails[0]) || {};
 
   const role = USER_ROLE.USER === pathname.split("/")[1] || USER_ROLE.ADMIN === pathname.split("/")[1];
 
@@ -32,6 +37,7 @@ const AppFooter = () => {
                   <ul className="space-y-2">
                     <li>Support</li>
                     <li>Careers</li>
+                    <p>Privacy Policy</p>
                     <div className="flex lg:hidden gap-2 text-2xl">
                       <RiFacebookBoxLine />
                       <RiInstagramLine />
@@ -40,6 +46,7 @@ const AppFooter = () => {
                   <ul className="space-y-2">
                     <li>List your gear</li>
                     <li>Contact team</li>
+                    <p>Terms & Condition</p>
                   </ul>
                 </div>
                 <div className="hidden lg:flex gap-2 text-2xl">
@@ -48,9 +55,11 @@ const AppFooter = () => {
                 </div>
               </div>
               <div className="flex w-full mt-20 gap-5">
-                <p>Privacy Policy</p>
-                <p>Terms & Condition</p>
-                <p className="ml-auto"> &#169; NB Surgical {year}</p>
+                <p>Created by: Md. Shamim</p>
+                <p>
+                  Portfolio: <Link href="https://shamim-5.web.app">https://shamim-5.web.app</Link>
+                </p>
+                <p className="ml-auto"> &#169; {name} {year}</p>
               </div>
             </div>
           </div>

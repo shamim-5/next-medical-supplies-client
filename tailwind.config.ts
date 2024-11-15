@@ -19,6 +19,7 @@ const config: Config = {
       fontFamily: {
         heebo: ["Heebo", "sans-serif"],
         work: ["Work Sans", "sans-serif"],
+        jetBrains: ["JetBrains Mono", "monospace"],
       },
     },
   },

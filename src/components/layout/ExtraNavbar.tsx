@@ -45,8 +45,8 @@ const ExtraNavbar = ({ role }: { role: boolean }) => {
       <div className="flex space-x-2">
         <h3 className="text-cyan text-sm mr-1">
           <ContactsOutlined className="text-cyan text-sm mr-1" />
-          <span className="text-secondary">Address:</span>
-          {location?.address}, {location?.city}-{location?.zipCode},{location?.country}
+          <span className="text-secondary">Address: </span>
+          {location?.address}, {location?.city}-{location?.zipCode}, {location?.country}
         </h3>
       </div>
     </div>

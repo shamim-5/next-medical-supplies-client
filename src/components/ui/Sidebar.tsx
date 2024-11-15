@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks/hook";
 import useUserInfo from "@/hooks/useUserInfo";
+import { useGetShopDetailsQuery } from "@/redux/features/surgicalShop/surgicalShopApi";
 
 const { Sider } = Layout;
 
@@ -16,6 +17,9 @@ const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { accessToken: firebaseAccessToken } = useUserInfo();
   const { user, accessToken } = useAppSelector((state) => state?.auth);
+
+  const { data: { data: shopDetails } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
+  const { shopName } = (!isLoading && shopDetails && shopDetails[0]) || {};
 
   const admin = accessToken === firebaseAccessToken && user === process.env.NEXT_PUBLIC_ADMIN ? true : false;
 
@@ -44,7 +48,8 @@ const Sidebar = () => {
         <div>
           <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold my-4">
             <Link href={"/"} className="text-primary-light">
-              NB<span className="text-cyan">S</span>
+              {shopName?.shortName.slice(0, 2)}
+              <span className="text-cyan">{shopName?.shortName.slice(2)}</span>
             </Link>
           </h2>
         </div>

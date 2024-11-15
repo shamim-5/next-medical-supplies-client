@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Heebo&family=Work+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Work Sans", sans-serif;
+  font-family: "JetBrains Mono", monospace;
 }
 
 /* globals css */
@@ -41,11 +42,14 @@
   box-shadow: #919eab4d 0 0 2px, #919eab05 0 12px 24px -4px !important;
 }
 
-.ant-menu-horizontal  {
+.ant-menu-horizontal {
   @apply flex justify-end !important;
 }
 
-.ant-menu-item .ant-menu-submenu  {
+.ant-menu-item .ant-menu-submenu {
   @apply px-1 !important;
 }
 
+.ant-menu-item-only-child {
+  @apply pr-0 !important;
+}

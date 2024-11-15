@@ -15,6 +15,7 @@ import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { cleanPath } from "@/redux/features/path/pathSlice";
 import { USER_ROLE } from "@/constants/role";
 import ExtraNavbar from "./ExtraNavbar";
+import { useGetShopDetailsQuery } from "@/redux/features/surgicalShop/surgicalShopApi";
 
 const { Header } = Layout;
 
@@ -22,6 +23,9 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isLoggedIn = useAuth();
+
+  const { data: { data: shopDetails } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
+  const { shopName } = (!isLoading && shopDetails && shopDetails[0]) || {};
 
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
@@ -92,35 +96,43 @@ const Navbar: React.FC = () => {
           role && "hidden"
         }`}
       >
-        <div className="flex-none flex items-center justify-between lg:mr-2 mb-2">
+        <div className=" flex items-center justify-between lg:mr-2 mb-2 uppercase">
           <div>
             <Link href={"/"}>
-              <Image className="w-6 md:w-9" src={logoImage} width={32} height={32} alt="logo" />
+              <Image className="w-6 md:w-12" src={logoImage} width={48} height={48} alt="logo" />
             </Link>
           </div>
           <div>
-            <h2 className="text-4xl font-semibold  hidden md:block  ml-2">
+            <div className="flex-col text-4xl leading-none hidden md:block  ml-2">
+              <div>
+                <Link href={"/"} className="text-primary">
+                  {shopName?.firstName}
+                </Link>
+              </div>
+              <div className="text-cyan text-lg leading-none">
+                <Link href={"/"} className="text-cyan">
+                  {shopName?.middleName} {shopName?.lastName}
+                </Link>
+              </div>
+            </div>
+            <h2 className="text-4xl block md:hidden ml-2">
               <Link href={"/"} className="text-primary">
-                NB <span className="text-cyan">Surgical</span>
-              </Link>
-            </h2>
-            <h2 className="text-4xl font-semibold block md:hidden ml-2">
-              <Link href={"/"} className="text-primary">
-                NB<span className="text-cyan">S</span>
+                {shopName?.shortName.slice(0, 1)}
+                <span className="text-cyan">{shopName?.shortName.slice(1)}</span>
               </Link>
             </h2>
           </div>
         </div>
 
-        <div className="mt-6 flex-none">
+        <div className="mt-6 flex justify-end">
           <SearchAntd />
         </div>
 
-        <div className="shrink flex items-center justify-start">
+        <div className="shrink flex items-center justify-start w-auto">
           <div className="hidden lg:block">
             <Menu
-              style={{ whiteSpace: "nowrap", minWidth: "650px" }}
-              className="text-primary font-mono border-0"
+              style={{ whiteSpace: "nowrap", minWidth: "600px" }}
+              className="text-primary border-0"
               theme="light"
               mode="horizontal"
               selectedKeys={selectedKeys}

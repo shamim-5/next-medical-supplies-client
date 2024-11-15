@@ -2,7 +2,7 @@ import StoreForm from "@/components/admin/StoreForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "NB_Surgical - Store page",
+  title: "Store page",
   description: "Surgical equipments shop app",
 };
 

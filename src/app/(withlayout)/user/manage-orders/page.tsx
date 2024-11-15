@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ManageOrdersTable from "@/components/user/ManageOrdersTable";
 
 export const metadata: Metadata = {
-  title: "NB_Surgical - Cart Items page",
+  title: "Cart Items page",
   description: "Surgical equipments shop app",
 };
 

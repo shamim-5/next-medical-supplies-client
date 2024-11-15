@@ -2,7 +2,7 @@ import PendingOrders from "@/components/admin/PendingOrders";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "NB_Surgical - Pending Orders page",
+  title: "Pending Orders page",
   description: "Surgical equipments shop app",
 };
 

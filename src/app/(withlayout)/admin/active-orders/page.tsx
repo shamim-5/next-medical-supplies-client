@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ActiveOrders from "@/components/admin/ActiveOrders";
 
 export const metadata: Metadata = {
-  title: "NB_Surgical - Active Orders page",
+  title: "Active Orders page",
   description: "Surgical equipments shop app",
 };
 

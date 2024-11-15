@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ReagentsPageData from "@/components/reagents/ReagentsPageData";
 
 export const metadata: Metadata = {
-  title: "NB_Surgical - Reagent page",
+  title: "Reagent page",
   description: "Surgical equipments shop app",
 };
 

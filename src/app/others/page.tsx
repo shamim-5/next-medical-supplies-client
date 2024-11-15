@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import OthersPageData from "@/components/others/OthersPageData";
 
 export const metadata: Metadata = {
-  title: "NB_Surgical - Others page",
+  title: "Others page",
   description: "Surgical equipments shop app",
 };
 

@@ -13,7 +13,7 @@ const NestedCarousel: React.FC = () => {
           <h3 className="text-3xl md:text-4xl lg:text-5xl uppercase pb-2 font-semibold">Surgical Equipments</h3>
           <p className="text-xl py-4">Don&apos;t miss your special offer!</p>
           <Button className="border-4 border-[#5ECAD1] uppercase font-mono font-semibold" size="large">
-            <Link className="text-[#19B3BD]" href={"/"}>
+            <Link className="text-[#19B3BD]" href="/devices">
               Shop Now
             </Link>
           </Button>
@@ -24,7 +24,7 @@ const NestedCarousel: React.FC = () => {
           <h3 className="text-3xl md:text-4xl lg:text-5xl uppercase pb-2 font-semibold">Laboratory Reagents</h3>
           <p className="text-xl py-4">Don&apos;t miss your special offer!</p>
           <Button className="border-4 border-[#5ECAD1] uppercase font-mono font-semibold" size="large">
-            <Link className="text-[#19B3BD]" href={"/"}>
+            <Link className="text-[#19B3BD]" href="/reagents">
               Shop Now
             </Link>
           </Button>
@@ -35,7 +35,7 @@ const NestedCarousel: React.FC = () => {
           <h3 className="text-3xl md:text-4xl lg:text-5xl uppercase pb-2 font-semibold">Medical Equipments</h3>
           <p className="text-xl py-4">Don&apos;t miss your special offer!</p>
           <Button className="border-4 border-[#5ECAD1] uppercase font-mono font-semibold" size="large">
-            <Link className="text-[#19B3BD]" href={"/"}>
+            <Link className="text-[#19B3BD]" href="/others">
               Shop Now
             </Link>
           </Button>
@@ -46,7 +46,7 @@ const NestedCarousel: React.FC = () => {
           <h3 className="text-3xl md:text-4xl lg:text-5xl uppercase pb-2 font-semibold">Disposable Masks</h3>
           <p className="text-xl py-4">Don&apos;t miss your special offer!</p>
           <Button className="border-4 border-[#5ECAD1] uppercase font-mono font-semibold" size="large">
-            <Link className="text-[#19B3BD]" href={"/"}>
+            <Link className="text-[#19B3BD]" href="/all-items">
               Shop Now
             </Link>
           </Button>

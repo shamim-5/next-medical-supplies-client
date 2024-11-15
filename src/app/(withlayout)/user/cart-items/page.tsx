@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "NB_Surgical - Cart Items page",
+  title: "Cart Items page",
   description: "Surgical equipments shop app",
 };
 import CartItemsTable from "@/components/user/CartItemsTable";

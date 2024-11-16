@@ -18,5 +18,6 @@ export default function CalculatePrice(record: any[] | readonly IProduct[]) {
   return {
     totalPrice,
     finalPrice,
+    discountPercentage,
   };
 }

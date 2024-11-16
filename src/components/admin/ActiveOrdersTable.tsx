@@ -133,7 +133,7 @@ const ActiveOrdersTable: React.FC<IActiveOrdersTableProps> = ({ order }) => {
             );
           }}
           footer={(record) => {
-            const { totalPrice, finalPrice } = CalculatePrice(record) || {};
+            const { totalPrice, finalPrice, discountPercentage } = CalculatePrice(record) || {};
 
             return (
               <div>

@@ -12,7 +12,7 @@ export default function CalculatePrice(record: any[] | readonly IProduct[]) {
     return { discountPrice: Math.floor(discountPrice), discount: discount };
   };
   const totalPrice: number = calculateTotalPrice(record);
-  const discountPercentage: number = 10;
+  const discountPercentage: number = record?.[0]?.discountPercentage || 0;
   const finalPrice = applyDiscount(totalPrice, discountPercentage);
 
   return {

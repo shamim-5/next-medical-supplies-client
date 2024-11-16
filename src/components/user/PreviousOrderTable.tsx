@@ -107,7 +107,7 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
               return { discountPrice: Math.floor(discountPrice), discount: discount };
             };
             const totalPrice: number = calculateTotalPrice(record);
-            const discountPercentage: number = 10;
+            const discountPercentage: number = record?.[0]?.discountPercentage || 0;
             const finalPrice = applyDiscount(totalPrice, discountPercentage);
 
             return (
@@ -127,9 +127,9 @@ const PreviousOrderTable: React.FC<IPreviousOrderTableProps> = ({ order }) => {
                       </div>
                     </div>
                     <div className="flex justify-end">
-                      <h2 className="mr-9 w-[200px] text-end text-slate-900/70">10% Discount :</h2>
+                      <h2 className="mr-9 w-[200px] text-end text-slate-900/70">{discountPercentage}% Discount :</h2>
                       <div className="mr-4 lg:mr-6 w-[100px]">
-                        <div className=" "> - {finalPrice?.discount} /=</div>
+                        <div className=" "> - {finalPrice?.discount}.00 /=</div>
                         <Divider className="mt-2 mb-3" />
                       </div>
                     </div>

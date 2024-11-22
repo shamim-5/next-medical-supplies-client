@@ -90,10 +90,10 @@ const CartItemsTable: React.FC = () => {
             title={() => (
               <div className="flex justify-between">
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2">Items that you want to buy</h2>
+                  <h2 className="text-lg md:text-2xl lg:text-3xl font-semibold uppercase py-2 leading-none">Items that you want to buy</h2>
                 </div>
                 <div>
-                  <Space size="middle" className="w-full cursor-pointer">
+                  <Space size="middle" className="w-full cursor-pointer my-1 md:my-0 leading-5">
                     <a onClick={() => router.push("/all-items")}>
                       Add More <PlusCircleOutlined className="text-blue-500/90 text-xl text-center" />
                     </a>

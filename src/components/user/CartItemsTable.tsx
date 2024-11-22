@@ -108,13 +108,13 @@ const CartItemsTable: React.FC = () => {
                 }
 
                 const totalPriceFloat = record.reduce((sum: number, obj: IRecord) => sum + (obj.priceTotal || 0), 0);
-                return Math.floor(totalPriceFloat);
+                return Math.round(totalPriceFloat);
               };
 
               const applyDiscount = (totalPrice: number, discountPercentage: number) => {
                 const discount = (totalPrice * discountPercentage) / 100;
                 const discountPrice = totalPrice - discount;
-                return { discountPrice: Math.floor(discountPrice), discount: discount };
+                return { discountPrice: Math.round(discountPrice), discount: Math.round(discount) };
               };
 
               const totalPrice: number = calculateTotalPrice(record);

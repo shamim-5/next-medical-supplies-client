@@ -20,7 +20,7 @@ const showShakeEffect: WaveConfig["showEffect"] = (node, { component }) => {
     cancelAnimationFrame((node as any).effectTimeout);
 
     (node as any).effectTimeout = requestAnimationFrame(() => {
-      const currentStep = Math.floor(steps / itv);
+      const currentStep = Math.round(steps / itv);
       const current = seq[currentStep];
       const next = seq[currentStep + 1];
 

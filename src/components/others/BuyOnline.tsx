@@ -25,7 +25,7 @@ const BuyOnline: React.FC = () => {
 
         <div className="absolute top-0 left-0 w-full py-4">
           <div className="w-auto text-white px-4 flex flex-col justify-center ">
-            <h3 className="text-2xl md:text-4xl lg:text-5xl uppercase pb-6 font-semibold w-full lg:w-[calc(100vw-360px)]">
+            <h3 className="text-2xl md:text-4xl lg:text-5xl uppercase pb-1 lg:pb-6 font-semibold w-full lg:w-[calc(100vw-360px)]">
               {sliderImageContent?.urlFourContent?.h1 || "Hospital and Diagnostic Equipments Buy Online at Home"}
             </h3>
           </div>
@@ -39,7 +39,7 @@ const BuyOnline: React.FC = () => {
             </Link>
           </Button>
 
-          <div className="text-white p-4 mt-2 lg:mt-6">
+          <div className="text-white px-4 py-4 lg:py-6 mt-0 lg:mt-6">
             <div className="flex lg:flex-row flex-col lg:space-x-2 leading-none">
               <h3 className=" text-sm mr-1">
                 <PhoneOutlined className=" text-sm mr-1 rotate-90" />
@@ -47,10 +47,12 @@ const BuyOnline: React.FC = () => {
                 {contact?.phone}
               </h3>
               <Divider className="lg:flex hidden" type="vertical" />
-              <h3 className=" text-sm mr-1">
+              <h3 className=" text-sm truncate ">
                 <MailOutlined className=" text-sm mr-1" />
                 <span className="">Email: </span>
-                {contact?.email}
+                <Link className="text-white" href={`mailto:${contact?.email}`}>
+                  {contact?.email}
+                </Link>
               </h3>
             </div>
             <div className="flex space-x-2 leading-none">

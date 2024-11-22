@@ -82,7 +82,7 @@ const CartItemsTable: React.FC = () => {
   return (
     <div>
       {products.length > 0 ? (
-        <div>
+        <div className="overflow-x-auto">
           <Table
             columns={columns}
             dataSource={data}

@@ -4,6 +4,7 @@ import { Avatar, Divider } from "antd";
 import { ContactsOutlined, MailOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
 import { useGetShopDetailsQuery } from "@/redux/features/surgicalShop/surgicalShopApi";
 import useUserInfo from "@/hooks/useUserInfo";
+import Link from "next/link";
 
 const ExtraNavbar = ({ role }: { role: boolean }) => {
   const { displayName } = useUserInfo() || {};
@@ -36,7 +37,9 @@ const ExtraNavbar = ({ role }: { role: boolean }) => {
         <h3 className="text-cyan text-sm mr-1">
           <MailOutlined className="text-cyan text-sm mr-1" />
           <span className="text-secondary">Email: </span>
-          {contact?.email}
+          <Link className="text-cyan" href={`mailto:${contact?.email}`}>
+            {contact?.email}
+          </Link>
         </h3>
       </div>
 

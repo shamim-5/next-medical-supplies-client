@@ -25,10 +25,10 @@ const AppFooter = () => {
           <div>
             <div className=" bg-[#e2eaec85] text-secondary px-2 lg:px-12 py-3 lg:py-4">
               <div className="flex justify-between items-center w-full">
-                <div>
+                <div className="hidden md:flex">
                   <Image src={logoImage} alt="FooterLogo" width={96} />
                 </div>
-                <div className="flex gap-20">
+                <div className="flex gap-9 md:gap-20">
                   <ul className="space-y-2">
                     <li>Upcoming</li>
                     <li>Shipping</li>

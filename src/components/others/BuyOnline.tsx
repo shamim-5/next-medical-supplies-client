@@ -12,13 +12,10 @@ import Image from "next/image";
 const BuyOnline: React.FC = () => {
   const { data: { data: shopDetails } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
 
-  const { location, contact, sliderImage } = (!isLoading && shopDetails && shopDetails[0]) || {};
+  const { location, contact, sliderImage, sliderImageContent } = (!isLoading && shopDetails && shopDetails[0]) || {};
 
   return (
     <div className="my-6 md:my-9 lg:my-12">
-      {/* <h2 className="text-primary-dark text-2xl md:text-3xl lg:text-4xl uppercase font-semibold mb-4">All Products</h2> */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 place-content-between  gap-4 lg:gap-x-9 lg:gap-y-6">
-       </div> */}
       <div className="relative ">
         <img
           src={sliderImage?.urlFour}
@@ -29,7 +26,7 @@ const BuyOnline: React.FC = () => {
         <div className="absolute top-0 left-0 w-full py-4">
           <div className="w-auto text-white px-4 flex flex-col justify-center ">
             <h3 className="text-2xl md:text-4xl lg:text-5xl uppercase pb-6 font-semibold w-full lg:w-[calc(100vw-360px)]">
-              Hospital and Diagnostic Equipments Buy Online at Home
+              {sliderImageContent?.urlFourContent?.h1 || "Hospital and Diagnostic Equipments Buy Online at Home"}
             </h3>
           </div>
           <CarouselBuyOnline />

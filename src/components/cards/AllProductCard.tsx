@@ -37,9 +37,16 @@ const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
       className="place-self-stretch"
       cover={<Image alt="example" src={product.imageURL} style={{ width: "100%" }} />}
     >
-      <Meta title={product.name} description={product?.description} className="h-24" />
+      <Meta
+        title={product.name}
+        description={
+          <div className="h-12 overflow-hidden">
+            <p className="line-clamp-3 leading-none">{product.description || "This is the description"}</p>
+          </div>
+        }
+      />
       <div className="flex items-center justify-between">
-        <p>{product.manufacturer}</p>
+        <p className="line-clamp-1">{product.manufacturer}</p>
         <Button
           onClick={handleDetailsButton}
           className="text-cyan hover:font-bold m-0 p-0 font-thin font-mono text-xs "
@@ -50,12 +57,7 @@ const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
       </div>
       <div className="flex flex-row items-center justify-between">
         <div>
-          <Button
-            onClick={handleButtonClick}
-            className="bg-gradient-to-l hover:bg-gradient-to-b uppercase from-primary/90 to-primary/70 hover:text-slate-900 "
-            type="primary"
-            htmlType="submit"
-          >
+          <Button onClick={handleButtonClick} className="commonBtn" type="primary" htmlType="submit">
             Buy now
           </Button>
         </div>

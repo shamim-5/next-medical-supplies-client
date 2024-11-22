@@ -51,9 +51,16 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
     <>
       {consumable && (
         <Card hoverable className="place-self-stretch" cover={<Image alt="example" src={consumable.imageURL} />}>
-          <Meta title={consumable.name} description={consumable?.description} className="h-24" />
+          <Meta
+            title={consumable.name}
+            description={
+              <div className="h-12 overflow-hidden">
+                <p className="line-clamp-3 leading-none">{consumable.description || "This is the description"}</p>
+              </div>
+            }
+          />
           <div className="flex items-center justify-between">
-            <p>{consumable.manufacturer}</p>
+            <p className="line-clamp-1">{consumable.manufacturer}</p>
             <Button
               onClick={handleDetailsButton}
               className="text-cyan hover:font-bold m-0 p-0 font-thin font-mono text-xs "
@@ -64,12 +71,7 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
           </div>
           <div className="flex flex-row items-center justify-between">
             <div>
-              <Button
-                onClick={handleButtonClick}
-                className="bg-gradient-to-l hover:bg-gradient-to-b uppercase from-primary/90 to-primary/70 hover:text-slate-900 "
-                type="primary"
-                htmlType="submit"
-              >
+              <Button onClick={handleButtonClick} className="commonBtn" type="primary" htmlType="submit">
                 Buy now
               </Button>
             </div>
@@ -87,9 +89,16 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
       )}
       {medicalEquipment && (
         <Card hoverable className="place-self-stretch" cover={<Image alt="example" src={medicalEquipment.imageURL} />}>
-          <Meta title={medicalEquipment.name} description={medicalEquipment?.description} className="h-24" />
+          <Meta
+            title={medicalEquipment.name}
+            description={
+              <div className="h-12 overflow-hidden">
+                <p className="line-clamp-3 leading-none">{medicalEquipment.description || "This is the description"}</p>
+              </div>
+            }
+          />
           <div className="flex items-center justify-between">
-            <p>{medicalEquipment.manufacturer}</p>
+            <p className="line-clamp-1">{medicalEquipment.manufacturer}</p>
             <Button
               onClick={handleDetailsButtonForME}
               className="text-cyan hover:font-bold m-0 p-0 font-thin font-mono text-xs "
@@ -100,12 +109,7 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
           </div>
           <div className="flex flex-row items-center justify-between">
             <div>
-              <Button
-                onClick={handleButtonMe}
-                className="bg-gradient-to-l hover:bg-gradient-to-b uppercase from-primary/90 to-primary/70 hover:text-slate-900 "
-                type="primary"
-                htmlType="submit"
-              >
+              <Button onClick={handleButtonMe} className="commonBtn" type="primary" htmlType="submit">
                 Buy now
               </Button>
             </div>

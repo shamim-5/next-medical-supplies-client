@@ -9,8 +9,8 @@ export default function HomePage() {
     <div>
       <CarouselAntd />
       <FeaturedServices />
-      <BuyOnline />
       <AllProducts />
+      <BuyOnline />
       <Subscribe />
     </div>
   );

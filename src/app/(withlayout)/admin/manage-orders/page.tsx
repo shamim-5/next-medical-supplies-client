@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Blank from "@/components/shared/Blank";
+import ManageOrdersTable from "@/components/user/ManageOrdersTable";
 
 export const metadata: Metadata = {
   title: "Manage Orders page",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 const ManageOrdersPage = () => {
   return (
     <div>
-      <Blank />
+      <ManageOrdersTable />
     </div>
   );
 };

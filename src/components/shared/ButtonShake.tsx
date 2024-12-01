@@ -48,7 +48,7 @@ const Wrapper = ({ name, customOnClick, ...wave }: WaveConfig & { name: string; 
   <ConfigProvider wave={wave}>
     <Button
       type="primary"
-      className="bg-gradient-to-l hover:bg-gradient-to-b uppercase from-primary/90 to-primary/70 hover:text-slate-900 "
+      className="commonBtn "
       onClick={customOnClick}
     >
       {name}
@@ -57,7 +57,7 @@ const Wrapper = ({ name, customOnClick, ...wave }: WaveConfig & { name: string; 
 );
 
 const ButtonShake = ({ children, onClick }: { children: string; onClick?: () => void }) => (
-  <Space style={{ padding: 24 }} size="large">
+  <Space style={{ padding: 0}} size="large">
     <Wrapper name={children} showEffect={showShakeEffect} customOnClick={onClick} />
   </Space>
 );

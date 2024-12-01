@@ -20,7 +20,7 @@ const SearchAntd: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center my-0">
-      <Space direction="vertical" className="max-w-[200px]">
+      <Space direction="vertical" className="max-w-[130px] lg:max-w-[200px]">
         <Search placeholder="Search by title" allowClear onChange={onSearch} />
       </Space>
     </div>

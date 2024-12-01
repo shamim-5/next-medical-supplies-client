@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
         <div className=" flex items-center justify-between lg:mr-2 mb-2 uppercase">
           <div>
             <Link href={"/"}>
-              <Image className="w-6 md:w-12" src={logoImage} width={48} height={48} alt="logo" />
+              <Image className="w-7" src={logoImage} width={48} height={48} alt="logo" />
             </Link>
           </div>
           <div>
@@ -164,7 +164,7 @@ const Navbar: React.FC = () => {
             />
           </div>
 
-          <div className="block lg:hidden">
+          <div className="block lg:hidden mt-1">
             <Dropdown
               menu={{
                 items,
@@ -173,7 +173,7 @@ const Navbar: React.FC = () => {
             >
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
-                  <MenuFoldOutlined className="text-primary text-2xl" />
+                  <MenuFoldOutlined className="text-primary text-3xl" />
                 </Space>
               </a>
             </Dropdown>

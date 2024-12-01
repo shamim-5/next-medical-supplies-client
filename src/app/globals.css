@@ -41,7 +41,7 @@
 }
 
 .ant-layout-sider-trigger {
-  @apply bg-secondary border border-primary-light/10 font-bold !important;
+  @apply bg-secondary border border-primary-light/10 font-bold p-0 m-0 !important;
   box-shadow: #919eab4d 0 0 2px, #919eab05 0 12px 24px -4px !important;
 }
 
@@ -55,4 +55,12 @@
 
 .ant-menu-item-only-child {
   @apply pr-0 !important;
+}
+
+.ant-table-cell {
+  @apply py-3 px-1 !important;
+}
+
+.ant-table-title {
+  @apply px-1 py-1 !important;
 }

@@ -23,20 +23,29 @@ const CartItemsTable: React.FC = () => {
 
   const columns: ColumnsType<IProduct> = [
     {
+      title: "S/N",
+      key: "id",
+      rowScope: "row",
+      render: (_, _record, index) => <Space>{index + 1}</Space>,
+    },
+    {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <a className="line-clamp-1">{text}</a>,
     },
     {
       title: "Category",
       dataIndex: "category",
       key: "category",
+      render: (text) => <span className="line-clamp-1">{text}</span>,
+      responsive: ["lg"],
     },
     {
       title: "Manufacturer",
       dataIndex: "manufacturer",
       key: "manufacturer",
+      render: (text) => <span className="line-clamp-1">{text}</span>,
     },
     {
       title: "Quantity",
@@ -47,8 +56,8 @@ const CartItemsTable: React.FC = () => {
       title: "Price",
       dataIndex: "priceTotal",
       key: "priceTotal",
+      render: (text) => <span className="">{Math.round(Number(text))}.00/=</span>,
     },
-
     {
       title: "Action",
       key: "action",
@@ -87,17 +96,21 @@ const CartItemsTable: React.FC = () => {
             columns={columns}
             dataSource={data}
             pagination={false}
+            rowClassName={() => "leading-none"}
             title={() => (
-              <div className="flex justify-between">
-                <div>
-                  <h2 className="text-lg md:text-2xl lg:text-3xl font-semibold uppercase py-2 leading-none">Items that you want to buy</h2>
-                </div>
-                <div>
-                  <Space size="middle" className="w-full cursor-pointer my-1 md:my-0 leading-5">
-                    <a onClick={() => router.push("/all-items")}>
-                      Add More <PlusCircleOutlined className="text-blue-500/90 text-xl text-center" />
-                    </a>
-                  </Space>
+              <div className="">
+                <div className="flex justify-between">
+                  <div>
+                    <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2 mt-4">Cart Items</h2>
+                  </div>
+                  <div>
+                    <Space size="middle" className="w-full cursor-pointer my-1 md:my-0 leading-5">
+                      <a onClick={() => router.push("/all-items")}>
+                        <span className="hidden lg:inline mr-1">Add More</span>
+                        <PlusCircleOutlined className="text-blue-500/90 text-xl text-center" />
+                      </a>
+                    </Space>
+                  </div>
                 </div>
               </div>
             )}
@@ -145,28 +158,38 @@ const CartItemsTable: React.FC = () => {
 
               return (
                 <div>
-                  <div className="flex justify-end">
-                    <h2 className="mr-9 w-[200px] text-end text-slate-900/70">Total Price :</h2>
-                    <div className="mr-4 lg:mr-6 w-[100px]">
-                      <div className="">{totalPrice}.00 /=</div>
+                  <div className="flex flex-col-reverse gap-2 lg:flex-row">
+                    <div></div>
+
+                    <div className="ml-auto">
+                      <div className="flex justify-start">
+                        <h2 className="mr-2 lg:mr-9 w-[150px] text-end">Total Price :</h2>
+                        <div className="ml-auto">
+                          <div className="whitespace-nowrap">{totalPrice}.00 /=</div>
+                        </div>
+                      </div>
+                      <div className="flex justify-start">
+                        <h2 className="mr-2 lg:mr-9 w-[150px] text-end">
+                          Discount {discountPercentage >= 1 && `${discountPercentage}%`} :
+                        </h2>
+                        <div className="ml-auto">
+                          <div className="whitespace-nowrap "> - {finalPrice?.discount}.00 /=</div>
+                          <Divider className="mt-1 mb-2" />
+                        </div>
+                      </div>
+                      <div className="flex justify-start font-semibold">
+                        <h2 className="mr-2 lg:mr-9 w-[150px] text-end">Payable Amount :</h2>
+                        <div className="ml-auto">
+                          <div className="whitespace-nowrap">{finalPrice?.discountPrice}.00 /=</div>
+                        </div>
+                      </div>
+                      <Divider className="mt-2" />
+                      <div className="flex justify-evenly lg:justify-end mr-9 lg:mr-0">
+                        <ButtonShake onClick={handleClick}>Place an Order</ButtonShake>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex justify-end">
-                    <h2 className="mr-9 w-[200px] text-end text-slate-900/70">{discountPercentage}% Discount :</h2>
-                    <div className="mr-4 lg:mr-6 w-[100px]">
-                      <div className=""> - {finalPrice?.discount}.00 /=</div>
-                      <Divider className="mt-2 mb-3" />
-                    </div>
-                  </div>
-                  <div className="flex justify-end">
-                    <h2 className="mr-9 w-[200px] text-end">Payable Amount :</h2>
-                    <div className="mr-4 lg:mr-6 w-[100px]">
-                      <div className="">{finalPrice?.discountPrice}.00 /=</div>
-                    </div>
-                  </div>
-                  <div className="flex justify-end mr-4 lg:mr-6">
-                    <ButtonShake onClick={handleClick}>Place an Order</ButtonShake>
-                  </div>
+                  <Divider className="mt-1 lg:mt-2 mb-0" />
                 </div>
               );
             }}

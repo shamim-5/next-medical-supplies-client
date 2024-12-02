@@ -10,10 +10,7 @@ export const metadata: Metadata = {
 const UserProfilePage = () => {
   return (
     <div>
-      <div></div>
-      <div>
-        <Profile title="Profile" />
-      </div>
+      <Profile title="Profile" />
     </div>
   );
 };

@@ -1,17 +1,18 @@
 import { apiSlice } from "@/redux/api/apiSlice";
+import { ordersApi } from "../orders/ordersApi";
 
 export const dueListApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getDueListFromDB: builder.query({
       query: () => "/due-list",
 
-      providesTags: ["due-list"],
+      providesTags: ["due-list", "orders"],
     }),
 
     getDueListFromDBbyEmail: builder.query({
       query: (email) => `/due-list/${email}`,
 
-      providesTags: ["due-list"],
+      providesTags: ["due-list", "orders"],
     }),
 
     addToDueListDB: builder.mutation({
@@ -21,7 +22,7 @@ export const dueListApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
-      invalidatesTags: ["due-list"],
+      invalidatesTags: ["due-list", "orders"],
     }),
 
     updateDueListById: builder.mutation({
@@ -31,7 +32,22 @@ export const dueListApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
-      invalidatesTags: ["due-list"],
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        const result = await queryFulfilled;
+
+        // silent update to orders collection
+        if (arg?.orderId) {
+          const orderId = result?.data?.data?.orderId;
+          dispatch(
+            ordersApi.endpoints.updateOrdersStatusById.initiate({
+              data: { paid: true },
+              id: orderId,
+            })
+          );
+        }
+      },
+
+      invalidatesTags: ["due-list", "orders"],
     }),
   }),
 });

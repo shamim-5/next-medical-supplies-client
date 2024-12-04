@@ -12,8 +12,10 @@ import { useAddToDBMutation } from "@/redux/features/cart-items/cartItemsApi";
 import { useRouter } from "next/navigation";
 import useUserInfo from "@/hooks/useUserInfo";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import useUserPick from "@/hooks/useUserPick";
 
 const CartItemsTable: React.FC = () => {
+  const userDetails = useAppSelector((state) => state?.userDetails || {});
   const products = useAppSelector((state) => state?.cartItems) || [];
   const { uid, displayName, email } = useUserInfo() || {};
   const [addToDB] = useAddToDBMutation();
@@ -137,9 +139,9 @@ const CartItemsTable: React.FC = () => {
 
               const handleClick = async () => {
                 const items = {
-                  userId: uid?.toString(),
-                  userName: displayName,
-                  email: email,
+                  userId: !userDetails?.userId ? uid?.toString() : userDetails?.userId,
+                  userName: !userDetails?.userName ? displayName : userDetails?.userName,
+                  email: !userDetails?.email ? email : userDetails?.email,
                   status: false,
                   active: false,
                   paid: false,
@@ -150,7 +152,7 @@ const CartItemsTable: React.FC = () => {
                 try {
                   await addToDB(items);
                   router.push("/user/manage-orders");
-                  toast.success("Thanks for your order. You will receive confirmation message soon.");
+                  toast.success("Thanks for your order.");
                 } catch (error) {
                   // do nothing
                 }

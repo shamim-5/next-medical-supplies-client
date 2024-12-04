@@ -6,6 +6,7 @@ import searchSliceReducer from "./features/helper/searchSlice";
 import statusSliceReducer from "./features/helper/statusSlice";
 import pathSliceReducer from "./features/path/pathSlice";
 import priceSliceReducer from "./features/helper/priceSlice";
+import userDetailsReducer from "./features/user-details/userDetailsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     search: searchSliceReducer,
     status: statusSliceReducer,
     price: priceSliceReducer,
+    userDetails: userDetailsReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),

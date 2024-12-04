@@ -1,40 +1,50 @@
 import React from "react";
 import { Button, notification, Space } from "antd";
+import { toast } from "react-toastify";
 
-const close = () => {
-  console.log("Notification was closed. Either the close button was clicked or duration time elapsed.");
-};
+interface NotificationConfirmProps {
+  title: string;
+  description: string;
+  onConfirm: () => void;
+}
 
-const NotificationConfirm: React.FC = () => {
+const NotificationConfirm: React.FC<NotificationConfirmProps> = ({ title, description, onConfirm }) => {
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
     const key = `open${Date.now()}`;
     const btn = (
       <Space>
-        <Button type="link" size="small" onClick={() => api.destroy()}>
-          Destroy All
+        <Button className=" text-cyan hover:border-cyan" size="small" onClick={() => api.destroy()}>
+          Cancel
         </Button>
-        <Button type="primary" size="small" onClick={() => api.destroy(key)}>
+        <Button
+          className="commonBtn text-white leading-none"
+          size="small"
+          onClick={() => {
+            api.destroy(key);
+            onConfirm();
+          }}
+        >
           Confirm
         </Button>
       </Space>
     );
+
     api.open({
-      message: "Notification Title",
-      description:
-        'A function will be be called after the notification is closed (automatically after the "duration" time of manually).',
+      message: title,
+      description,
       btn,
       key,
-      onClose: close,
+      duration: 0,
     });
   };
 
   return (
     <>
       {contextHolder}
-      <Button type="primary" onClick={openNotification}>
-        Open the notification box
+      <Button onClick={openNotification} size="small" className="commonBtn text-white leading-none hidden md:block">
+        Pay
       </Button>
     </>
   );

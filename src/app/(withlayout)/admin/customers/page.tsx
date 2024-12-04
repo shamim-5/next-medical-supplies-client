@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 const CustomersPage = () => {
+  
   return (
     <div>
       <CustomersListTable />

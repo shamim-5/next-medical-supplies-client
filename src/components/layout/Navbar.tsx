@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
         <div className=" flex items-center justify-between lg:mr-2 mb-2 uppercase">
           <div>
             <Link href={"/"}>
-              <Image className="w-7" src={logoImage} width={48} height={48} alt="logo" />
+              <Image className="w-7 lg:w-12" src={logoImage} width={48} height={48} alt="logo" />
             </Link>
           </div>
           <div>

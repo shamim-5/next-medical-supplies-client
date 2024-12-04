@@ -26,7 +26,7 @@ const FeaturedCardTwo: React.FC<FeaturedCardTwoProps> = ({ medicalEquipment }) =
     if (medicalEquipment) {
       dispatch(addToCart(medicalEquipment));
       router.push("/user/cart-items");
-      toast.success("Add to cart success");
+      toast.success("Add to cart success !");
     }
   };
 

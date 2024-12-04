@@ -1,4 +1,5 @@
 "use client";
+
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Layout, Menu, Space, Dropdown, Button } from "antd";
@@ -9,13 +10,14 @@ import logoImage from "@/assets/logo-navbar.svg";
 import { auth } from "@/lib/firebase";
 import useAuth from "@/redux/hooks/useAuth";
 import SearchAntd from "./SearchAntd";
-import { useAppDispatch } from "@/redux/hooks/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hook";
 import { signOut } from "firebase/auth";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { cleanPath } from "@/redux/features/path/pathSlice";
 import { USER_ROLE } from "@/constants/role";
 import ExtraNavbar from "./ExtraNavbar";
 import { useGetShopDetailsQuery } from "@/redux/features/surgicalShop/surgicalShopApi";
+import useUserInfo from "@/hooks/useUserInfo";
 
 const { Header } = Layout;
 
@@ -23,6 +25,10 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isLoggedIn = useAuth();
+  const { accessToken: firebaseAccessToken } = useUserInfo();
+  const { user, accessToken } = useAppSelector((state) => state?.auth);
+
+  const admin = accessToken === firebaseAccessToken && user === process.env.NEXT_PUBLIC_ADMIN ? true : false;
 
   const { data: { data: shopDetails } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
   const { shopName } = (!isLoading && shopDetails && shopDetails[0]) || {};
@@ -61,10 +67,16 @@ const Navbar: React.FC = () => {
     },
     { label: <Link href="/others">Others</Link>, name: "Others", key: "6", path: `/others` },
     {
-      label: isLoggedIn && <Link href="/user/manage-orders">Dashboard</Link>,
-      name: isLoggedIn && "Dashboard",
+      label: isLoggedIn && admin && <Link href="/admin/pending-orders">Dashboard</Link>,
+      name: isLoggedIn && admin && "Dashboard",
+      key: "999",
+      path: isLoggedIn && admin && `/admin/pending-orders`,
+    },
+    {
+      label: isLoggedIn && !admin && <Link href="/user/cart-items">Cart-Items</Link>,
+      name: isLoggedIn && !admin && "Cart-Items",
       key: "123",
-      path: isLoggedIn && `/user/manage-orders`,
+      path: isLoggedIn && !admin && `/user/cart-items`,
     },
     {
       label: isLoggedIn ? (

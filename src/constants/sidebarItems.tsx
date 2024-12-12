@@ -39,6 +39,24 @@ export const sidebarItems = (role: string) => {
   const commonSidebarItems: MenuProps["items"] = [
     {
       label: (
+        <Link className="text-primary-light" href={`/${role}/all-goods`}>
+          All Goods
+        </Link>
+      ),
+      icon: <AppstoreAddOutlined />,
+      key: `/${role}/all-goods`,
+    },
+    {
+      label: (
+        <Link className="text-primary-light" href={`/${role}/cart-items`}>
+          Cart Items
+        </Link>
+      ),
+      icon: <ScheduleOutlined />,
+      key: `/${role}/cart-items`,
+    },
+    {
+      label: (
         <Link className="text-primary-light" href={`/${role}/manage-orders`}>
           Manage Orders
         </Link>
@@ -51,7 +69,15 @@ export const sidebarItems = (role: string) => {
   const adminSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     ...commonSidebarItems,
-
+    {
+      label: (
+        <Link className="text-primary-light" href={`/${role}/cart-items`}>
+          Cart Items
+        </Link>
+      ),
+      icon: <ScheduleOutlined />,
+      key: `/${role}/cart-items`,
+    },
     {
       label: (
         <Link className="text-primary-light" href={`/${role}/pending-orders`}>
@@ -99,19 +125,7 @@ export const sidebarItems = (role: string) => {
     },
   ];
 
-  const userSidebarItems: MenuProps["items"] = [
-    ...defaultSidebarItems,
-    ...commonSidebarItems,
-    {
-      label: (
-        <Link className="text-primary-light" href={`/${role}/cart-items`}>
-          cart-items
-        </Link>
-      ),
-      icon: <ScheduleOutlined />,
-      key: `/${role}/cart-items`,
-    },
-  ];
+  const userSidebarItems: MenuProps["items"] = [...defaultSidebarItems, ...commonSidebarItems];
 
   if (role === USER_ROLE.ADMIN) return adminSidebarItems;
   else if (role === USER_ROLE.USER) return userSidebarItems;

@@ -12,7 +12,7 @@ import Contents from "@/components/layout/Contents";
 
 export const metadata: Metadata = {
   title: {
-    default: "NB_Surgical",
+    default: `${process.env.NEXT_PUBLIC_TITLE}`,
     template: `${process.env.NEXT_PUBLIC_TITLE}_%s`,
   },
   description: "Surgical equipments shop app",

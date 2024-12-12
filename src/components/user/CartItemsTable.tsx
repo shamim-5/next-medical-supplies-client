@@ -12,14 +12,16 @@ import { useAddToDBMutation } from "@/redux/features/cart-items/cartItemsApi";
 import { useRouter } from "next/navigation";
 import useUserInfo from "@/hooks/useUserInfo";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import useUserPick from "@/hooks/useUserPick";
 
 const CartItemsTable: React.FC = () => {
   const userDetails = useAppSelector((state) => state?.userDetails || {});
   const products = useAppSelector((state) => state?.cartItems) || [];
-  const { uid, displayName, email } = useUserInfo() || {};
+  const { user, accessToken } = useAppSelector((state) => state?.auth);
+  const { uid, displayName, email, accessToken: firebaseAccessToken } = useUserInfo() || {};
   const [addToDB] = useAddToDBMutation();
   const router = useRouter();
+
+  const admin = accessToken === firebaseAccessToken && user === process.env.NEXT_PUBLIC_ADMIN ? true : false;
 
   const dispatch = useAppDispatch();
 
@@ -151,7 +153,7 @@ const CartItemsTable: React.FC = () => {
 
                 try {
                   await addToDB(items);
-                  router.push("/user/manage-orders");
+                  router.push(admin ? `${"/admin/manage-orders"}` : "/user/manage-orders");
                   toast.success("Thanks for your order.");
                 } catch (error) {
                   // do nothing

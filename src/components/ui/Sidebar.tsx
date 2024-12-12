@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Button, Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import logoImage from "@/assets/logo-navbar.svg";
 import { sidebarItems } from "@/constants/sidebarItems";
 import { USER_ROLE } from "@/constants/role";
@@ -10,7 +9,6 @@ import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks/hook";
 import useUserInfo from "@/hooks/useUserInfo";
 import { useGetShopDetailsQuery } from "@/redux/features/surgicalShop/surgicalShopApi";
-import { MenuOutlined } from "@ant-design/icons";
 import useCollapsed from "@/hooks/useCollapsed";
 
 const { Sider } = Layout;

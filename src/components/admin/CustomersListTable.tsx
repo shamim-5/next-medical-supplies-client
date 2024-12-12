@@ -3,25 +3,12 @@
 import React from "react";
 import { Button, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { useGetDueListFromDBQuery } from "@/redux/features/admin/dueList/dueListApi";
 import useUserInfo from "@/hooks/useUserInfo";
-import { USER_ROLE } from "@/constants/role";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hook";
 import { useGetOrdersFromDBQuery } from "@/redux/features/admin/orders/ordersApi";
-import { RightCircleFilled } from "@ant-design/icons";
 import { toast } from "react-toastify";
-import useUserPick from "@/hooks/useUserPick";
-import { useRouter } from "next/navigation";
 import { userDetails } from "@/redux/features/user-details/userDetailsSlice";
-
-interface Product {
-  key: string;
-  name: string;
-  category: string;
-  manufacturer: string;
-  quantity: number;
-  price: number;
-}
+import { useRouter } from "next/navigation";
 
 interface UniqueEntry {
   userName: string;
@@ -71,22 +58,23 @@ const CustomersListTable: React.FC = () => {
       title: "Name",
       dataIndex: "userName",
       key: "userName",
-      ellipsis: true,
+      render: (text) => <span className="line-clamp-1">{text}</span>,
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      ellipsis: true,
+      render: (text) => <span className="line-clamp-1">{text}</span>,
     },
     {
       title: "UserId",
       dataIndex: "userId",
       key: "userId",
+      responsive: ["lg"],
       // align: "right",
       // width: 100,
       // render: (value: number) => `${value.toFixed(2)}/=`,
-      ellipsis: true,
+      // ellipsis: true,
     },
     {
       title: () => admin && <span className="">Action</span>,
@@ -103,7 +91,7 @@ const CustomersListTable: React.FC = () => {
   ];
 
   return (
-    <div className="responsive-table-container">
+    <div className="overflow-x-auto">
       <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2 mt-4">Customers List</h2>
       {!isLoading && orders && (
         <Table
@@ -111,7 +99,7 @@ const CustomersListTable: React.FC = () => {
           dataSource={uniqueEntry}
           pagination={false}
           rowClassName={() => "leading-none"}
-          scroll={{ x: "max-content" }}
+          // scroll={{ x: "max-content" }}
         />
       )}
     </div>

@@ -28,13 +28,13 @@ const cartItemsSlice = createSlice({
       if (existingItem) {
         existingItem.quantity = existingItem.quantity ? existingItem.quantity + 1 : 1;
         existingItem.priceTotal = existingItem.price
-          ? Math.floor(existingItem.price) * existingItem.quantity
+          ? Math.round(existingItem.price) * existingItem.quantity
           : existingItem.price;
       } else {
         const newItem: ICartItems = {
           ...action.payload,
           quantity: action.payload.quantity || 1,
-          priceTotal: Math.floor(action.payload.price as number) || 0,
+          priceTotal: Math.round(action.payload.price as number) || 0,
           discountPercentage: Number(process.env.NEXT_PUBLIC_DISCOUNT) || 0,
         };
         state.push(newItem);
@@ -46,7 +46,7 @@ const cartItemsSlice = createSlice({
       if (existingItem && existingItem.quantity !== 0) {
         existingItem.quantity = existingItem.quantity ? existingItem.quantity - 1 : 1;
         existingItem.priceTotal = existingItem.price
-          ? Math.floor(existingItem.price) * existingItem.quantity
+          ? Math.round(existingItem.price) * existingItem.quantity
           : existingItem.price;
       }
     },

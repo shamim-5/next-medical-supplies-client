@@ -1,4 +1,4 @@
-import Blank from "@/components/shared/Blank";
+import CustomersListTable from "@/components/admin/CustomersListTable";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,9 +7,10 @@ export const metadata: Metadata = {
 };
 
 const CustomersPage = () => {
+  
   return (
     <div>
-      <Blank />
+      <CustomersListTable />
     </div>
   );
 };

@@ -26,7 +26,7 @@ const Profile: React.FC<ProfileProps> = ({ title }) => {
   return (
     <div>
       <Divider className="text-3xl lg:text-4xl">{title}</Divider>
-      <div className="flex justify-center uppercase">
+      <div className="flex justify-center items-center capitalize">
         <div>
           <div className="text-center">
             {photoURL || dbPhotoURL ? (
@@ -35,23 +35,39 @@ const Profile: React.FC<ProfileProps> = ({ title }) => {
               <Avatar size={64} icon={<UserOutlined />} />
             )}
           </div>
-          <ModalUpdateProfile />
+          <div className="pl-4 lg:pl-0">
+            <ModalUpdateProfile />
+          </div>
           <Divider className="mt-2" />
-          <div className="text-lg text-slate-900 flex">
-            Name : <p className="ml-4  text-slate-900/75">{name || displayName || "Name not found"}</p>
+          <div className="text-sm lg:text-lg text-slate-900 flex pl-4 lg:pl-0">
+            <div className="w-16 lg:w-24  flex-shrink-0">Name</div>
+            <div>: </div>
+            <div className="ml-1 lg:ml-2 text-left  text-slate-900/75 line-clamp-2">
+              {name || displayName || "Name not found"}
+            </div>
           </div>
-          <div className="text-lg text-slate-900 flex">
-            Email : <p className="ml-4 text-slate-900/75 lowercase">{email}</p>
+
+          <div className="text-sm lg:text-lg text-slate-900 flex pl-4 lg:pl-0">
+            <div className="w-16 lg:w-24  flex-shrink-0">Email</div>
+            <div>: </div>
+            <div className="ml-1 lg:ml-2 text-left text-slate-900/75 lowercase line-clamp-1">{email}</div>
           </div>
-          <Divider />
-          <div className="text-lg text-slate-900 flex mt-2">
-            <span className="w-28">Phone :</span>
-            <p className="ml-4 text-slate-900/75">{phoneNumber ? "0" + phoneNumber : "Phone number not found"}</p>
+
+          <div className="text-sm lg:text-lg text-slate-900 flex pl-4 lg:pl-0">
+            <div className="w-16 lg:w-24  flex-shrink-0">Phone</div>
+            <div>: </div>
+            <div className="ml-1 lg:ml-2 text-left text-slate-900/75 line-clamp-1">
+              {phoneNumber ? "0" + phoneNumber : "Phone number not found"}
+            </div>
           </div>
-          <div className="text-lg text-slate-900 flex mt-2">
-            <span className="w-28">Address :</span>
-            <div>
-              <p className="ml-4 text-slate-900/75 ">{address?.addressLineOne || "Address not found"}</p>
+
+          <Divider className="m-2" />
+
+          <div className="text-sm lg:text-lg text-slate-900 flex pl-4 lg:pl-0">
+            <div className="w-16 lg:w-24  flex-shrink-0">Address</div>
+            <div>: </div>
+            <div className="ml-1 lg:ml-2 text-left text-slate-900/75 line-clamp-3">
+              {address?.addressLineOne || "Address not found"}
             </div>
           </div>
         </div>

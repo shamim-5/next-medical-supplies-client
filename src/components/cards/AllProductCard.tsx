@@ -23,8 +23,8 @@ const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
 
   const handleButtonClick = () => {
     dispatch(addToCart(product));
-    router.push("/user/cart-items");
-    toast.success("Add to cart success");
+    // router.push("/user/cart-items");
+    toast.success("Add to cart success !");
   };
 
   const handleDetailsButton = () => {
@@ -57,8 +57,8 @@ const AllProductCard: React.FC<AllProductCardProps> = ({ product }) => {
       </div>
       <div className="flex flex-row items-center justify-between">
         <div>
-          <Button onClick={handleButtonClick} className="commonBtn" type="primary" htmlType="submit">
-            Buy now
+          <Button onClick={handleButtonClick} className="commonBtn" size="small" type="primary" htmlType="submit">
+            Add To Cart
           </Button>
         </div>
         <div className="flex items-center ml-4">

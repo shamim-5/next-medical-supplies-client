@@ -28,15 +28,15 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
   const handleButtonClick = () => {
     if (consumable) {
       dispatch(addToCart(consumable));
-      router.push("/user/cart-items");
-      toast.success("Add to cart success");
+      // router.push("/user/cart-items");
+      toast.success("Add to cart success !");
     }
   };
   const handleButtonMe = () => {
     if (medicalEquipment) {
       dispatch(addToCart(medicalEquipment));
-      router.push("/user/cart-items");
-      toast.success("Add to cart success");
+      // router.push("/user/cart-items");
+      toast.success("Add to cart success !");
     }
   };
 
@@ -71,8 +71,8 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
           </div>
           <div className="flex flex-row items-center justify-between">
             <div>
-              <Button onClick={handleButtonClick} className="commonBtn" type="primary" htmlType="submit">
-                Buy now
+              <Button onClick={handleButtonClick} className="commonBtn" size="small" type="primary" htmlType="submit">
+                Add To Cart
               </Button>
             </div>
             <div className="flex items-center ml-4">
@@ -109,8 +109,8 @@ const OtherCard: React.FC<OtherCardProps> = ({ consumable, medicalEquipment }) =
           </div>
           <div className="flex flex-row items-center justify-between">
             <div>
-              <Button onClick={handleButtonMe} className="commonBtn" type="primary" htmlType="submit">
-                Buy now
+              <Button onClick={handleButtonMe} className="commonBtn" size="small" type="primary" htmlType="submit">
+                Add To Cart
               </Button>
             </div>
             <div className="flex items-center ml-4">

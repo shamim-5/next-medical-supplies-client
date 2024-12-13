@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 const DueListPage = () => {
   return (
     <div>
+      <h2 className="text-2xl lg:text-3xl font-semibold uppercase py-2 mt-4">Due List</h2>
       <DueList />
     </div>
   );

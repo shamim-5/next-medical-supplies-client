@@ -6,13 +6,13 @@ export const ordersApi = apiSlice.injectEndpoints({
     getOrdersFromDB: builder.query({
       query: () => "/orders",
 
-      providesTags: ["orders"],
+      providesTags: ["due-list", "orders"],
     }),
 
     getOrdersFromDBbyEmail: builder.query({
       query: (email) => `/orders/${email}`,
 
-      providesTags: ["orders"],
+      providesTags: ["due-list", "orders"],
     }),
 
     addToOrdersDB: builder.mutation({
@@ -22,7 +22,7 @@ export const ordersApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
-      invalidatesTags: ["orders"],
+      invalidatesTags: ["due-list", "orders"],
     }),
 
     updateStatusById: builder.mutation({
@@ -55,7 +55,17 @@ export const ordersApi = apiSlice.injectEndpoints({
         }
       },
 
-      invalidatesTags: ["orders"],
+      invalidatesTags: ["due-list", "orders"],
+    }),
+
+    updateOrdersStatusById: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/orders/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+
+      invalidatesTags: ["due-list", "orders"],
     }),
   }),
 });
@@ -65,4 +75,5 @@ export const {
   useAddToOrdersDBMutation,
   useUpdateStatusByIdMutation,
   useGetOrdersFromDBbyEmailQuery,
+  useUpdateOrdersStatusByIdMutation,
 } = ordersApi;

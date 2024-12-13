@@ -336,7 +336,7 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ id }) => {
   const handleButtonClick = () => {
     dispatch(addToCart(products[0]));
     router.push("/user/cart-items");
-    toast.success("Add to cart success");
+    toast.success("Add to cart success !");
   };
 
   return (

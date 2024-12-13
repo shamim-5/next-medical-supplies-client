@@ -1,18 +1,17 @@
 import PrivateRoute from "@/components/PrivateRoute";
-import Contents from "@/components/ui/DashBoardContents";
+import DashBoardContents from "@/components/ui/DashBoardContents";
 import Sidebar from "@/components/ui/Sidebar";
 import { Layout } from "antd";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Layout hasSider>
+    <Layout hasSider className="custom-scrollbar ">
       <PrivateRoute>
         <Sidebar />
-        <Contents>{children}</Contents>
+        <DashBoardContents>{children}</DashBoardContents>
       </PrivateRoute>
     </Layout>
   );
 };
 
 export default DashboardLayout;
- 

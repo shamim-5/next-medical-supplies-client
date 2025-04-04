@@ -13,8 +13,8 @@ const AppFooter = () => {
   const date = new Date();
   const year = date.getFullYear();
 
-    const { data: { data: shopDetails } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
-    const { name } = (!isLoading && shopDetails && shopDetails[0]) || {};
+  const { data: { data: shopDetails } = [], isLoading } = useGetShopDetailsQuery(undefined) || {};
+  const { name } = (!isLoading && shopDetails && shopDetails[0]) || {};
 
   const role = USER_ROLE.USER === pathname.split("/")[1] || USER_ROLE.ADMIN === pathname.split("/")[1];
 
@@ -55,11 +55,16 @@ const AppFooter = () => {
                 </div>
               </div>
               <div className="flex w-full mt-20 gap-5">
-                <p>Created by: Md. Shamim</p>
+                <p></p>
                 <p>
-                  Portfolio: <Link href="https://shamim-5.web.app">https://shamim-5.web.app</Link>
+                  <Link href="mailto:m100.shamim@gmail.com" target="_blank">
+                    Developer Email
+                  </Link>
                 </p>
-                <p className="ml-auto"> &#169; {name} {year}</p>
+                <p className="ml-auto">
+                  {" "}
+                  &#169; {name} {year}
+                </p>
               </div>
             </div>
           </div>
